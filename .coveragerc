@@ -1,0 +1,5 @@
+[run]
+omit =
+    src/rest_framework_tricks/tests/*
+    example/simple/settings/*
+    example/simple/wsgi.py

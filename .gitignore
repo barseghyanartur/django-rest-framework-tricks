@@ -36,3 +36,6 @@ codebin/
 /src/django_rest_framework_tricks.egg-info
 #/examples/simple/settings/__init__.py
 /examples/simple/settings/local_settings.py
+/examples/rest_framework_tricks_demo_installer/
+/examples/django-rest-framework-tricks-env/
+/examples/rest_framework_tricks_demo_installer.tar.gz

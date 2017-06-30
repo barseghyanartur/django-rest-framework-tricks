@@ -425,6 +425,26 @@ Sample OPTIONS call
         }
     }
 
+Demo
+====
+Run demo locally
+----------------
+In order to be able to quickly evaluate the `django-rest-framework-tricks`,
+a demo app (with a quick installer) has been created (works on Ubuntu/Debian,
+may work on other Linux systems as well, although not guaranteed). Follow the
+instructions below to have the demo running within a minute.
+
+Grab and run the latest ``rest_framework_tricks_demo_installer.sh`` demo
+installer:
+
+.. code-block:: sh
+
+    wget -O - https://raw.github.com/barseghyanartur/django-rest-framework-tricks/master/examples/rest_framework_tricks_demo_installer.sh | bash
+
+Open your browser and test the app.
+
+- URL: http://127.0.0.1:8001/books/api/
+
 Testing
 =======
 

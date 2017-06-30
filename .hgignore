@@ -34,3 +34,6 @@ syntax: regexp
 ^dist/
 ^src/django_rest_framework_tricks\.egg-info
 \.DS_Store
+^examples/rest_framework_tricks_demo_installer/
+^examples/django-rest-framework-tricks-env/
+^examples/rest_framework_tricks_demo_installer\.tar\.gz

@@ -71,8 +71,8 @@ model fields:
 - ``pages``: ``IntegerField``
 - ``stock_count``: ``IntegerField``
 
-In our REST API, we want to split serializer into parts using nested
-serializers and have the following structure:
+In our REST API, we want to split the Book serializer into parts using nested
+serializers to have the following structure:
 
 .. code-block:: json
 

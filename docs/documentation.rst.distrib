@@ -9,10 +9,7 @@ Contents:
    :maxdepth: 20
 
    rest_framework_tricks
-   quick_start
-   basic_usage_examples
    advanced_usage_examples
-   misc_usage_examples
 
 Indices and tables
 ==================

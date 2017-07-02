@@ -74,7 +74,7 @@ model fields:
 In our REST API, we want to split the Book serializer into parts using nested
 serializers to have the following structure:
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
         "id": "",
@@ -96,10 +96,12 @@ serializers to have the following structure:
 Sample model
 ~~~~~~~~~~~~
 
-The only customisation here is that we declare two ``NestedProxyField`` fields
-on the ``Book`` model level for to be used in ``BookSerializer`` serializer.
+The only variation from standard implementation here is that we declare two
+``NestedProxyField`` fields on the ``Book`` model level for to be used in
+``BookSerializer`` serializer.
 
-Note, that the change does not cause model change (no migrations or whatever).
+Note, that the change does not cause model change (no migrations or
+whatsoever).
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -180,7 +182,8 @@ Then we define our (main) ``BookSerializer`` class, which is going to be
 used a ``serializer_class`` of the ``BookViewSet``. We inherit the
 ``BookSerializer`` from
 ``rest_framework_tricks.serializers.HyperlinkedModelSerializer``
-instead of the one of the Django REST framework.
+instead of the one of the Django REST framework. There's also a
+``rest_framework_tricks.serializers.ModelSerializer`` available.
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -270,7 +273,7 @@ Defining the serializers
 Sample ViewSet
 ~~~~~~~~~~~~~~
 
-Absolutely no customisations here.
+Absolutely no variations from standard implementation here.
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -306,7 +309,7 @@ Sample OPTIONS call
     Content-Type: application/json
     Vary: Accept
 
-.. code-block:: json
+.. code-block:: javascript
 
     {
         "name": "Book List",
@@ -425,6 +428,89 @@ Sample OPTIONS call
         }
     }
 
+Unlimited nesting depth
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Unlimited nesting depth is supported.
+
+Our imaginary ``Author`` model could consist of the following (non-relational)
+Django model fields:
+
+- ``salutation``: ``CharField``
+- ``name``: ``CharField``
+- ``email``: ``EmailField``
+- ``birth_date``: ``DateField``
+- ``biography``: ``TextField`` (with choices)
+- ``phone_number``: ``CharField``
+- ``website``: ``URLField``
+- ``company``: ``CharField``
+- ``company_phone_number``: ``CharField``
+- ``company_email``: ``EmailField``
+- ``company_website``: ``URLField``
+
+In our REST API, we could split the Author serializer into parts using
+nested serializers to have the following structure:
+
+.. code-block:: javascript
+
+    {
+        "id": "",
+        "salutation": "",
+        "name": "",
+        "birth_date": "",
+        "biography": "",
+        "contact_information": {
+            "personal_contact_information": {
+                "email": "",
+                "phone_number": "",
+                "website": ""
+            },
+            "business_contact_information": {
+                "company": "",
+                "company_email": "",
+                "company_phone_number": "",
+                "company_website": ""
+            }
+        }
+    }
+
+Our model would have to be defined as follows (see ``Advanced usage examples``
+for complete model definition):
+
+.. code-block:: python
+
+    class Author(models.Model):
+        """Author."""
+
+        # ...
+
+        # This does not cause a model change
+        personal_contact_information = NestedProxyField(
+            'email',
+            'phone_number',
+            'website',
+        )
+
+        # This does not cause a model change
+        business_contact_information = NestedProxyField(
+            'company',
+            'company_email',
+            'company_phone_number',
+            'company_website',
+        )
+
+        # This does not cause a model change
+        contact_information = NestedProxyField(
+            'personal_contact_information',
+            'business_contact_information',
+        )
+
+        # ...
+
+See the `Advanced usage examples
+<https://github.com/barseghyanartur/django-rest-framework-tricks/blob/master/ADVANCED_USAGE_EXAMPLES.rst>`_
+for more examples.
+
 Demo
 ====
 Run demo locally
@@ -541,10 +627,7 @@ Contents:
    :maxdepth: 20
 
    rest_framework_tricks
-   quick_start
-   basic_usage_examples
    advanced_usage_examples
-   misc_usage_examples
 
 Indices and tables
 ==================

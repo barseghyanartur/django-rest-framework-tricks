@@ -1,2 +1,2 @@
 cat README.rst docs/documentation.rst.distrib > docs/index.rst
-#cat USAGE_EXAMPLES.rst > docs/usage_examples.rst
+cat ADVANCED_USAGE_EXAMPLES.rst > docs/advanced_usage_examples.rst

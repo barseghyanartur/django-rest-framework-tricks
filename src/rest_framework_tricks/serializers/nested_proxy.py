@@ -44,18 +44,26 @@ from rest_framework import serializers
 
 __title__ = 'rest_framework_tricks.serializers.nested_proxy'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2016-2017 Artur Barseghyan'
+__copyright__ = '2017 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
+    'extract_nested_serializers',
     'HyperlinkedModelSerializer',
     'is_nested_proxy_field',
     'ModelSerializer',
     'NestedProxyFieldIdentifier',
+    'set_instance_values',
 )
 
 
 def is_nested_proxy_field(field):
-    """Checks if field is nested proxy field."""
+    """Check if field is nested proxy field.
+
+    :param field:
+    :type field:
+    :return: True or False
+    :rtype: bool
+    """
     return (
         isinstance(field, NestedProxyFieldIdentifier)
         or
@@ -67,13 +75,78 @@ def is_nested_proxy_field(field):
     )
 
 
+def extract_nested_serializers(serializer,
+                               validated_data,
+                               nested_serializers=None,
+                               nested_serializers_data=None):
+    """Extract nested serializers.
+
+    :param serializer: Serializer instance.
+    :param validated_data: Validated data.
+    :param nested_serializers:
+    :param nested_serializers_data:
+    :type serializer: rest_framework.serializers.Serializer
+    :type validated_data: dict
+    :type nested_serializers: dict
+    :type nested_serializers_data:
+    :return:
+    :rtype: tuple
+    """
+    if nested_serializers is None:
+        nested_serializers = {}
+    if nested_serializers_data is None:
+        nested_serializers_data = {}
+
+    for __field_name, __field in serializer.fields.items():
+        if is_nested_proxy_field(__field):
+            __serializer_data = validated_data.pop(
+                __field_name
+            )
+            nested_serializers[__field_name] = __field
+            nested_serializers_data[__field_name] = __serializer_data
+
+    return nested_serializers, nested_serializers_data
+
+
+def set_instance_values(nested_serializers,
+                        nested_serializers_data,
+                        instance):
+    """Set values on instance.
+
+    Does not perform any save actions.
+
+    :param nested_serializers: Nested serializers.
+    :param nested_serializers_data: Nested serializers data.
+    :param instance: Instance (not yet saved)
+    :type nested_serializers:
+    :type nested_serializers_data:
+    :type instance:
+    :return: Same instance with values set.
+    :rtype:
+    """
+    for __serializer_name, __serializer in nested_serializers_data.items():
+        for __field_name, __field_value in __serializer.items():
+            if is_nested_proxy_field(
+                    nested_serializers[__serializer_name][__field_name]
+            ):
+                set_instance_values(
+                    {
+                        __field_name: nested_serializers[__serializer_name]
+                                                        [__field_name]
+                    },
+                    {__field_name: __field_value},
+                    instance
+                )
+            else:
+                setattr(instance, __field_name, __field_value)
+
+
 class NestedProxyFieldIdentifier(object):
     """NestedProxyField identifier."""
 
 
 class ModelSerializer(serializers.ModelSerializer):
     """ModelSerializer for models with NestedProxyField fields.
-
 
     Example:
 
@@ -108,20 +181,21 @@ class ModelSerializer(serializers.ModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers = {}
-        for __field_name, __field in self.fields.items():
-            if is_nested_proxy_field(__field):
-                __nested_serializers[__field_name] = validated_data.pop(
-                    __field_name
-                )
+        __nested_serializers, __nested_serializers_data = \
+            extract_nested_serializers(
+                self,
+                validated_data,
+            )
 
         # Create instance, but don't save it yet
         instance = self.Meta.model(**validated_data)
 
-        # Assign fields one by one
-        for __serializer_name, __serializer in __nested_serializers.items():
-            for __field_name, __field_value in __serializer.items():
-                setattr(instance, __field_name, __field_value)
+        # Assign fields to the `instance` one by one
+        set_instance_values(
+            __nested_serializers,
+            __nested_serializers_data,
+            instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -135,12 +209,11 @@ class ModelSerializer(serializers.ModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers = {}
-        for __field_name, __field in self.fields.items():
-            if is_nested_proxy_field(__field):
-                __nested_serializers[__field_name] = validated_data.pop(
-                    __field_name
-                )
+        __nested_serializers, __nested_serializers_data = \
+            extract_nested_serializers(
+                self,
+                validated_data,
+            )
 
         # Update the instance
         instance = super(ModelSerializer, self).update(
@@ -148,11 +221,12 @@ class ModelSerializer(serializers.ModelSerializer):
             validated_data
         )
 
-        # Assign fields one by one
-        for __serializer_name, __serializer in __nested_serializers.items():
-
-            for __field_name, __field_value in __serializer.items():
-                setattr(instance, __field_name, __field_value)
+        # Assign fields to the `instance` one by one
+        set_instance_values(
+            __nested_serializers,
+            __nested_serializers_data,
+            instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -197,21 +271,21 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers = {}
-        for __field_name, __field in self.fields.items():
-            if is_nested_proxy_field(__field) \
-                    and __field_name in validated_data:
-                __nested_serializers[__field_name] = validated_data.pop(
-                    __field_name
-                )
+        __nested_serializers, __nested_serializers_data = \
+            extract_nested_serializers(
+                self,
+                validated_data,
+            )
 
         # Create instance, but don't save it yet
         instance = self.Meta.model(**validated_data)
 
-        # Assign fields one by one
-        for __serializer_name, __serializer in __nested_serializers.items():
-            for __field_name, __field_value in __serializer.items():
-                setattr(instance, __field_name, __field_value)
+        # Assign fields to the `instance` one by one
+        set_instance_values(
+            __nested_serializers,
+            __nested_serializers_data,
+            instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -225,13 +299,11 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers = {}
-        for __field_name, __field in self.fields.items():
-            if is_nested_proxy_field(__field) \
-                    and __field_name in validated_data:
-                __nested_serializers[__field_name] = validated_data.pop(
-                    __field_name
-                )
+        __nested_serializers, __nested_serializers_data = \
+            extract_nested_serializers(
+                self,
+                validated_data,
+            )
 
         # Update the instance
         instance = super(HyperlinkedModelSerializer, self).update(
@@ -239,10 +311,12 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
             validated_data
         )
 
-        # Assign fields one by one
-        for __serializer_name, __serializer in __nested_serializers.items():
-            for __field_name, __field_value in __serializer.items():
-                setattr(instance, __field_name, __field_value)
+        # Assign fields to the `instance` one by one
+        set_instance_values(
+            __nested_serializers,
+            __nested_serializers_data,
+            instance
+        )
 
         # Save the instance and return
         instance.save()

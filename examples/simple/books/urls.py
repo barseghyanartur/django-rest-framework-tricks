@@ -18,7 +18,12 @@ from .views import (
     UpdateBooksView,
     IndexView,
 )
-from .viewsets import BookViewSet, PublisherViewSet
+from .viewsets import (
+    AuthorViewSet,
+    AuthorProxyViewSet,
+    BookViewSet,
+    PublisherViewSet,
+)
 
 __all__ = ('urlpatterns',)
 
@@ -27,9 +32,16 @@ router = ExtendedDefaultRouter()
 books = router.register(r'books',
                         BookViewSet,
                         base_name='book')
-hyperlinked_books = router.register(r'publishers',
-                                    PublisherViewSet,
-                                    base_name='publisher')
+publishers = router.register(r'publishers',
+                             PublisherViewSet,
+                             base_name='publisher')
+authors = router.register(r'authors',
+                          AuthorViewSet,
+                          base_name='author')
+
+proxy_authors = router.register(r'proxy-authors',
+                                AuthorProxyViewSet,
+                                base_name='authorproxy')
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

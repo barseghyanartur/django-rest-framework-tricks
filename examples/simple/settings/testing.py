@@ -76,8 +76,8 @@ LOGGING = {
         'rest_framework_tricks_log': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': PROJECT_DIR("../../logs/django_elasticsearch_dsl_"
-                                    "drf.log"),
+            'filename': PROJECT_DIR("../../logs/django_rest_framework_tricks"
+                                    ".log"),
             'maxBytes': 1048576,
             'backupCount': 99,
             'formatter': 'verbose',

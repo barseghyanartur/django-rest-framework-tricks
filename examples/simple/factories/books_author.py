@@ -19,6 +19,14 @@ class BaseAuthorFactory(DjangoModelFactory):
     salutation = Faker('text', max_nb_chars=10)
     name = Faker('name')
     email = Faker('email')
+    birth_date = Faker('date')
+    biography = Faker('text')
+    phone_number = Faker('phone_number')
+    website = Faker('url')
+    company = Faker('company')
+    company_phone_number = Faker('phone_number')
+    company_email = Faker('email')
+    company_website = Faker('url')
 
     class Meta(object):
         """Meta class."""

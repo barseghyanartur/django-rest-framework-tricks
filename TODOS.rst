@@ -11,7 +11,7 @@ Must haves
 ==========
 .. code-block:: text
 
-    - Handle unlimited nesting depth.
+    + Handle unlimited nesting depth.
 
 Should haves
 ============

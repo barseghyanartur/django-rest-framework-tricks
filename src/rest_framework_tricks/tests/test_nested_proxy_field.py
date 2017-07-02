@@ -25,7 +25,7 @@ else:
 
 __title__ = 'rest_framework_tricks.tests.test_nested_proxy_field'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2016-2017 Artur Barseghyan'
+__copyright__ = '2017 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
     'TestNestedProxyFieldCreateAction',
@@ -45,10 +45,9 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
         super(TestNestedProxyFieldCreateAction, cls).setUpClass()
 
         cls.book_listing_url = reverse('book-list', kwargs={})
-        cls.publisher_listing_url = reverse(
-            'publisher-list',
-            kwargs={}
-        )
+        cls.publisher_listing_url = reverse('publisher-list', kwargs={})
+        cls.author_listing_url = reverse('author-list', kwargs={})
+        cls.proxy_author_listing_url = reverse('authorproxy-list', kwargs={})
 
     def _nested_proxy_field_hyperlinked_model_serializer(self, url=None):
         """Test NestedProxyField and HyperlinkedModelSerializer."""
@@ -128,6 +127,65 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
             self.publisher_listing_url
         )
 
+    def _nested_proxy_field_model_serializer_depth(self, url=None):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        data = {
+            'salutation': self.faker.text(max_nb_chars=10),
+            'name': self.faker.name(),
+            'birth_date': self.faker.date(),
+            'biography': self.faker.text(),
+            'contact_information': {
+                'personal_contact_information': {
+                    'email': self.faker.email(),
+                    'phone_number': self.faker.phone_number(),
+                    'website': self.faker.url(),
+                },
+                'business_contact_information': {
+                    'company': self.faker.company(),
+                    'company_email': self.faker.email(),
+                    'company_phone_number': self.faker.phone_number(),
+                    'company_website': self.faker.url()
+                }
+            }
+        }
+
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        for __key in ('salutation', 'name', 'biography'):
+            self.assertEqual(response.data.get(__key), data.get(__key))
+
+        for __key in ('email', 'phone_number', 'website'):
+            self.assertEqual(
+                response.data['contact_information']
+                             ['personal_contact_information'].get(__key),
+                data['contact_information']
+                    ['personal_contact_information'].get(__key)
+            )
+
+        for __key in ('company',
+                      'company_email',
+                      'company_phone_number',
+                      'company_website'):
+            self.assertEqual(
+                response.data['contact_information']
+                             ['business_contact_information'].get(__key),
+                data['contact_information']
+                    ['business_contact_information'].get(__key)
+            )
+
+    def test_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.author_listing_url
+        )
+
+    def test_another_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.proxy_author_listing_url
+        )
+
 
 @pytest.mark.django_db
 class TestNestedProxyFieldUpdateAction(BaseRestFrameworkTestCase):
@@ -150,6 +208,16 @@ class TestNestedProxyFieldUpdateAction(BaseRestFrameworkTestCase):
         cls.publisher_detail_url = reverse(
             'publisher-detail',
             kwargs={'pk': cls.books[0].publisher.pk}
+        )
+
+        cls.author_detail_url = reverse(
+            'author-detail',
+            kwargs={'pk': cls.books[0].authors.first().pk}
+        )
+
+        cls.proxy_author_detail_url = reverse(
+            'authorproxy-detail',
+            kwargs={'pk': cls.books[0].authors.first().pk}
         )
 
     def _nested_proxy_field_hyperlinked_model_serializer(self, url=None):
@@ -228,6 +296,65 @@ class TestNestedProxyFieldUpdateAction(BaseRestFrameworkTestCase):
         """Test NestedProxyField and ModelSerializer."""
         self._nested_proxy_field_model_serializer(
             self.publisher_detail_url
+        )
+
+    def _nested_proxy_field_model_serializer_depth(self, url=None):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        data = {
+            'salutation': self.faker.text(max_nb_chars=10),
+            'name': self.faker.name(),
+            'birth_date': self.faker.date(),
+            'biography': self.faker.text(),
+            'contact_information': {
+                'personal_contact_information': {
+                    'email': self.faker.email(),
+                    'phone_number': self.faker.phone_number(),
+                    'website': self.faker.url(),
+                },
+                'business_contact_information': {
+                    'company': self.faker.company(),
+                    'company_email': self.faker.email(),
+                    'company_phone_number': self.faker.phone_number(),
+                    'company_website': self.faker.url()
+                }
+            }
+        }
+
+        response = self.client.put(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        for __key in ('salutation', 'name', 'biography'):
+            self.assertEqual(response.data.get(__key), data.get(__key))
+
+        for __key in ('email', 'phone_number', 'website'):
+            self.assertEqual(
+                response.data['contact_information']
+                             ['personal_contact_information'].get(__key),
+                data['contact_information']
+                    ['personal_contact_information'].get(__key)
+            )
+
+        for __key in ('company',
+                      'company_email',
+                      'company_phone_number',
+                      'company_website'):
+            self.assertEqual(
+                response.data['contact_information']
+                             ['business_contact_information'].get(__key),
+                data['contact_information']
+                    ['business_contact_information'].get(__key)
+            )
+
+    def test_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.author_detail_url
+        )
+
+    def test_another_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.proxy_author_detail_url
         )
 
 

@@ -440,7 +440,7 @@ Django model fields:
 - ``name``: ``CharField``
 - ``email``: ``EmailField``
 - ``birth_date``: ``DateField``
-- ``biography``: ``TextField`` (with choices)
+- ``biography``: ``TextField``
 - ``phone_number``: ``CharField``
 - ``website``: ``URLField``
 - ``company``: ``CharField``

@@ -140,7 +140,7 @@ def NestedProxyField(*fields, **options):
                     setattr(
                         obj.__class__,
                         __key,
-                        NestedProxyField(*__values, obj=self)
+                        NestedProxyField(*__values, obj=obj)
                     )
                     __dict.update({__key: getattr(obj, __key)})
             # If string

@@ -15,6 +15,12 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.1
+-----
+yyyy-mm-dd (not released yet)
+
+- Minor fixes.
+- Documentation improvements.
 
 0.2
 ---
@@ -22,7 +28,7 @@ are used for versioning (schema follows below):
 
 - Handle unlimited nesting depth for nested serializers of non-relational
   fields.
-- Improved documentation.
+- Documentation improvements.
 
 0.1.8
 -----

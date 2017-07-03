@@ -11,6 +11,7 @@ Must haves
 ==========
 .. code-block:: text
 
+    - Test with various versions of Django REST framework.
     + Handle unlimited nesting depth.
 
 Should haves

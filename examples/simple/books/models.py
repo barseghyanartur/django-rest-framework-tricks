@@ -65,7 +65,9 @@ class Author(models.Model):
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     company = models.CharField(max_length=200, null=True, blank=True)
-    company_phone_number = models.CharField(max_length=200, null=True, blank=True)
+    company_phone_number = models.CharField(max_length=200,
+                                            null=True,
+                                            blank=True)
     company_email = models.EmailField(null=True, blank=True)
     company_website = models.URLField(null=True, blank=True)
 

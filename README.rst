@@ -484,14 +484,16 @@ for complete model definition):
 
         # ...
 
-        # This does not cause a model change
+        # List the fields for `PersonalContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         personal_contact_information = NestedProxyField(
             'email',
             'phone_number',
             'website',
         )
 
-        # This does not cause a model change
+        # List the fields for `BusinessContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         business_contact_information = NestedProxyField(
             'company',
             'company_email',
@@ -499,7 +501,8 @@ for complete model definition):
             'company_website',
         )
 
-        # This does not cause a model change
+        # List the fields for `ContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         contact_information = NestedProxyField(
             'personal_contact_information',
             'business_contact_information',
@@ -508,14 +511,14 @@ for complete model definition):
         # ...
 
 See the `Advanced usage examples
-<https://github.com/barseghyanartur/django-rest-framework-tricks/blob/master/ADVANCED_USAGE_EXAMPLES.rst>`_
-for more examples.
+<https://github.com/barseghyanartur/django-rest-framework-tricks/blob/master/ADVANCED_USAGE_EXAMPLES.rst#nested-serializers>`_
+for complete example.
 
 Demo
 ====
 Run demo locally
 ----------------
-In order to be able to quickly evaluate the `django-rest-framework-tricks`,
+In order to be able to quickly evaluate the ``django-rest-framework-tricks``,
 a demo app (with a quick installer) has been created (works on Ubuntu/Debian,
 may work on other Linux systems as well, although not guaranteed). Follow the
 instructions below to have the demo running within a minute.
@@ -529,7 +532,9 @@ installer:
 
 Open your browser and test the app.
 
-- URL: http://127.0.0.1:8001/books/api/
+.. code-block:: text
+
+    http://127.0.0.1:8001/books/api/
 
 Testing
 =======

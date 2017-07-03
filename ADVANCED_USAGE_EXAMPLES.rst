@@ -8,8 +8,56 @@ Nested serializers
 Unlimited nesting depth
 -----------------------
 
+Our imaginary ``Author`` model consist of the following (non-relational)
+Django model fields:
+
+- ``salutation``: ``CharField``
+- ``name``: ``CharField``
+- ``email``: ``EmailField``
+- ``birth_date``: ``DateField``
+- ``biography``: ``TextField``
+- ``phone_number``: ``CharField``
+- ``website``: ``URLField``
+- ``company``: ``CharField``
+- ``company_phone_number``: ``CharField``
+- ``company_email``: ``EmailField``
+- ``company_website``: ``URLField``
+
+In our REST API, we split the Author serializer into parts using nested
+serializers to have the following structure:
+
+.. code-block:: javascript
+
+    {
+        "id": "",
+        "salutation": "",
+        "name": "",
+        "birth_date": "",
+        "biography": "",
+        "contact_information": {
+            "personal_contact_information": {
+                "email": "",
+                "phone_number": "",
+                "website": ""
+            },
+            "business_contact_information": {
+                "company": "",
+                "company_email": "",
+                "company_phone_number": "",
+                "company_website": ""
+            }
+        }
+    }
+
 Sample models
 ~~~~~~~~~~~~~
+
+The only variation from standard implementation here is that we declare two
+``NestedProxyField`` fields on the ``Author`` model level for to be used in
+``AuthorSerializer`` serializer.
+
+Note, that the change does not cause model change (no migrations or
+whatsoever).
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -42,14 +90,16 @@ Model definition
         company_email = models.EmailField(null=True, blank=True)
         company_website = models.URLField(null=True, blank=True)
 
-        # This does not cause a model change
+        # List the fields for `PersonalContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         personal_contact_information = NestedProxyField(
             'email',
             'phone_number',
             'website',
         )
 
-        # This does not cause a model change
+        # List the fields for `BusinessContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         business_contact_information = NestedProxyField(
             'company',
             'company_email',
@@ -57,7 +107,8 @@ Model definition
             'company_website',
         )
 
-        # This does not cause a model change
+        # List the fields for `ContactInformationSerializer` nested
+        # serializer. This does not cause a model change.
         contact_information = NestedProxyField(
             'personal_contact_information',
             'business_contact_information',
@@ -77,7 +128,8 @@ as follows (although at the moment it's not the recommended approach):
 .. code-block:: python
 
     # ...
-    # This does not cause a model change
+    # List the fields for `ContactInformationSerializer` nested
+    # serializer. This does not cause a model change.
     contact_information = NestedProxyField(
         {
             'personal_contact_information': (
@@ -101,6 +153,18 @@ as follows (although at the moment it's not the recommended approach):
 Sample serializers
 ~~~~~~~~~~~~~~~~~~
 
+At first, we add ``nested_proxy_field`` property to the ``Meta`` class
+definitions  of ``PersonalContactInformationSerializer``,
+``BusinessContactInformationSerializer`` and ``ContactInformationSerializer``
+nested serializers.
+
+Then we define our (main) ``AuthorSerializer`` class, which is going to be
+used a ``serializer_class`` of the ``AuthorViewSet``. We inherit the
+``AuthorSerializer`` from
+``rest_framework_tricks.serializers.HyperlinkedModelSerializer``
+instead of the one of the Django REST framework. There's also a
+``rest_framework_tricks.serializers.ModelSerializer`` available.
+
 Required imports
 ^^^^^^^^^^^^^^^^
 
@@ -114,6 +178,8 @@ Required imports
 
 Serializer definition
 ^^^^^^^^^^^^^^^^^^^^^
+
+**Nested serializer for `ContactInformationSerializer` nested serializer**
 
 .. code-block:: python
 
@@ -131,6 +197,9 @@ Serializer definition
             )
             nested_proxy_field = True
 
+**Nested serializer for `ContactInformationSerializer` nested serializer**
+
+.. code-block:: python
 
     class BusinessContactInformationSerializer(serializers.ModelSerializer):
         """Business contact information serializer."""
@@ -147,6 +216,9 @@ Serializer definition
             )
             nested_proxy_field = True
 
+**Nested serializer for `AuthorSerializer` (main) serializer**
+
+.. code-block:: python
 
     class ContactInformationSerializer(serializers.ModelSerializer):
         """Contact information serializer."""
@@ -168,6 +240,9 @@ Serializer definition
             )
             nested_proxy_field = True
 
+**Main serializer to be used in the ViewSet**
+
+.. code-block:: python
 
     class AuthorSerializer(ModelSerializer):
         """Author serializer."""
@@ -187,8 +262,99 @@ Serializer definition
                 'contact_information',
             )
 
+If you can't make use of `rest_framework_tricks` serializers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If somehow you can't make use of the
+``rest_framework_tricks.serializers.ModelSerializer`` or
+``rest_framework_tricks.serializers.HyperlinkedModelSerializer`` serializers,
+there are handy functions to help you to make your serializer to work with
+``NestedProxyField``.
+
+See the following example:
+
+Required imports
+++++++++++++++++
+
+.. code-block:: python
+
+    from rest_framework import serializers
+    from rest_framework_tricks.serializers.nested_proxy import (
+        extract_nested_serializers,
+        set_instance_values,
+    )
+
+Serializer definition
++++++++++++++++++++++
+
+.. code-block:: python
+
+    class BookSerializer(serializers.ModelSerializer):
+        """BookSerializer."""
+
+        # ...
+
+        def create(self, validated_data):
+            """Create.
+
+            :param validated_data:
+            :return:
+            """
+            # Collect information on nested serializers
+            __nested_serializers, __nested_serializers_data = \
+                extract_nested_serializers(
+                    self,
+                    validated_data,
+                )
+
+            # Create instance, but don't save it yet
+            instance = self.Meta.model(**validated_data)
+
+            # Assign fields to the `instance` one by one
+            set_instance_values(
+                __nested_serializers,
+                __nested_serializers_data,
+                instance
+            )
+
+            # Save the instance and return
+            instance.save()
+            return instance
+
+        def update(self, instance, validated_data):
+            """Update.
+
+            :param instance:
+            :param validated_data:
+            :return:
+            """
+            # Collect information on nested serializers
+            __nested_serializers, __nested_serializers_data = \
+                extract_nested_serializers(
+                    self,
+                    validated_data,
+                )
+
+            # Update the instance
+            instance = super(ModelSerializer, self).update(
+                instance,
+                validated_data
+            )
+
+            # Assign fields to the `instance` one by one
+            set_instance_values(
+                __nested_serializers,
+                __nested_serializers_data,
+                instance
+            )
+
+            # Save the instance and return
+            instance.save()
+            return instance
+
 Sample ViewSet
 ~~~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -215,6 +381,8 @@ ViewSet definition
 
 Sample URLs/router definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
 
 Required imports
 ^^^^^^^^^^^^^^^^
@@ -391,7 +559,6 @@ Sample POST call
 .. code-block:: javascript
 
     {
-        "id": 1000012,
         "salutation": "At eve",
         "name": "Shana Rodriquez",
         "birth_date": "2016-04-05",
@@ -405,7 +572,7 @@ Sample POST call
             "business_contact_information": {
                 "company": "Hopkins and Mccoy Co",
                 "company_email": "vevuciqa@yahoo.com",
-                "company_phone_number": "Estrada Savage Inc",
+                "company_phone_number": "+386-35-5689443",
                 "company_website": "http://www.xifyhefiqom.com.au"
             }
         }

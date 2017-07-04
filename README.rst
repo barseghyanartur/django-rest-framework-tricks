@@ -127,14 +127,10 @@ Model definition
     BOOK_PUBLISHING_STATUS_PUBLISHED = 'published'
     BOOK_PUBLISHING_STATUS_NOT_PUBLISHED = 'not_published'
     BOOK_PUBLISHING_STATUS_IN_PROGRESS = 'in_progress'
-    BOOK_PUBLISHING_STATUS_CANCELLED = 'cancelled'
-    BOOK_PUBLISHING_STATUS_REJECTED = 'rejected'
     BOOK_PUBLISHING_STATUS_CHOICES = (
         (BOOK_PUBLISHING_STATUS_PUBLISHED, "Published"),
         (BOOK_PUBLISHING_STATUS_NOT_PUBLISHED, "Not published"),
         (BOOK_PUBLISHING_STATUS_IN_PROGRESS, "In progress"),
-        (BOOK_PUBLISHING_STATUS_CANCELLED, "Cancelled"),
-        (BOOK_PUBLISHING_STATUS_REJECTED, "Rejected"),
     )
     BOOK_PUBLISHING_STATUS_DEFAULT = BOOK_PUBLISHING_STATUS_PUBLISHED
 
@@ -261,7 +257,9 @@ Defining the serializers
 .. code-block:: python
 
     # Note, that we are importing the ``HyperlinkedModelSerializer`` from
-    # the `rest_framework_tricks.serializers`.
+    # the `rest_framework_tricks.serializers`. Names of the serializers
+    # should match the names of model properties set with ``NestedProxyField``
+    # fields.
     class BookSerializer(HyperlinkedModelSerializer):
         """Book serializer."""
 
@@ -423,14 +421,6 @@ Sample OPTIONS call
                                 {
                                     "value": "in_progress",
                                     "display_name": "In progress"
-                                },
-                                {
-                                    "value": "cancelled",
-                                    "display_name": "Cancelled"
-                                },
-                                {
-                                    "value": "rejected",
-                                    "display_name": "Rejected"
                                 }
                             ]
                         }

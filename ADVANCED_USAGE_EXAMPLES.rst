@@ -179,6 +179,11 @@ Required imports
 Serializer definition
 ^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+
+    If you get validation errors about null-values, add ``allow_null=True``
+    next to the ``required=False`` for serializer field definitions.
+
 **Nested serializer for `ContactInformationSerializer` nested serializer**
 
 .. code-block:: python

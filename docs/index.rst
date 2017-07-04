@@ -13,7 +13,8 @@ Prerequisites
 Dependencies
 ============
 
-- djangorestframework
+- djangorestframework: Written with 3.6.3, tested with >=3.5.0,<=3.6.3. May
+  work on earlier versions, although not guaranteed.
 
 Installation
 ============
@@ -44,6 +45,12 @@ Installation
 
             # ...
         )
+
+Documentation
+=============
+
+Documentation is available on `Read the Docs
+<http://django-rest-framework-tricks.readthedocs.io/>`_.
 
 Main features and highlights
 ============================
@@ -179,7 +186,7 @@ definitions  of ``PublishingInformationSerializer`` and
 ``StockInformationSerializer`` nested serializers.
 
 Then we define our (main) ``BookSerializer`` class, which is going to be
-used a ``serializer_class`` of the ``BookViewSet``. We inherit the
+used as a ``serializer_class`` of the ``BookViewSet``. We inherit the
 ``BookSerializer`` from
 ``rest_framework_tricks.serializers.HyperlinkedModelSerializer``
 instead of the one of the Django REST framework. There's also a
@@ -199,6 +206,11 @@ Required imports
 
 Defining the serializers
 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+    If you get validation errors about null-values, add ``allow_null=True``
+    next to the ``required=False`` for serializer field definitions.
 
 **Nested serializer**
 

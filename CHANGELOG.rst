@@ -17,7 +17,7 @@ are used for versioning (schema follows below):
 
 0.2.1
 -----
-yyyy-mm-dd (not released yet)
+2017-07-04
 
 - Minor fixes.
 - Documentation improvements.

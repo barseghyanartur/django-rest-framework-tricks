@@ -281,7 +281,8 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
     def _nested_proxy_field_model_serializer_missing_fields(self, url=None):
         """Test NestedProxyField and ModelSerializer with missing fields.
 
-        In this case, the ``info`` field is missing.
+        Several non-required fields are missing (in this case, it's the
+        ``info`` field).
         """
         data = {
             'name': self.faker.text(max_nb_chars=30),

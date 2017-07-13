@@ -20,6 +20,7 @@ are used for versioning (schema follows below):
 2017-07-13
 
 - More tests.
+- Made tests DRY.
 
 0.2.2
 -----

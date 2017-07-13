@@ -3,7 +3,8 @@
 # django-rest-framework-tricks documentation build configuration file, created
 # by sphinx-quickstart on Tue Nov 22 09:31:14 2017.
 #
-# This file is execfile()d with the current directory set to its containing dir.
+# This file is execfile()d with the current directory set to its containing
+# dir.
 #
 # Note that not all possible configuration values are present in this
 # auto-generated file.
@@ -34,7 +35,8 @@ except Exception as e:
     project = u'django-rest-framework-tricks'
     copyright = u'2017, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
-# -- Django configuration ------------------------------------------------------
+# -- Django configuration -----------------------------------------------------
+import django
 from django.conf import settings
 
 if not settings.configured:
@@ -68,13 +70,15 @@ if not settings.configured:
 
     settings.configure(**configure_kwargs)
 
-# -- General configuration -----------------------------------------------------
+django.setup()
+
+# -- General configuration ----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 # needs_sphinx = '1.0'
 
-# Add any Sphinx extension module names here, as strings. They can be extensions
-# coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
+# Add any Sphinx extension module names here, as strings. They can be
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -117,7 +121,8 @@ release = version
 # directories to ignore when looking for source files.
 exclude_patterns = ['_build']
 
-# The reST default role (used for this markup: `text`) to use for all documents.
+# The reST default role (used for this markup: `text`) to use for all
+# documents.
 # default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
@@ -138,7 +143,7 @@ pygments_style = 'sphinx'
 # modindex_common_prefix = []
 
 
-# -- Options for HTML output ---------------------------------------------------
+# -- Options for HTML output --------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -218,7 +223,7 @@ html_static_path = ['_static']
 htmlhelp_basename = 'django-rest-framework-tricksdoc'
 
 
-# -- Options for LaTeX output --------------------------------------------------
+# -- Options for LaTeX output -------------------------------------------------
 
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
@@ -263,7 +268,7 @@ latex_documents = [
 # latex_domain_indices = True
 
 
-# -- Options for manual page output --------------------------------------------
+# -- Options for manual page output -------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
@@ -279,7 +284,7 @@ man_pages = [
 # man_show_urls = False
 
 
-# -- Options for Texinfo output ------------------------------------------------
+# -- Options for Texinfo output -----------------------------------------------
 
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
@@ -303,7 +308,7 @@ texinfo_documents = [
 # texinfo_show_urls = 'footnote'
 
 
-# -- Options for Epub output ---------------------------------------------------
+# -- Options for Epub output --------------------------------------------------
 
 # Bibliographic Dublin Core info.
 epub_title = u'django-rest-framework-tricks'

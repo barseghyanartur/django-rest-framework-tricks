@@ -2,6 +2,10 @@
 Advanced usage examples
 =======================
 
+Contents:
+
+.. contents:: Table of Contents
+
 Nested serializers
 ==================
 
@@ -148,7 +152,6 @@ as follows (although at the moment it's not the recommended approach):
         },
     )
     # ...
-
 
 Sample serializers
 ~~~~~~~~~~~~~~~~~~

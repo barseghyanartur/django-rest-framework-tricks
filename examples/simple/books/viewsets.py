@@ -1,12 +1,19 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 
-from .models import Author, AuthorProxy, Book, Publisher
+from .models import (
+    Author,
+    AuthorProxy,
+    Book,
+    Profile,
+    Publisher,
+)
 from .serializers import (
     AuthorSerializer,
     AuthorProxySerializer,
     BookSerializer,
     PublisherSerializer,
+    ProfileSerializer,
 )
 
 __all__ = (
@@ -14,6 +21,7 @@ __all__ = (
     'AuthorProxyViewSet',
     'BookViewSet',
     'PublisherViewSet',
+    'ProfileViewSet',
 )
 
 
@@ -46,4 +54,12 @@ class AuthorProxyViewSet(ModelViewSet):
 
     queryset = AuthorProxy.objects.all()
     serializer_class = AuthorProxySerializer
+    permission_classes = [AllowAny]
+
+
+class ProfileViewSet(ModelViewSet):
+    """Profile ViewSet."""
+
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
     permission_classes = [AllowAny]

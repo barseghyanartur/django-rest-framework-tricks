@@ -47,6 +47,7 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
         cls.book_listing_url = reverse('book-list', kwargs={})
         cls.publisher_listing_url = reverse('publisher-list', kwargs={})
         cls.author_listing_url = reverse('author-list', kwargs={})
+        cls.profile_listing_url = reverse('profile-list', kwargs={})
         cls.proxy_author_listing_url = reverse('authorproxy-list', kwargs={})
 
     def _nested_proxy_field_hyperlinked_model_serializer(self, url=None):
@@ -174,6 +175,91 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
                     ['business_contact_information'].get(__key)
             )
 
+    def _nested_proxy_field_model_serializer_more_depth(self, url=None):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        data = {
+            'information': {
+                'data': {
+                    'personal_information': {
+                        'salutation': self.faker.text(max_nb_chars=10),
+                        'first_name': self.faker.first_name(),
+                        'last_name': self.faker.last_name(),
+                        'birth_date': self.faker.date(),
+                        'biography': self.faker.text(),
+                    },
+                    'contact_information': {
+                        'personal_contact_information': {
+                            'email': self.faker.email(),
+                            'phone_number': self.faker.phone_number(),
+                            'website': self.faker.url(),
+                        },
+                        'business_contact_information': {
+                            'company': self.faker.company(),
+                            'company_email': self.faker.email(),
+                            'company_phone_number': self.faker.phone_number(),
+                            'company_website': self.faker.url()
+                        }
+                    },
+                    'bank_information': {
+                        'bank_name': self.faker.company(),
+                        'bank_account_name': self.faker.name(),
+                        'bank_account_number': self.faker.pystr(),
+                    },
+                }
+            }
+        }
+
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        for __key in ('salutation', 'first_name', 'last_name', 'biography'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['personal_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['personal_information'].get(__key)
+            )
+
+        for __key in ('email', 'phone_number', 'website'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['contact_information']
+                             ['personal_contact_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['contact_information']
+                    ['personal_contact_information'].get(__key)
+            )
+
+        for __key in ('company',
+                      'company_email',
+                      'company_phone_number',
+                      'company_website'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['contact_information']
+                             ['business_contact_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['contact_information']
+                    ['business_contact_information'].get(__key)
+            )
+
+        for __key in ('bank_name', 'bank_account_name', 'bank_account_number'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['bank_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['bank_information'].get(__key)
+            )
+
     def test_nested_proxy_field_model_serializer_depth(self):
         """Test NestedProxyField and ModelSerializer with more depth."""
         self._nested_proxy_field_model_serializer_depth(
@@ -184,6 +270,12 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
         """Test NestedProxyField and ModelSerializer with more depth."""
         self._nested_proxy_field_model_serializer_depth(
             self.proxy_author_listing_url
+        )
+
+    def test_another_nested_proxy_field_model_serializer_more_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_more_depth(
+            self.profile_listing_url
         )
 
 

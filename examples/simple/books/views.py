@@ -19,8 +19,6 @@ __all__ = (
     'CreateAuthorsView',
     'BookListView',
     'BookListValuesView',
-    # 'OrderLineListView',
-    # 'OrderListView',
     'PublisherIDsView',
     'PublisherListView',
     'UpdateBooksView',

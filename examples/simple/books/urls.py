@@ -22,6 +22,7 @@ from .viewsets import (
     AuthorViewSet,
     AuthorProxyViewSet,
     BookViewSet,
+    ProfileViewSet,
     PublisherViewSet,
 )
 
@@ -35,6 +36,9 @@ books = router.register(r'books',
 publishers = router.register(r'publishers',
                              PublisherViewSet,
                              base_name='publisher')
+profiles = router.register(r'profiles',
+                           ProfileViewSet,
+                           base_name='profile')
 authors = router.register(r'authors',
                           AuthorViewSet,
                           base_name='author')

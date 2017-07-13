@@ -635,7 +635,8 @@ Contents:
 
    index
    advanced_usage_examples
-   rest_framework_tricks
+   changelog
+   package
 
 Indices and tables
 ==================

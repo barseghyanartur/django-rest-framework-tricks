@@ -175,6 +175,18 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
                     ['business_contact_information'].get(__key)
             )
 
+    def test_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.author_listing_url
+        )
+
+    def test_another_nested_proxy_field_model_serializer_depth(self):
+        """Test NestedProxyField and ModelSerializer with more depth."""
+        self._nested_proxy_field_model_serializer_depth(
+            self.proxy_author_listing_url
+        )
+
     def _nested_proxy_field_model_serializer_more_depth(self, url=None):
         """Test NestedProxyField and ModelSerializer with more depth."""
         data = {
@@ -260,22 +272,44 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
                     ['bank_information'].get(__key)
             )
 
-    def test_nested_proxy_field_model_serializer_depth(self):
-        """Test NestedProxyField and ModelSerializer with more depth."""
-        self._nested_proxy_field_model_serializer_depth(
-            self.author_listing_url
-        )
-
-    def test_another_nested_proxy_field_model_serializer_depth(self):
-        """Test NestedProxyField and ModelSerializer with more depth."""
-        self._nested_proxy_field_model_serializer_depth(
-            self.proxy_author_listing_url
-        )
-
     def test_another_nested_proxy_field_model_serializer_more_depth(self):
         """Test NestedProxyField and ModelSerializer with more depth."""
         self._nested_proxy_field_model_serializer_more_depth(
             self.profile_listing_url
+        )
+
+    def _nested_proxy_field_model_serializer_missing_fields(self, url=None):
+        """Test NestedProxyField and ModelSerializer with missing fields.
+
+        In this case, the ``info`` field is missing.
+        """
+        data = {
+            'name': self.faker.text(max_nb_chars=30),
+            'website': self.faker.url(),
+            'address_information': {
+                'address': self.faker.address(),
+                'city': self.faker.city(),
+                'state_province': self.faker.state(),
+                'country': self.faker.country()
+            }
+        }
+
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        for __key in ('name', 'website'):
+            self.assertEqual(response.data.get(__key), data.get(__key))
+
+        for __key in ('address', 'city', 'state_province', 'country'):
+            self.assertEqual(
+                response.data['address_information'].get(__key),
+                data['address_information'].get(__key)
+            )
+
+    def test_nested_proxy_field_model_serializer_missing_fields(self):
+        """Test NestedProxyField and ModelSerializer with missing fields."""
+        self._nested_proxy_field_model_serializer_missing_fields(
+            self.publisher_listing_url
         )
 
 

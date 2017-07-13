@@ -4,7 +4,7 @@ Release history and notes
 <http://en.wikipedia.org/wiki/Software_versioning#Sequence-based_identifiers>`_
 are used for versioning (schema follows below):
 
-.. code-block:: none
+.. code-block:: text
 
     major.minor[.revision]
 
@@ -15,8 +15,15 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.3
+-----
+2017-07-13
+
+- More tests.
+
 0.2.2
 -----
+2017-07-04
 
 - Documentation improvements.
 - Tested against various Django REST framework versions (>=3.5.0,<=3.6.3).

@@ -42,7 +42,6 @@ class Migration(migrations.Migration):
             ],
             options={
                 'proxy': True,
-                'indexes': [],
             },
             bases=('books.author',),
         ),

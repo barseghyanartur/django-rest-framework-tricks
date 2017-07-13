@@ -312,6 +312,98 @@ class TestNestedProxyFieldCreateAction(BaseRestFrameworkTestCase):
             self.publisher_listing_url
         )
 
+    def _nested_proxy_field_model_serializer_depth_missing_fields(self,
+                                                                  url=None):
+        """Test NestedProxyField and ModelSerializer with more depth.
+
+        Several non-required fields are missing (in this case they are
+        ``birth_date``, ``biography``, ``website`` and ``company_website``).
+        """
+        data = {
+            'information': {
+                'data': {
+                    'personal_information': {
+                        'salutation': self.faker.text(max_nb_chars=10),
+                        'first_name': self.faker.first_name(),
+                        'last_name': self.faker.last_name(),
+                    },
+                    'contact_information': {
+                        'personal_contact_information': {
+                            'email': self.faker.email(),
+                            'phone_number': self.faker.phone_number(),
+                        },
+                        'business_contact_information': {
+                            'company': self.faker.company(),
+                            'company_email': self.faker.email(),
+                            'company_phone_number': self.faker.phone_number(),
+                        }
+                    },
+                    'bank_information': {
+                        'bank_name': self.faker.company(),
+                        'bank_account_name': self.faker.name(),
+                        'bank_account_number': self.faker.pystr(),
+                    },
+                }
+            }
+        }
+
+        response = self.client.post(url, data, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        for __key in ('salutation', 'first_name', 'last_name'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['personal_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['personal_information'].get(__key)
+            )
+
+        for __key in ('email', 'phone_number'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['contact_information']
+                             ['personal_contact_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['contact_information']
+                    ['personal_contact_information'].get(__key)
+            )
+
+        for __key in ('company', 'company_email', 'company_phone_number'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['contact_information']
+                             ['business_contact_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['contact_information']
+                    ['business_contact_information'].get(__key)
+            )
+
+        for __key in ('bank_name', 'bank_account_name', 'bank_account_number'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['bank_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['bank_information'].get(__key)
+            )
+
+    def test_nested_proxy_field_model_serializer_depth_missing_fields(self):
+        """Test NestedProxyField and ModelSerializer with more depth.
+
+        Several non-required fields are missing.
+        """
+        self._nested_proxy_field_model_serializer_depth_missing_fields(
+            self.profile_listing_url
+        )
+
 
 @pytest.mark.django_db
 class TestNestedProxyFieldUpdateAction(BaseRestFrameworkTestCase):

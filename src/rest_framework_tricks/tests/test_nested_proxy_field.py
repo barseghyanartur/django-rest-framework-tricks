@@ -365,6 +365,57 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
                     ['bank_information'].get(__key)
             )
 
+    def _nested_proxy_field_model_serializer_depth_more_missing_fields(
+            self, url=None
+    ):
+        """Test NestedProxyField and ModelSerializer with more depth.
+
+        All non-required fields are missing (in this case they are
+        ``birth_date``, ``biography``, ``website`` and ``company_website``).
+        """
+        data = {
+            'information': {
+                'data': {
+                    'personal_information': {
+                        'salutation': self.faker.text(max_nb_chars=10),
+                        'first_name': self.faker.first_name(),
+                        'last_name': self.faker.last_name(),
+                    },
+                    'contact_information': {
+                        'personal_contact_information': {
+                            'email': self.faker.email(),
+                        },
+                    },
+                }
+            }
+        }
+
+        response = self.get_client_action()(url, data, format='json')
+
+        self.assertEqual(response.status_code, self.get_status_code())
+
+        for __key in ('salutation', 'first_name', 'last_name'):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['personal_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['personal_information'].get(__key)
+            )
+
+        for __key in ('email',):
+            self.assertEqual(
+                response.data['information']
+                             ['data']
+                             ['contact_information']
+                             ['personal_contact_information'].get(__key),
+                data['information']
+                    ['data']
+                    ['contact_information']
+                    ['personal_contact_information'].get(__key)
+            )
+
 
 class TestNestedProxyFieldCreateAction(TestNestedProxyFieldActionBase):
     """Test NestedProxyField - create action."""
@@ -432,6 +483,17 @@ class TestNestedProxyFieldCreateAction(TestNestedProxyFieldActionBase):
         Several non-required fields are missing.
         """
         self._nested_proxy_field_model_serializer_depth_missing_fields(
+            self.profile_listing_url
+        )
+
+    def test_nested_proxy_field_model_serializer_depth_more_missing_fields(
+        self
+    ):
+        """Test NestedProxyField and ModelSerializer with more depth.
+
+        All of the non-required fields are missing.
+        """
+        self._nested_proxy_field_model_serializer_depth_more_missing_fields(
             self.profile_listing_url
         )
 
@@ -537,6 +599,17 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
         Several non-required fields are missing.
         """
         self._nested_proxy_field_model_serializer_depth_missing_fields(
+            self.profile_detail_url
+        )
+
+    def test_nested_proxy_field_model_serializer_depth_more_missing_fields(
+        self
+    ):
+        """Test NestedProxyField and ModelSerializer with more depth.
+
+        All of the non-required fields are missing.
+        """
+        self._nested_proxy_field_model_serializer_depth_more_missing_fields(
             self.profile_detail_url
         )
 

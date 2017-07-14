@@ -12,6 +12,7 @@ Must haves
 .. code-block:: text
 
     - Test with various versions of Django REST framework.
+    - Try to reproduce the "missing fields in the validated data" problem.
     + Handle unlimited nesting depth.
 
 Should haves

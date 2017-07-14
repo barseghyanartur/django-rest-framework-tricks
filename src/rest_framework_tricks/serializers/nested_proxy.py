@@ -98,7 +98,7 @@ def extract_nested_serializers(serializer,
         nested_serializers_data = {}
 
     for __field_name, __field in serializer.fields.items():
-        if is_nested_proxy_field(__field):
+        if is_nested_proxy_field(__field) and __field_name in validated_data:
             __serializer_data = validated_data.pop(
                 __field_name
             )

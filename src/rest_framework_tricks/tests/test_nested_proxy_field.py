@@ -127,10 +127,11 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
         """Test NestedProxyField and ModelSerializer.
 
         All nested fields are missing.
+
+        Note, that the `address_information` which contains the `address`,
+        `city`, `state_province` and `country` fields is completely missing
+        in the payload.
         """
-        # TODO: At the moment, if `address_information` is totally missing,
-        # it fails. Adding even empty `address_information` helps.
-        # This needs to be solved.
         data = {
             'name': self.faker.text(max_nb_chars=30),
             'info': self.faker.text(),
@@ -148,12 +149,6 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
         self.assertEqual(response.status_code, self.get_status_code())
         for __key in ('name', 'info', 'website'):
             self.assertEqual(response.data.get(__key), data.get(__key))
-
-        # for __key in ('address', 'city', 'state_province', 'country'):
-        #     self.assertEqual(
-        #         response.data['address_information'].get(__key),
-        #         data['address_information'].get(__key)
-        #     )
 
     def _nested_proxy_field_model_serializer_depth(self, url=None):
         """Test NestedProxyField and ModelSerializer with more depth."""

@@ -96,6 +96,11 @@ class BookSerializer(HyperlinkedModelSerializer):
 class AddressInformationSerializer(serializers.ModelSerializer):
     """Address information serializer."""
 
+    address = serializers.CharField(required=False, allow_null=True)
+    city = serializers.CharField(required=False, allow_null=True)
+    state_province = serializers.CharField(required=False, allow_null=True)
+    country = serializers.CharField(required=False, allow_null=True)
+
     class Meta(object):
         """Meta options."""
 

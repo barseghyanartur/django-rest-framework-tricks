@@ -15,6 +15,13 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+
+0.2.4
+-----
+2017-07-14
+
+- Fix issue #1 with non-required nested serializer fields.
+
 0.2.3
 -----
 2017-07-13

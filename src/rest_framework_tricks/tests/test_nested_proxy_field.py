@@ -121,6 +121,40 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
                 data['address_information'].get(__key)
             )
 
+    def _nested_proxy_field_model_serializer_missing_all_nested_fields(
+            self, url=None
+    ):
+        """Test NestedProxyField and ModelSerializer.
+
+        All nested fields are missing.
+        """
+        # TODO: At the moment, if `address_information` is totally missing,
+        # it fails. Adding even empty `address_information` helps.
+        # This needs to be solved.
+        data = {
+            'name': self.faker.text(max_nb_chars=30),
+            'info': self.faker.text(),
+            'website': self.faker.url(),
+            # 'address_information': {
+            #     'address': self.faker.address(),
+            #     'city': self.faker.city(),
+            #     'state_province': self.faker.state(),
+            #     'country': self.faker.country()
+            # }
+        }
+
+        response = self.get_client_action()(url, data, format='json')
+
+        self.assertEqual(response.status_code, self.get_status_code())
+        for __key in ('name', 'info', 'website'):
+            self.assertEqual(response.data.get(__key), data.get(__key))
+
+        # for __key in ('address', 'city', 'state_province', 'country'):
+        #     self.assertEqual(
+        #         response.data['address_information'].get(__key),
+        #         data['address_information'].get(__key)
+        #     )
+
     def _nested_proxy_field_model_serializer_depth(self, url=None):
         """Test NestedProxyField and ModelSerializer with more depth."""
         data = {
@@ -503,6 +537,14 @@ class TestNestedProxyFieldCreateAction(TestNestedProxyFieldActionBase):
             self.publisher_listing_url
         )
 
+    def test_nested_proxy_field_model_serializer_missing_all_nested_fields(
+        self
+    ):
+        """Test NestedProxyField and ModelSerializer."""
+        self._nested_proxy_field_model_serializer_missing_all_nested_fields(
+            self.publisher_listing_url
+        )
+
 
 @pytest.mark.django_db
 class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
@@ -569,6 +611,14 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
             self.publisher_detail_url
         )
 
+    def test_nested_proxy_field_model_serializer_missing_all_nested_fields(
+        self
+    ):
+        """Test NestedProxyField and ModelSerializer."""
+        self._nested_proxy_field_model_serializer_missing_all_nested_fields(
+            self.publisher_detail_url
+        )
+
     def test_nested_proxy_field_model_serializer_depth(self):
         """Test NestedProxyField and ModelSerializer with more depth."""
         self._nested_proxy_field_model_serializer_depth(
@@ -613,9 +663,11 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
             self.profile_detail_url
         )
 
-    def test_nested_proxy_field_model_serializer(self):
+    def test_nested_proxy_field_model_serializer_missing_all_nested_fields(
+        self
+    ):
         """Test NestedProxyField and ModelSerializer."""
-        self._nested_proxy_field_model_serializer(
+        self._nested_proxy_field_model_serializer_missing_all_nested_fields(
             self.publisher_detail_url
         )
 

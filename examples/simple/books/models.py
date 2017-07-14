@@ -29,10 +29,10 @@ class Publisher(models.Model):
 
     name = models.CharField(max_length=30)
     info = models.TextField(null=True, blank=True)
-    address = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    state_province = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
+    state_province = models.CharField(max_length=255, null=True, blank=True)
+    country = models.CharField(max_length=255, null=True, blank=True)
     website = models.URLField()
 
     # This does not cause a model change

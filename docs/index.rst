@@ -31,6 +31,12 @@ Installation
 
         pip install https://github.com/barseghyanartur/django-rest-framework-tricks/archive/stable.tar.gz
 
+    or latest stable version from BitBucket:
+
+    .. code-block:: sh
+
+        pip install https://bitbucket.org/barseghyanartur/django-rest-framework-tricks/get/stable.tar.gz
+
 (2) Add ``rest_framework`` and ``rest_framework_tricks`` to ``INSTALLED_APPS``:
 
     .. code-block:: python

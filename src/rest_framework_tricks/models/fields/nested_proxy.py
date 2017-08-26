@@ -131,6 +131,7 @@ def NestedProxyField(*fields, **options):
 
     @property
     def proxy_field(self):
+        """Proxy field."""
         obj = options.get('obj') if 'obj' in options else self
         __dict = {}
         for __field in fields:

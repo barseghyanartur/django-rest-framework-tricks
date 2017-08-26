@@ -1,3 +1,7 @@
+"""
+Fields.
+"""
+
 from .nested_proxy import *
 
 __title__ = 'rest_framework_tricks.models.fields'

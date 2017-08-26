@@ -658,14 +658,6 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
             self.profile_detail_url
         )
 
-    def test_nested_proxy_field_model_serializer_missing_all_nested_fields(
-        self
-    ):
-        """Test NestedProxyField and ModelSerializer."""
-        self._nested_proxy_field_model_serializer_missing_all_nested_fields(
-            self.publisher_detail_url
-        )
-
 
 if __name__ == '__main__':
     unittest.main()

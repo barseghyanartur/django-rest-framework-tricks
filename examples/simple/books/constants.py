@@ -1,3 +1,7 @@
+"""
+Constants.
+"""
+
 BOOK_PUBLISHING_STATUS_PUBLISHED = 'published'
 BOOK_PUBLISHING_STATUS_NOT_PUBLISHED = 'not_published'
 BOOK_PUBLISHING_STATUS_IN_PROGRESS = 'in_progress'

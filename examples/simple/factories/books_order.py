@@ -1,3 +1,7 @@
+"""
+Books Book model factory.
+"""
+
 from factory import DjangoModelFactory, SubFactory  # , post_generation
 
 from books.models import Order

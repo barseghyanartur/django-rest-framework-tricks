@@ -1,3 +1,7 @@
+"""
+Books OrderLine model factory.
+"""
+
 from factory import DjangoModelFactory, SubFactory
 
 from books.models import OrderLine

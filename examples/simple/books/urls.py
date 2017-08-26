@@ -1,3 +1,7 @@
+"""
+Urls.
+"""
+
 from django.conf.urls import url, include
 
 from rest_framework_extensions.routers import ExtendedDefaultRouter

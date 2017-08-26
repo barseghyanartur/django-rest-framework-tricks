@@ -1,3 +1,7 @@
+"""
+Mixins.
+"""
+
 from django.http import JsonResponse
 
 __all__ = ('JSONResponseMixin',)

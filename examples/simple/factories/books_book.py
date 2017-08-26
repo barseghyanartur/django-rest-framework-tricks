@@ -1,3 +1,7 @@
+"""
+Books Book model factory.
+"""
+
 import random
 
 from factory import (

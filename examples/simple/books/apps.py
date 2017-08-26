@@ -1,13 +1,10 @@
-try:
-    from django.apps import AppConfig
+from django.apps import AppConfig
 
-    class Config(AppConfig):
-        """Config."""
+__all__ = ('Config',)
 
-        name = 'books'
-        label = 'books'
 
-    __all__ = ('Config',)
+class Config(AppConfig):
+    """Config."""
 
-except ImportError:
-    pass
+    name = 'books'
+    label = 'books'

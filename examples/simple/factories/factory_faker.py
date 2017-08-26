@@ -1,4 +1,7 @@
 # coding=utf-8
+"""
+Factory faker tweaked.
+"""
 
 from __future__ import unicode_literals
 

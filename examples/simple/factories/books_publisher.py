@@ -1,3 +1,7 @@
+"""
+Books Publisher model factory.
+"""
+
 import random
 
 from factory import DjangoModelFactory, LazyAttribute

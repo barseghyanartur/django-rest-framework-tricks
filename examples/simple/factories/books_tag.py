@@ -1,3 +1,7 @@
+"""
+Books Tag model factory.
+"""
+
 import random
 
 from factory import DjangoModelFactory, LazyAttribute

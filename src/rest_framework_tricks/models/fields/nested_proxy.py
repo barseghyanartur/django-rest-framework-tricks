@@ -1,5 +1,5 @@
 """
-Fields.
+Nested proxy field.
 """
 
 from ...utils import DictProxy

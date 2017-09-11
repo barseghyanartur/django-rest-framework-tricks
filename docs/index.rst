@@ -630,8 +630,8 @@ Author
 
 Artur Barseghyan <artur.barseghyan@gmail.com>
 
-Documentation
-=============
+Project documentation
+=====================
 Contents:
 
 .. contents:: Table of Contents

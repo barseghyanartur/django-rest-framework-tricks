@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 wget -O rest_framework_tricks_demo_installer.tar.gz https://github.com/barseghyanartur/django-rest-framework-tricks/archive/stable.tar.gz
 virtualenv django-rest-framework-tricks-env
 source django-rest-framework-tricks-env/bin/activate

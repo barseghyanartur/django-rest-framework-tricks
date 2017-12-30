@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 pip uninstall django-rest-framework-tricks -y
 rm build -rf
 rm dist -rf

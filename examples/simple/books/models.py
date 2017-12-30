@@ -181,7 +181,8 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher,
                                   related_name='books',
                                   null=True,
-                                  blank=True)
+                                  blank=True,
+                                  on_delete=models.CASCADE)
     publication_date = models.DateField()
     state = models.CharField(max_length=100,
                              choices=BOOK_PUBLISHING_STATUS_CHOICES,
@@ -221,7 +222,8 @@ class Book(models.Model):
 class Order(models.Model):
     """Order."""
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
+                              on_delete=models.CASCADE)
     lines = models.ManyToManyField("books.OrderLine", blank=True)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
@@ -239,7 +241,11 @@ class Order(models.Model):
 class OrderLine(models.Model):
     """Order line."""
 
-    book = models.ForeignKey('books.Book', related_name='order_lines')
+    book = models.ForeignKey(
+        'books.Book',
+        related_name='order_lines',
+        on_delete=models.CASCADE
+    )
 
     class Meta(object):
         """Meta options."""

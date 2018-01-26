@@ -24,6 +24,7 @@ from .viewsets import (
     AuthorViewSet,
     AuthorProxyViewSet,
     BookViewSet,
+    BookProxyViewSet,
     ProfileViewSet,
     PublisherViewSet,
 )
@@ -39,21 +40,31 @@ __all__ = ('urlpatterns',)
 
 
 router = ExtendedDefaultRouter()
+
 books = router.register(
     r'books',
     BookViewSet,
     base_name='book'
 )
+
+proxy_books = router.register(
+    r'proxy-books',
+    BookProxyViewSet,
+    base_name='bookproxy'
+)
+
 publishers = router.register(
     r'publishers',
     PublisherViewSet,
     base_name='publisher'
 )
+
 profiles = router.register(
     r'profiles',
     ProfileViewSet,
     base_name='profile'
 )
+
 authors = router.register(
     r'authors',
     AuthorViewSet,

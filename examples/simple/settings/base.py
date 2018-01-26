@@ -239,6 +239,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'rest_framework',  # REST framework
+    'django_filters',
 
     # This app
     'rest_framework_tricks',

@@ -23,6 +23,7 @@ __all__ = (
     'CreateAuthorsView',
     'BookListView',
     'BookListValuesView',
+    'BookListWithCountsView',
     'PublisherIDsView',
     'PublisherListView',
     'UpdateBooksView',

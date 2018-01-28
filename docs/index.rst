@@ -574,8 +574,8 @@ Defining the serializers
 
 .. code-block:: python
 
-    class PublishingInformationSerializer(serializers.ModelSerializer):
-        """Publishing information serializer."""
+    class ProfileSerializer(serializers.ModelSerializer):
+        """Profile serializer."""
 
         username = serializers.CharField(source='user.username', read_only=True)
         email = serializers.CharField(source='user.email', read_only=True)

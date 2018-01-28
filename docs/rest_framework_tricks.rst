@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    rest_framework_tricks.filters
     rest_framework_tricks.models
     rest_framework_tricks.serializers
     rest_framework_tricks.tests

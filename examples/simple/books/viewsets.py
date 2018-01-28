@@ -2,15 +2,11 @@
 View sets.
 """
 
-# import django_filters
-
-# from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 
 from rest_framework_tricks.filters import OrderingFilter
 
-# from .filters import CustomStatusFilter
 from .models import (
     Author,
     AuthorProxy,

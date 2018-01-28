@@ -25,6 +25,7 @@ from .viewsets import (
     AuthorProxyViewSet,
     BookViewSet,
     BookProxyViewSet,
+    BookProxy2ViewSet,
     ProfileViewSet,
     PublisherViewSet,
 )
@@ -51,6 +52,12 @@ proxy_books = router.register(
     r'proxy-books',
     BookProxyViewSet,
     base_name='bookproxy'
+)
+
+proxy2_books = router.register(
+    r'proxy2-books',
+    BookProxy2ViewSet,
+    base_name='bookproxy2'
 )
 
 publishers = router.register(

@@ -16,6 +16,7 @@ from ..constants import (
 __all__ = (
     'Book',
     'BookProxy',
+    'BookProxy2',
 )
 
 
@@ -74,3 +75,14 @@ class BookProxy(Book):
         """Meta options."""
 
         proxy = True
+
+
+class BookProxy2(Book):
+    """Book proxy model for to be used in testing."""
+
+    class Meta(object):
+        """Meta options."""
+
+        proxy = True
+
+

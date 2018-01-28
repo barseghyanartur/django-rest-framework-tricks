@@ -8,11 +8,12 @@ from rest_framework_tricks.serializers import (
     ModelSerializer,
 )
 
-from ..models import Book, BookProxy
+from ..models import Book, BookProxy, BookProxy2
 
 __all__ = (
     'BookSerializer',
     'BookProxySerializer',
+    'BookProxy2Serializer',
 )
 
 # ****************************************************************************
@@ -84,7 +85,7 @@ class BookProxySerializer(HyperlinkedModelSerializer):
 
     publishing_information = PublishingInformationSerializer(required=False)
     stock_information = StockInformationSerializer(required=False)
-    publisher_name = serializers.CharField(source='publisher.name')
+    city = serializers.CharField(source='publisher.city', read_only=True)
 
     class Meta(object):
         """Meta options."""
@@ -98,5 +99,32 @@ class BookProxySerializer(HyperlinkedModelSerializer):
             'summary',
             'publishing_information',
             'stock_information',
-            'publisher_name',
+            'city',
+        )
+
+# ****************************************************************************
+# ***************************** BookProxy ************************************
+# ****************************************************************************
+
+
+class BookProxy2Serializer(HyperlinkedModelSerializer):
+    """Book proxy serializer."""
+
+    publishing_information = PublishingInformationSerializer(required=False)
+    stock_information = StockInformationSerializer(required=False)
+    city = serializers.CharField(source='publisher.city', read_only=True)
+
+    class Meta(object):
+        """Meta options."""
+
+        model = BookProxy2
+        fields = (
+            'url',
+            'id',
+            'title',
+            'description',
+            'summary',
+            'publishing_information',
+            'stock_information',
+            'city',
         )

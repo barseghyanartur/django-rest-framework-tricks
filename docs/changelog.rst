@@ -15,6 +15,17 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.6
+-----
+2018-01-28
+
+- Added ``OrderingFilter``, which makes it possible to specify
+  mapping (ordering option -> ORM field) for making more developer
+  friendly ordering options in the API. An example of such could be
+  a ``Profile`` model with ``ForeignKey`` relation to ``User`` model. In
+  case if we want to order by ``email`` field in the ``ProfileViewSet``,
+  instead of ordering on ``user__email`` we could order just on ``email``.
+
 0.2.5
 -----
 2017-12-30

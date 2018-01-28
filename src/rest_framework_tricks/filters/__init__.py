@@ -1,13 +1,13 @@
 """
-Fields.
+Filters.
 """
 
-from .nested_proxy import *
+from .ordering import *
 
-__title__ = 'rest_framework_tricks.models.fields'
+__title__ = 'rest_framework_tricks.filters'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
 __copyright__ = '2017-2018 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
-    'NestedProxyField',
+    'OrderingFilter',
 )

@@ -2,18 +2,21 @@
 View sets.
 """
 
-import django_filters
+# import django_filters
 
-from rest_framework import filters
+# from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 
-from .filters import CustomStatusFilter
+from rest_framework_tricks.filters import OrderingFilter
+
+# from .filters import CustomStatusFilter
 from .models import (
     Author,
     AuthorProxy,
     Book,
     BookProxy,
+    BookProxy2,
     Profile,
     Publisher,
 )
@@ -22,6 +25,7 @@ from .serializers import (
     AuthorProxySerializer,
     BookSerializer,
     BookProxySerializer,
+    BookProxy2Serializer,
     PublisherSerializer,
     ProfileSerializer,
 )
@@ -31,6 +35,7 @@ __all__ = (
     'AuthorProxyViewSet',
     'BookViewSet',
     'BookProxyViewSet',
+    'BookProxy2ViewSet',
     'PublisherViewSet',
     'ProfileViewSet',
 )
@@ -47,15 +52,30 @@ class BookViewSet(ModelViewSet):
 class BookProxyViewSet(ModelViewSet):
     """Book proxy ViewSet."""
 
-    queryset = BookProxy.objects.all()
+    queryset = BookProxy.objects.all().select_related('publisher')
     serializer_class = BookProxySerializer
     permission_classes = [AllowAny]
-    filter_class = CustomStatusFilter
     filter_backends = (
-        django_filters.rest_framework.DjangoFilterBackend,
-        filters.OrderingFilter,
+        OrderingFilter,
     )
-    ordering_fields = ('id', 'publisher__name',)
+    ordering_fields = {
+        'id': 'id',
+        'city': 'publisher__city',
+    }
+    ordering = ('id',)
+
+
+class BookProxy2ViewSet(ModelViewSet):
+    """Book proxy 2 ViewSet."""
+
+    queryset = BookProxy2.objects.all().select_related('publisher')
+    serializer_class = BookProxy2Serializer
+    permission_classes = [AllowAny]
+    filter_backends = (
+        OrderingFilter,
+    )
+    ordering_fields = ('id',)
+    ordering = ('id',)
 
 
 class PublisherViewSet(ModelViewSet):

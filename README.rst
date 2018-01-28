@@ -62,6 +62,8 @@ Main features and highlights
 ============================
 
 - `Nested serializers`_: Nested serializers for non-relational fields.
+- `Ordering filter`_: User friendly names for ordering options (for instance,
+  for related field names).
 
 Usage examples
 ==============
@@ -521,6 +523,117 @@ for complete model definition):
 See the `Advanced usage examples
 <https://github.com/barseghyanartur/django-rest-framework-tricks/blob/master/ADVANCED_USAGE_EXAMPLES.rst#nested-serializers>`_
 for complete example.
+
+Ordering filter
+---------------
+User friendly names for ordering options (for instance, for related field
+names).
+
+Sample model
+~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from django.db import models
+
+
+Model definition
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class Profile(models.Model):
+        """Profile."""
+
+        user = models.ForeignKey('auth.User')
+        biography = models.TextField()
+        hobbies = models.TextField()
+
+
+Sample serializer
+~~~~~~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from rest_framework import serializers
+
+    from .models import Profile
+
+Defining the serializers
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class PublishingInformationSerializer(serializers.ModelSerializer):
+        """Publishing information serializer."""
+
+        username = serializers.CharField(source='user.username', read_only=True)
+        email = serializers.CharField(source='user.email', read_only=True)
+
+        class Meta(object):
+
+        model = Profile
+        fields = (
+            'id',
+            'username',
+            'email',
+            'biography',
+            'hobbies',
+        )
+
+Sample ViewSet
+~~~~~~~~~~~~~~
+
+The only variation from standard implementation here is that we
+use ``rest_frameworks_tricks.filters.OrderingFilter`` instead
+of ``rest_framework.filters.OrderingFilter``.
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from rest_framework.viewsets import ModelViewSet
+    from rest_framework.permissions import AllowAny
+
+    from .models import Profile
+    from .serializers import ProfileSerializer
+
+ViewSet definition
+^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class ProfileViewSet(ModelViewSet):
+        """Profile ViewSet."""
+
+        queryset = Profile.objects.all()
+        serializer_class = ProfileSerializer
+        permission_classes = [AllowAny]
+        ordering_fields = {
+            'id': 'id',
+            'username': 'user__username',
+            'email': 'user__email',
+        }
+        ordering = ('id',)
+
+Sample GET calls
+^^^^^^^^^^^^^^^^
+
+.. code-block:: text
+
+    GET /api/profile/?ordering=email
+    GET /api/profile/?ordering=-username
 
 Demo
 ====

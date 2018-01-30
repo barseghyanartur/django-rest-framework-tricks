@@ -605,6 +605,7 @@ Required imports
 
     from rest_framework.viewsets import ModelViewSet
     from rest_framework.permissions import AllowAny
+    from rest_framework_tricks.filters import OrderingFilter
 
     from .models import Profile
     from .serializers import ProfileSerializer
@@ -620,6 +621,7 @@ ViewSet definition
         queryset = Profile.objects.all()
         serializer_class = ProfileSerializer
         permission_classes = [AllowAny]
+        filter_backends = (OrderingFilter,)
         ordering_fields = {
             'id': 'id',
             'username': 'user__username',

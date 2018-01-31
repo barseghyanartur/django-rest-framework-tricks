@@ -62,8 +62,8 @@ Main features and highlights
 ============================
 
 - `Nested serializers`_: Nested serializers for non-relational fields.
-- `Ordering filter`_: User friendly names for ordering options (for instance,
-  for related field names).
+- `Ordering filter`_: Developer friendly names for ordering options (for
+  instance, for related field names).
 
 Usage examples
 ==============
@@ -526,8 +526,8 @@ for complete example.
 
 Ordering filter
 ---------------
-User friendly names for ordering options (for instance, for related field
-names).
+Developer friendly names for ordering options (for instance, for related field
+names) for making better APIs.
 
 Sample model
 ~~~~~~~~~~~~
@@ -631,6 +631,9 @@ ViewSet definition
 
 Sample GET calls
 ^^^^^^^^^^^^^^^^
+
+Note, that our ordering options are now equal to the field names in the
+serializer (JSON response). API becomes easier to use/understand that way.
 
 .. code-block:: text
 

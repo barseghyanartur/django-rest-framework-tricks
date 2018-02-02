@@ -57,6 +57,7 @@ class BookProxyViewSet(ModelViewSet):
     ordering_fields = {
         'id': 'id',
         'city': 'publisher__city',
+        'status': ['state', 'publication_date'],
     }
     ordering = ('id',)
 
@@ -70,7 +71,7 @@ class BookProxy2ViewSet(ModelViewSet):
     filter_backends = (
         OrderingFilter,
     )
-    ordering_fields = ('id',)
+    ordering_fields = ('id', 'state',)
     ordering = ('id',)
 
 

@@ -89,13 +89,20 @@ class OrderingFilter(DjangoOrderingFilter):
                 ordering = []
                 for item in _ordering:
                     if '-' in item:
-                        ordering.append(
-                            '-{}'.format(valid_fields.get(item[1:]))
-                        )
+                        value = valid_fields.get(item[1:])
+                        if isinstance(value, (tuple, list)):
+                            value = ['-{}'.format(__v) for __v in value]
+                            ordering += value
+                        else:
+                            ordering.append(
+                                '-{}'.format(value)
+                            )
                     else:
-                        ordering.append(
-                            valid_fields.get(item)
-                        )
+                        value = valid_fields.get(item)
+                        if isinstance(value, (tuple, list)):
+                            ordering += value
+                        else:
+                            ordering.append(value)
                 if ordering:
                     return ordering
 

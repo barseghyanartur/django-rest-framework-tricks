@@ -138,6 +138,51 @@ class TestOrderingFilter(BaseRestFrameworkTestCase):
 
         self.assertEqual(data, sorted_data)
 
+    def _test_ordering_list(self, descending=False):
+        """Test ordering list.
+
+        :param descending:
+        :return:
+        """
+        response = self.client.get(
+            self.bookproxy_listing_url,
+            {'ordering': '-status' if descending else 'status'},
+            format='json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = []
+        data_2 = []
+        for item in response.data['results']:
+            _state = item['state'] if item['state'] else ''
+            _pub_date = item['publishing_information']['publication_date'] \
+                if item['publishing_information']['publication_date'] \
+                else ''
+            data.append(_state)
+            data_2.append('{} {}'.format(_state, _pub_date))
+
+        sorted_data = sorted(data)
+        sorted_data_2 = sorted(data_2)
+        if descending:
+            sorted_data = list(reversed(sorted_data))
+            sorted_data_2 = list(reversed(sorted_data_2))
+
+        self.assertEqual(data, sorted_data)
+        self.assertEqual(data_2, sorted_data_2)
+
+    def test_ordering_list(self):
+        """Test ordering list (ascending).
+
+        :return:
+        """
+        return self._test_ordering_list()
+
+    def test_ordering_list_descending(self):
+        """Test ordering list (descending).
+
+        :return:
+        """
+        return self._test_ordering_list(descending=True)
+
 
 if __name__ == '__main__':
     unittest.main()

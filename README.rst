@@ -578,6 +578,7 @@ Defining the serializers
         """Profile serializer."""
 
         username = serializers.CharField(source='user.username', read_only=True)
+        full_name = serializers.SerializerMethodField()
         email = serializers.CharField(source='user.email', read_only=True)
 
         class Meta(object):
@@ -586,10 +587,14 @@ Defining the serializers
         fields = (
             'id',
             'username',
+            'full_name',
             'email',
             'biography',
             'hobbies',
         )
+
+        def get_full_name(self, obj):
+            return obj.user.get_full_name()
 
 Sample ViewSet
 ~~~~~~~~~~~~~~
@@ -626,6 +631,7 @@ ViewSet definition
             'id': 'id',
             'username': 'user__username',
             'email': 'user__email',
+            'full_name': ['user__first_name', 'user__last_name']
         }
         ordering = ('id',)
 
@@ -639,6 +645,8 @@ serializer (JSON response). API becomes easier to use/understand that way.
 
     GET /api/profile/?ordering=email
     GET /api/profile/?ordering=-username
+    GET /api/profile/?ordering=full_name
+    GET /api/profile/?ordering=-full_name
 
 Demo
 ====

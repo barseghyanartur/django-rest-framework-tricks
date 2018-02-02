@@ -100,6 +100,7 @@ class BookProxySerializer(HyperlinkedModelSerializer):
             'publishing_information',
             'stock_information',
             'city',
+            'state',
         )
 
 # ****************************************************************************

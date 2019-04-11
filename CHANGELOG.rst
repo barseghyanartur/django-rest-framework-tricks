@@ -15,6 +15,16 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.10
+------
+2019-04-12
+
+- Tested against Django 2.1 and Django 2.2.
+- Tested against Python 3.7.
+- Dropping support for Python 3.4.
+- Upgrade test suite.
+- Temporary remove PyPy from tox (because of failing tests).
+
 0.2.9
 -----
 2018-02-03

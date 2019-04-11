@@ -5,5 +5,4 @@ Django>=1.8,<1.9
 django-debug-toolbar==1.4
 django-debug-toolbar-force==0.1.1
 django-ormex==0.2
-drf-extensions==0.3.1
 sqlparse==0.1.9

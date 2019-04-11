@@ -4,6 +4,8 @@ Urls.
 
 from django.conf.urls import url, include
 
+from rest_framework.routers import DefaultRouter
+
 from .views import (
     AddAuthorsToBookView,
     AuthorListView,
@@ -30,55 +32,48 @@ from .viewsets import (
     PublisherViewSet,
 )
 
-from nine.versions import DJANGO_GTE_2_0
-
-if DJANGO_GTE_2_0:
-    from .rest_framework_extensions_routers_compat import ExtendedDefaultRouter
-else:
-    from rest_framework_extensions.routers import ExtendedDefaultRouter
-
 __all__ = ('urlpatterns',)
 
 
-router = ExtendedDefaultRouter()
+router = DefaultRouter()
 
-books = router.register(
+router.register(
     r'books',
     BookViewSet,
     base_name='book'
 )
 
-proxy_books = router.register(
+router.register(
     r'proxy-books',
     BookProxyViewSet,
     base_name='bookproxy'
 )
 
-proxy2_books = router.register(
+router.register(
     r'proxy2-books',
     BookProxy2ViewSet,
     base_name='bookproxy2'
 )
 
-publishers = router.register(
+router.register(
     r'publishers',
     PublisherViewSet,
     base_name='publisher'
 )
 
-profiles = router.register(
+router.register(
     r'profiles',
     ProfileViewSet,
     base_name='profile'
 )
 
-authors = router.register(
+router.register(
     r'authors',
     AuthorViewSet,
     base_name='author'
 )
 
-proxy_authors = router.register(
+router.register(
     r'proxy-authors',
     AuthorProxyViewSet,
     base_name='authorproxy'

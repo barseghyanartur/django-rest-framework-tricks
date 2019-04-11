@@ -7,8 +7,8 @@ Collection of various tricks for
 Prerequisites
 =============
 
-- Django 1.8, 1.9, 1.10, 1.11 and 2.0.
-- Python 2.7, 3.4, 3.5, 3.6
+- Django 1.8, 1.9, 1.10, 1.11, 2.0, 2.1 and 2.2.
+- Python 2.7, 3.4, 3.5, 3.6, 3.7
 
 Dependencies
 ============

@@ -4,6 +4,18 @@ django-rest-framework-tricks
 Collection of various tricks for
 `Django REST framework <https://pypi.python.org/pypi/djangorestframework>`_.
 
+.. image:: https://img.shields.io/pypi/v/django-rest-framework-tricks.svg
+   :target: https://pypi.python.org/pypi/django-rest-framework-tricks
+   :alt: PyPI Version
+
+.. image:: https://img.shields.io/travis/barseghyanartur/django-rest-framework-tricks/master.svg
+   :target: http://travis-ci.org/barseghyanartur/django-rest-framework-tricks
+   :alt: Build Status
+
+.. image:: https://img.shields.io/badge/license-GPL--2.0--only%20OR%20LGPL--2.1--or--later-blue.svg
+   :target: https://github.com/barseghyanartur/django-rest-framework-tricks/#License
+   :alt: GPL-2.0-only OR LGPL-2.1-or-later
+
 Prerequisites
 =============
 
@@ -744,7 +756,7 @@ Keep the following hierarchy.
 License
 =======
 
-GPL 2.0/LGPL 2.1
+GPL-2.0-only OR LGPL-2.1-or-later
 
 Support
 =======

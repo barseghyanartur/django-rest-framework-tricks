@@ -51,7 +51,7 @@ setup(
     url='https://github.com/barseghyanartur/django-rest-framework-tricks/',
     package_dir={'': 'src'},
     packages=find_packages(where='./src'),
-    license='GPL 2.0/LGPL 2.1',
+    license='GPL-2.0-only OR LGPL-2.1-or-later',
     install_requires=(install_requires + extras_require),
     tests_require=tests_require,
     include_package_data=True,

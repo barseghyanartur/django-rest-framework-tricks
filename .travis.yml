@@ -39,3 +39,7 @@ before_script:
   - mkdir -p examples/db/
 
 script: travis_retry tox -e $TOX_ENV
+
+after_success:
+  - pip install coveralls
+  - coveralls

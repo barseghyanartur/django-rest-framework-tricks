@@ -4,6 +4,7 @@ Urls.
 
 from django.conf.urls import url, include
 
+import rest_framework
 from rest_framework.routers import DefaultRouter
 
 from .views import (
@@ -34,49 +35,58 @@ from .viewsets import (
 
 __all__ = ('urlpatterns',)
 
+BASENAME = 'basename'
+
+try:
+    drf_version = rest_framework.__version__.split('.')[:2]
+    drf_version = tuple(int(_i) for _i in drf_version)
+    if drf_version < (3, 9):
+        BASENAME = 'base_name'
+except:
+    pass
 
 router = DefaultRouter()
 
 router.register(
     r'books',
     BookViewSet,
-    base_name='book'
+    **{BASENAME: 'book'}
 )
 
 router.register(
     r'proxy-books',
     BookProxyViewSet,
-    base_name='bookproxy'
+    **{BASENAME: 'bookproxy'}
 )
 
 router.register(
     r'proxy2-books',
     BookProxy2ViewSet,
-    base_name='bookproxy2'
+    **{BASENAME: 'bookproxy2'}
 )
 
 router.register(
     r'publishers',
     PublisherViewSet,
-    base_name='publisher'
+    **{BASENAME: 'publisher'}
 )
 
 router.register(
     r'profiles',
     ProfileViewSet,
-    base_name='profile'
+    **{BASENAME: 'profile'}
 )
 
 router.register(
     r'authors',
     AuthorViewSet,
-    base_name='author'
+    **{BASENAME: 'author'}
 )
 
 router.register(
     r'proxy-authors',
     AuthorProxyViewSet,
-    base_name='authorproxy'
+    **{BASENAME: 'authorproxy'}
 )
 
 urlpatterns = [

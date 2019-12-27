@@ -4,8 +4,6 @@ Test OrderingFilter.
 
 from __future__ import absolute_import
 
-from decimal import Decimal
-
 import unittest
 
 from nine.versions import DJANGO_GTE_1_10

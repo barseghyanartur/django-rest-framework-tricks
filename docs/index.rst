@@ -27,13 +27,13 @@ Collection of various tricks for
 Prerequisites
 =============
 
-- Django 1.8, 1.9, 1.10, 1.11, 2.0, 2.1 and 2.2.
-- Python 2.7, 3.4, 3.5, 3.6, 3.7
+- Django 1.8, 1.9, 1.10, 1.11, 2.0, 2.1, 2.2 and 3.0.
+- Python 2.7, 3.5, 3.6, 3.7, 3.8
 
 Dependencies
 ============
 
-- djangorestframework: Written with 3.6.3, tested with >=3.5.0,<=3.7.7. May
+- djangorestframework: Written with 3.6.3, tested with >=3.5.0,<=3.11.0. May
   work on earlier versions, although not guaranteed.
 
 Installation
@@ -705,7 +705,7 @@ To test against specific environment, type:
 
 .. code-block:: sh
 
-    tox -e py36-django110
+    tox -e py38-django30
 
 To test just your working environment type:
 

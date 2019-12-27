@@ -4,3 +4,15 @@ include LICENSE_LGPL_2.1.txt
 include CHANGELOG.rst
 
 recursive-include src/rest_framework_tricks *
+
+include runtests.py
+include .coveragerc
+include pytest.ini
+include shell.py
+include tox.ini
+
+graft docs/
+
+global-exclude *.pyc
+global-exclude *.py,cover
+global-exclude __pycache__

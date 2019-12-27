@@ -3,7 +3,7 @@ Collection of various tricks for Django REST framework.
 """
 
 __title__ = 'django-rest-framework-tricks'
-__version__ = '0.2.10'
+__version__ = '0.2.11'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
 __copyright__ = '2017-2019 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'

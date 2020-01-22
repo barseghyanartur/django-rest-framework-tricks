@@ -50,6 +50,15 @@ setup(
     author='Artur Barseghyan',
     author_email='artur.barseghyan@gmail.com',
     url='https://github.com/barseghyanartur/django-rest-framework-tricks/',
+    project_urls={
+        "Bug Tracker": "https://github.com/barseghyanartur/"
+                       "django-rest-framework-tricks/",
+        "Documentation": "https://django-rest-framework-tricks.readthedocs.io/",
+        "Source Code": "https://github.com/barseghyanartur/"
+                       "django-rest-framework-tricks/",
+        "Changelog": "https://django-rest-framework-tricks.readthedocs.io/"
+                     "en/latest/changelog.html",
+    },
     package_dir={'': 'src'},
     packages=find_packages(where='./src'),
     license='GPL-2.0-only OR LGPL-2.1-or-later',

@@ -81,7 +81,7 @@ Documentation is available on `Read the Docs
 Main features and highlights
 ============================
 
-- `Nested serializers`_: Nested serializers for non-relational fields.
+- `Nested serializers`_: Nested (writable) serializers for non-relational fields.
 - `Ordering filter`_: Developer friendly names for ordering options (for
   instance, for related field names).
 

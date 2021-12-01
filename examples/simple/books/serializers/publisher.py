@@ -10,9 +10,7 @@ from rest_framework_tricks.serializers import (
 
 from ..models import Publisher
 
-__all__ = (
-    'PublisherSerializer',
-)
+__all__ = ("PublisherSerializer",)
 
 # ****************************************************************************
 # ****************************** Publisher ***********************************
@@ -27,15 +25,15 @@ class AddressInformationSerializer(serializers.ModelSerializer):
     state_province = serializers.CharField(required=False, allow_null=True)
     country = serializers.CharField(required=False, allow_null=True)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Publisher
         fields = (
-            'address',
-            'city',
-            'state_province',
-            'country',
+            "address",
+            "city",
+            "state_province",
+            "country",
         )
         nested_proxy_field = True
 
@@ -45,14 +43,14 @@ class PublisherSerializer(ModelSerializer):
 
     address_information = AddressInformationSerializer(required=False)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Publisher
         fields = (
-            'id',
-            'name',
-            'info',
-            'website',
-            'address_information',
+            "id",
+            "name",
+            "info",
+            "website",
+            "address_information",
         )

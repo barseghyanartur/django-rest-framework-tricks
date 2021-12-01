@@ -15,6 +15,18 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.12
+------
+2021-11-25
+
+- Tested against Django 3.1 and 3.2.
+- Tested against Python 3.9 and 3.10.
+- Tested against Django REST Framework 3.12.
+- Drop Python 2.x support.
+- Drop Python 3.5 support.
+- Drop Django < 2.2 support.
+- Drop Django REST Framework < 3.9.x support.
+
 0.2.11
 ------
 2019-12-27

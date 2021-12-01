@@ -1,0 +1,8 @@
+-r common.in
+-r test.in
+
+Django>=3.2,<3.3
+django-debug-toolbar>=2.1
+django-debug-toolbar-force>=0.1.7
+django-ormex>=0.2.1
+djangorestframework==3.12.4

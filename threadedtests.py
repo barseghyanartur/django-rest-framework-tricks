@@ -13,12 +13,14 @@ def main():
     sys.path.insert(0, "examples/simple")
 
     parser = argparse.ArgumentParser(description="""\nTesting.\n""")
-    parser.add_argument("-t",
-                        "--threads",
-                        dest="threads",
-                        type=int,
-                        help="Number of threads",
-                        metavar="THREADS")
+    parser.add_argument(
+        "-t",
+        "--threads",
+        dest="threads",
+        type=int,
+        help="Number of threads",
+        metavar="THREADS",
+    )
     __args = parser.parse_args()
     __threads = 5
     if __args.threads:
@@ -31,5 +33,5 @@ def main():
     return [__process.join() for __process in __processes]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

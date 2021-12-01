@@ -10,9 +10,7 @@ from rest_framework_tricks.serializers import (
 
 from ..models import Profile
 
-__all__ = (
-    'ProfileSerializer',
-)
+__all__ = ("ProfileSerializer",)
 
 # ****************************************************************************
 # ******************************* Profile ************************************
@@ -22,16 +20,16 @@ __all__ = (
 class PersonalInformationSerializer(serializers.ModelSerializer):
     """Personal information serializer."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'salutation',
-            'first_name',
-            'last_name',
-            'birth_date',
-            'biography',
+            "salutation",
+            "first_name",
+            "last_name",
+            "birth_date",
+            "biography",
         )
         nested_proxy_field = True
 
@@ -39,14 +37,14 @@ class PersonalInformationSerializer(serializers.ModelSerializer):
 class PersonalContactInformationSerializer(serializers.ModelSerializer):
     """Personal contact information serializer."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'email',
-            'phone_number',
-            'website',
+            "email",
+            "phone_number",
+            "website",
         )
         nested_proxy_field = True
 
@@ -54,15 +52,15 @@ class PersonalContactInformationSerializer(serializers.ModelSerializer):
 class BusinessContactInformationSerializer(serializers.ModelSerializer):
     """Business contact information serializer."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'company',
-            'company_email',
-            'company_phone_number',
-            'company_website',
+            "company",
+            "company_email",
+            "company_phone_number",
+            "company_website",
         )
         nested_proxy_field = True
 
@@ -70,20 +68,16 @@ class BusinessContactInformationSerializer(serializers.ModelSerializer):
 class ContactInformationSerializer(serializers.ModelSerializer):
     """Contact information serializer."""
 
-    personal_contact_information = PersonalContactInformationSerializer(
-        required=False
-    )
-    business_contact_information = BusinessContactInformationSerializer(
-        required=False
-    )
+    personal_contact_information = PersonalContactInformationSerializer(required=False)
+    business_contact_information = BusinessContactInformationSerializer(required=False)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'personal_contact_information',
-            'business_contact_information',
+            "personal_contact_information",
+            "business_contact_information",
         )
         nested_proxy_field = True
 
@@ -91,14 +85,14 @@ class ContactInformationSerializer(serializers.ModelSerializer):
 class BankInformationSerializer(serializers.ModelSerializer):
     """Bank information serializer."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'bank_name',
-            'bank_account_name',
-            'bank_account_number',
+            "bank_name",
+            "bank_account_name",
+            "bank_account_number",
         )
         nested_proxy_field = True
 
@@ -106,24 +100,18 @@ class BankInformationSerializer(serializers.ModelSerializer):
 class DataSerializer(serializers.ModelSerializer):
     """Data serializer."""
 
-    personal_information = PersonalInformationSerializer(
-        required=False
-    )
-    contact_information = ContactInformationSerializer(
-        required=False
-    )
-    bank_information = BankInformationSerializer(
-        required=False
-    )
+    personal_information = PersonalInformationSerializer(required=False)
+    contact_information = ContactInformationSerializer(required=False)
+    bank_information = BankInformationSerializer(required=False)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'personal_information',
-            'contact_information',
-            'bank_information',
+            "personal_information",
+            "contact_information",
+            "bank_information",
         )
         nested_proxy_field = True
 
@@ -131,17 +119,13 @@ class DataSerializer(serializers.ModelSerializer):
 class InformationSerializer(serializers.ModelSerializer):
     """information serializer."""
 
-    data = DataSerializer(
-        required=False
-    )
+    data = DataSerializer(required=False)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
-        fields = (
-            'data',
-        )
+        fields = ("data",)
         nested_proxy_field = True
 
 
@@ -150,11 +134,11 @@ class ProfileSerializer(ModelSerializer):
 
     information = InformationSerializer(required=False)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         model = Profile
         fields = (
-            'id',
-            'information',
+            "id",
+            "information",
         )

@@ -27,14 +27,15 @@ Collection of various tricks for
 Prerequisites
 =============
 
-- Django 1.8, 1.9, 1.10, 1.11, 2.0, 2.1, 2.2 and 3.0.
-- Python 2.7, 3.5, 3.6, 3.7, 3.8
+- Django 2.2, 3.0, 3.1 and 3.2.
+- Python 3.6, 3.7, 3.8, 3.9 and 3.10.
 
 Dependencies
 ============
 
-- djangorestframework: Written with 3.6.3, tested with >=3.5.0,<=3.11.0. May
-  work on earlier versions, although not guaranteed.
+- djangorestframework: Initially written with 3.6.3, but nowadays tested
+  with >=3.9.2,<=3.11.0. May (still) work on earlier- or (even) support
+  later- versions, although not guaranteed.
 
 Installation
 ============
@@ -45,17 +46,11 @@ Installation
 
         pip install django-rest-framework-tricks
 
-    or latest stable version from GitHub:
+    or latest development version from GitHub:
 
     .. code-block:: sh
 
-        pip install https://github.com/barseghyanartur/django-rest-framework-tricks/archive/stable.tar.gz
-
-    or latest stable version from BitBucket:
-
-    .. code-block:: sh
-
-        pip install https://bitbucket.org/barseghyanartur/django-rest-framework-tricks/get/stable.tar.gz
+        pip install https://github.com/barseghyanartur/django-rest-framework-tricks/archive/master.tar.gz
 
 (2) Add ``rest_framework`` and ``rest_framework_tricks`` to ``INSTALLED_APPS``:
 
@@ -705,28 +700,19 @@ To test against specific environment, type:
 
 .. code-block:: sh
 
-    tox -e py38-django30
+    tox -e py39-django32
 
 To test just your working environment type:
 
 .. code-block:: sh
 
-    ./runtests.py
+    pytest -vvv
 
 To run a single test in your working environment type:
 
 .. code-block:: sh
 
-    ./runtests.py src/rest_framework_tricks/tests/test_nested_proxy_field.py
-
-Or:
-
-.. code-block:: sh
-
-    ./manage.py test rest_framework_tricks.tests.test_nested_proxy_field
-
-It's assumed that you have all the requirements installed. If not, first
-install the test requirements:
+    pytest -vvv src/rest_framework_tricks/tests/test_nested_proxy_field.py
 
 .. code-block:: sh
 

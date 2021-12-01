@@ -8,48 +8,48 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0011_auto_20170630_1655'),
+        ("books", "0011_auto_20170630_1655"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='author',
-            name='biography',
+            model_name="author",
+            name="biography",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='birth_date',
+            model_name="author",
+            name="birth_date",
             field=models.DateField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='company',
+            model_name="author",
+            name="company",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='company_email',
+            model_name="author",
+            name="company_email",
             field=models.EmailField(blank=True, max_length=254, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='company_phone_number',
+            model_name="author",
+            name="company_phone_number",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='company_website',
+            model_name="author",
+            name="company_website",
             field=models.EmailField(blank=True, max_length=254, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='phone_number',
+            model_name="author",
+            name="phone_number",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='website',
+            model_name="author",
+            name="website",
             field=models.URLField(blank=True, null=True),
         ),
     ]

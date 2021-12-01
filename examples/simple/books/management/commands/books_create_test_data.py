@@ -20,16 +20,18 @@ class Command(BaseCommand):
     requires_system_checks = False
 
     def add_arguments(self, parser):
-        parser.add_argument('--number',
-                            action='store',
-                            dest='number',
-                            type=int,
-                            default=DEFAULT_NUMBER_OF_ITEMS_TO_CREATE,
-                            help="Number of items to create.")
+        parser.add_argument(
+            "--number",
+            action="store",
+            dest="number",
+            type=int,
+            default=DEFAULT_NUMBER_OF_ITEMS_TO_CREATE,
+            help="Number of items to create.",
+        )
 
     def handle(self, *args, **options):
-        if options.get('number'):
-            number = options['number']
+        if options.get("number"):
+            number = options["number"]
         else:
             number = DEFAULT_NUMBER_OF_ITEMS_TO_CREATE
 

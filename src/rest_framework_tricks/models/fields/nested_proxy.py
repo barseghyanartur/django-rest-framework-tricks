@@ -4,13 +4,11 @@ Nested proxy field.
 
 from ...utils import DictProxy
 
-__title__ = 'rest_framework_tricks.models.fields.nested_proxy'
-__author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2017-2019 Artur Barseghyan'
-__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
-__all__ = (
-    'NestedProxyField',
-)
+__title__ = "rest_framework_tricks.models.fields.nested_proxy"
+__author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__copyright__ = "2017-2019 Artur Barseghyan"
+__license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
+__all__ = ("NestedProxyField",)
 
 
 def NestedProxyField(*fields, **options):
@@ -51,7 +49,7 @@ def NestedProxyField(*fields, **options):
         >>>         'state',
         >>>     )
         >>>
-        >>>     class Meta(object):
+        >>>     class Meta:
         >>>
         >>>         ordering = ["isbn"]
         >>>
@@ -127,22 +125,18 @@ def NestedProxyField(*fields, **options):
         >>>     )
     """
 
-    __as_object = options.get('as_object', False)
+    __as_object = options.get("as_object", False)
 
     @property
     def proxy_field(self):
         """Proxy field."""
-        obj = options.get('obj') if 'obj' in options else self
+        obj = options.get("obj") if "obj" in options else self
         __dict = {}
         for __field in fields:
             # If dictionary
             if isinstance(__field, dict):
                 for __key, __values in __field.items():
-                    setattr(
-                        obj.__class__,
-                        __key,
-                        NestedProxyField(*__values, obj=obj)
-                    )
+                    setattr(obj.__class__, __key, NestedProxyField(*__values, obj=obj))
                     __dict.update({__key: getattr(obj, __key)})
             # If string
             else:

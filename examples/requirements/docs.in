@@ -1,0 +1,7 @@
+rst2pdf
+sphinx
+Jinja2
+MarkupSafe
+Sphinx
+docutils
+rstcheck==3.3.1

@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0014_authorproxy_profile'),
+        ("books", "0014_authorproxy_profile"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='profile',
-            name='salutation',
+            model_name="profile",
+            name="salutation",
             field=models.CharField(max_length=50),
         ),
     ]

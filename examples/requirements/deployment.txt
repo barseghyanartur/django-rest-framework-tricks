@@ -64,7 +64,7 @@ tomli==1.2.2
     # via pep517
 tqdm==4.62.3
     # via twine
-twine==3.6.0
+twine==3.7.0
     # via -r deployment.in
 urllib3==1.26.7
     # via requests

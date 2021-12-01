@@ -5,5 +5,4 @@ Django>=2.2,<2.3
 django-debug-toolbar>=1.6
 django-debug-toolbar-force>=0.1.1
 django-ormex>=0.2
-djangorestframework==3.9.2
-#djangorestframework==3.12.4
+djangorestframework>=3.9.2,<3.10

@@ -29,7 +29,7 @@ django-nine==0.2.5
     #   django-ormex
 django-ormex==0.2.1
     # via -r django_2_2.in
-djangorestframework==3.9.2
+djangorestframework==3.9.4
     # via -r django_2_2.in
 factory-boy==3.2.1
     # via -r test.in

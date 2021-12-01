@@ -3,10 +3,7 @@ Book model.
 """
 
 from django.db import models
-
 from rest_framework_tricks.models.fields import NestedProxyField
-
-from six import python_2_unicode_compatible
 
 from ..constants import (
     BOOK_PUBLISHING_STATUS_CHOICES,
@@ -20,7 +17,6 @@ __all__ = (
 )
 
 
-@python_2_unicode_compatible
 class Book(models.Model):
     """Book."""
 
@@ -59,7 +55,7 @@ class Book(models.Model):
         'state',
     )
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["isbn"]
@@ -71,7 +67,7 @@ class Book(models.Model):
 class BookProxy(Book):
     """Book proxy model for to be used in testing."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         proxy = True
@@ -80,9 +76,7 @@ class BookProxy(Book):
 class BookProxy2(Book):
     """Book proxy model for to be used in testing."""
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         proxy = True
-
-

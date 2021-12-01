@@ -15,8 +15,7 @@ and ``HyperlinkedModelSerializer`` classes.
     >>>     isbn = serializers.CharField(required=False)
     >>>     pages = serializers.IntegerField(required=False)
     >>>
-    >>>     class Meta(object):
-    >>>
+    >>>     class Meta:
     >>>         model = Book
     >>>         fields = (
     >>>             'publication_date',
@@ -28,8 +27,7 @@ and ``HyperlinkedModelSerializer`` classes.
     >>>
     >>> class StockInformationSerializer(serializers.ModelSerializer):
     >>>
-    >>>     class Meta(object):
-    >>>
+    >>>     class Meta:
     >>>         model = Book
     >>>         fields = (
     >>>             'stock_count',
@@ -42,9 +40,8 @@ and ``HyperlinkedModelSerializer`` classes.
 from rest_framework import serializers
 
 
-__title__ = 'rest_framework_tricks.serializers.nested_proxy'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2017-2019 Artur Barseghyan'
+__copyright__ = '2017-2021 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'extract_nested_serializers',
@@ -127,7 +124,7 @@ def set_instance_values(nested_serializers,
     for __serializer_name, __serializer in nested_serializers_data.items():
         for __field_name, __field_value in __serializer.items():
             if is_nested_proxy_field(
-                    nested_serializers[__serializer_name][__field_name]
+                nested_serializers[__serializer_name][__field_name]
             ):
                 set_instance_values(
                     {
@@ -160,8 +157,7 @@ class ModelSerializer(serializers.ModelSerializer):
     >>>     )
     >>>     stock_information = StockInformationSerializer(required=False)
     >>>
-    >>>     class Meta(object):
-    >>>
+    >>>     class Meta:
     >>>         model = Book
     >>>         fields = (
     >>>             'url',
@@ -250,8 +246,7 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
     >>>     )
     >>>     stock_information = StockInformationSerializer(required=False)
     >>>
-    >>>     class Meta(object):
-    >>>
+    >>>     class Meta:
     >>>         model = Book
     >>>         fields = (
     >>>             'url',

@@ -3,17 +3,13 @@ Profile models.
 """
 
 from django.db import models
-
 from rest_framework_tricks.models.fields import NestedProxyField
-
-from six import python_2_unicode_compatible
 
 __all__ = (
     'Profile',
 )
 
 
-@python_2_unicode_compatible
 class Profile(models.Model):
     """Profile."""
 
@@ -120,10 +116,10 @@ class Profile(models.Model):
     #     }
     # }
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["id"]
 
     def __str__(self):
-        return self.name
+        return self.email

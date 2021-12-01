@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
 """
 Test utils.
 """
-
-from __future__ import absolute_import, unicode_literals, print_function
-
-import unittest
-
 import pytest
 
 from ..utils import DictProxy
@@ -42,7 +36,3 @@ class TestUtils(BaseTestCase):
             self.assertEqual(getattr(__dict_proxy, __key), __dict[__key])
 
         print(__dict_proxy)
-
-
-if __name__ == '__main__':
-    unittest.main()

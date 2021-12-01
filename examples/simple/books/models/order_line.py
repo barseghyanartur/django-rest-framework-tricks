@@ -3,16 +3,12 @@ Order line models.
 """
 
 from django.db import models
-from django.utils.translation import ugettext
-
-from six import python_2_unicode_compatible
 
 __all__ = (
     'OrderLine',
 )
 
 
-@python_2_unicode_compatible
 class OrderLine(models.Model):
     """Order line."""
 
@@ -22,10 +18,10 @@ class OrderLine(models.Model):
         on_delete=models.CASCADE
     )
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["order__created"]
 
     def __str__(self):
-        return ugettext('{}').format(self.book.isbn)
+        return self.book.isbn

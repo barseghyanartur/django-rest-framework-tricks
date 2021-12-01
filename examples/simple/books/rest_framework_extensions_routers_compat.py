@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
 """
 Temporary copy of the ``rest_framework_extensions.routers`` of the
 ``drf_extensions`` package. To be removed once the latter one is updated
 to work with Django 2.0.
 """
-from distutils.version import LooseVersion
 from django.core.exceptions import ImproperlyConfigured
-
-from nine.versions import DJANGO_GTE_1_10
+from django.urls import NoReverseMatch
 
 from rest_framework.routers import (
     DefaultRouter,
@@ -24,11 +21,6 @@ from rest_framework_extensions.utils import (
     get_rest_framework_version,
 )
 from rest_framework_extensions.compat_drf import add_trailing_slash_if_needed
-
-if DJANGO_GTE_1_10:
-    from django.urls import NoReverseMatch
-else:
-    from django.core.urlresolvers import NoReverseMatch
 
 
 class ExtendedActionLinkRouterMixin(object):

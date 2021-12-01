@@ -6,15 +6,12 @@ from django.db import models
 
 from rest_framework_tricks.models.fields import NestedProxyField
 
-from six import python_2_unicode_compatible
-
 __all__ = (
     'Author',
     'AuthorProxy',
 )
 
 
-@python_2_unicode_compatible
 class Author(models.Model):
     """Author."""
 
@@ -73,7 +70,7 @@ class Author(models.Model):
         },
     )
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["id"]
@@ -106,7 +103,7 @@ class AuthorProxy(Author):
         'business_contact_information',
     )
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         proxy = True

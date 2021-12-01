@@ -4,16 +4,13 @@ Order models.
 
 from django.conf import settings
 from django.db import models
-from django.utils.translation import ugettext
-
-from six import python_2_unicode_compatible
+from django.utils.translation import gettext
 
 __all__ = (
     'Order',
 )
 
 
-@python_2_unicode_compatible
 class Order(models.Model):
     """Order."""
 
@@ -23,10 +20,10 @@ class Order(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["-created"]
 
     def __str__(self):
-        return ugettext('Order')
+        return gettext('Order')

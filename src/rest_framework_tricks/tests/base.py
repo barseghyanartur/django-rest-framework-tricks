@@ -5,16 +5,14 @@ Base tests.
 import logging
 
 from django.test import TestCase
-from rest_framework.test import APITestCase
 from faker import Faker
-
 import pytest
+from rest_framework.test import APITestCase
 
 import factories
 
-__title__ = 'rest_framework_tricks.tests.base'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2017-2019 Artur Barseghyan'
+__copyright__ = '2017-2021 Artur Barseghyan'
 __license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
 __all__ = (
     'BaseRestFrameworkTestCase',

@@ -5,11 +5,11 @@ Books Book model factory.
 import random
 
 from factory import (
-    DjangoModelFactory,
     SubFactory,
     post_generation,
     LazyAttribute,
 )
+from factory.django import DjangoModelFactory
 from factory.fuzzy import FuzzyChoice
 
 from books.constants import BOOK_PUBLISHING_STATUS_CHOICES
@@ -26,30 +26,28 @@ from .books_orderline import OrderLineFactory
 from .books_tag import LimitedTagFactory
 
 __all__ = (
-    'BookFactory',
-    'BookWithoutOrdersFactory',
-    'BookWithoutTagsAndOrdersFactory',
-    'BookWithoutTagsFactory',
-    'BookWithUniqueTitleFactory',
-    'SingleBookFactory',
+    "BookFactory",
+    "BookWithoutOrdersFactory",
+    "BookWithoutTagsAndOrdersFactory",
+    "BookWithoutTagsFactory",
+    "BookWithUniqueTitleFactory",
+    "SingleBookFactory",
 )
 
 
 class BaseBookFactory(DjangoModelFactory):
     """Base book factory."""
 
-    title = Faker('text', max_nb_chars=100)
-    summary = Faker('text')
-    publisher = SubFactory('factories.books_publisher.LimitedPublisherFactory')
-    publication_date = Faker('date')
-    price = Faker('pydecimal', left_digits=2, right_digits=2, positive=True)
-    isbn = Faker('isbn13')
+    title = Faker("text", max_nb_chars=100)
+    summary = Faker("text")
+    publisher = SubFactory("factories.books_publisher.LimitedPublisherFactory")
+    publication_date = Faker("date")
+    price = Faker("pydecimal", left_digits=2, right_digits=2, positive=True)
+    isbn = Faker("isbn13")
     state = FuzzyChoice(dict(BOOK_PUBLISHING_STATUS_CHOICES).keys())
-    pages = LazyAttribute(
-        lambda __x: random.randint(10, 200)
-    )
+    pages = LazyAttribute(lambda __x: random.randint(10, 200))
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
         model = Book
@@ -81,13 +79,11 @@ class BaseBookFactory(DjangoModelFactory):
             amount = random.randint(2, 7)
             orders = OrderFactory.create_batch(amount, **kwargs)
             order_line_kwargs = dict(kwargs)
-            order_line_kwargs['book'] = obj
+            order_line_kwargs["book"] = obj
             for order in orders:
                 # Create 1 `OrderLine` object.
                 amount = random.randint(1, 5)
-                order_lines = OrderLineFactory.create_batch(
-                    amount, **order_line_kwargs
-                )
+                order_lines = OrderLineFactory.create_batch(amount, **order_line_kwargs)
                 order.lines.add(*order_lines)
 
 
@@ -98,10 +94,10 @@ class BookFactory(BaseBookFactory):
 class BookWithUniqueTitleFactory(BaseBookFactory):
     """Book factory with unique title attribute."""
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('title',)
+        django_get_or_create = ("title",)
 
 
 class SingleBookFactory(BaseBookFactory):
@@ -109,12 +105,12 @@ class SingleBookFactory(BaseBookFactory):
 
     id = 999999
     title = "Performance optimisation"
-    publisher = SubFactory('factories.books_publisher.SinglePublisherFactory')
+    publisher = SubFactory("factories.books_publisher.SinglePublisherFactory")
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('id',)
+        django_get_or_create = ("id",)
 
     @post_generation
     def authors(obj, created, extracted, **kwargs):

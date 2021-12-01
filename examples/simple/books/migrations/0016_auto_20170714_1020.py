@@ -8,28 +8,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0015_auto_20170713_0418'),
+        ("books", "0015_auto_20170713_0418"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='publisher',
-            name='address',
+            model_name="publisher",
+            name="address",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='publisher',
-            name='city',
+            model_name="publisher",
+            name="city",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='publisher',
-            name='country',
+            model_name="publisher",
+            name="country",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='publisher',
-            name='state_province',
+            model_name="publisher",
+            name="state_province",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
     ]

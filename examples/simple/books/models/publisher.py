@@ -6,14 +6,9 @@ from django.db import models
 
 from rest_framework_tricks.models.fields import NestedProxyField
 
-from six import python_2_unicode_compatible
-
-__all__ = (
-    'Publisher',
-)
+__all__ = ("Publisher",)
 
 
-@python_2_unicode_compatible
 class Publisher(models.Model):
     """Publisher."""
 
@@ -27,14 +22,10 @@ class Publisher(models.Model):
 
     # This does not cause a model change
     address_information = NestedProxyField(
-        'address',
-        'city',
-        'state_province',
-        'country',
-        as_object=True
+        "address", "city", "state_province", "country", as_object=True
     )
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["id"]

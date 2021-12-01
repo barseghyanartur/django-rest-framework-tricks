@@ -8,21 +8,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0004_auto_20170322_2001'),
+        ("books", "0004_auto_20170322_2001"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='author',
-            options={'ordering': ['id']},
+            name="author",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterModelOptions(
-            name='publisher',
-            options={'ordering': ['id']},
+            name="publisher",
+            options={"ordering": ["id"]},
         ),
         migrations.AlterField(
-            model_name='author',
-            name='headshot',
-            field=models.ImageField(blank=True, null=True, upload_to='authors'),
+            model_name="author",
+            name="headshot",
+            field=models.ImageField(blank=True, null=True, upload_to="authors"),
         ),
     ]

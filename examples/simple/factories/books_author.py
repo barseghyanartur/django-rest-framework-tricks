@@ -4,35 +4,36 @@ Books Author model factory.
 
 import random
 
-from factory import DjangoModelFactory, LazyAttribute
+from factory import LazyAttribute
+from factory.django import DjangoModelFactory
 
 from books.models import Author
 
 from .factory_faker import Faker
 
 __all__ = (
-    'AuthorFactory',
-    'LimitedAuthorFactory',
-    'SingleAuthorFactory',
+    "AuthorFactory",
+    "LimitedAuthorFactory",
+    "SingleAuthorFactory",
 )
 
 
 class BaseAuthorFactory(DjangoModelFactory):
     """Base author factory."""
 
-    salutation = Faker('text', max_nb_chars=10)
-    name = Faker('name')
-    email = Faker('email')
-    birth_date = Faker('date')
-    biography = Faker('text')
-    phone_number = Faker('phone_number')
-    website = Faker('url')
-    company = Faker('company')
-    company_phone_number = Faker('phone_number')
-    company_email = Faker('email')
-    company_website = Faker('url')
+    salutation = Faker("text", max_nb_chars=10)
+    name = Faker("name")
+    email = Faker("email")
+    birth_date = Faker("date")
+    biography = Faker("text")
+    phone_number = Faker("phone_number")
+    website = Faker("url")
+    company = Faker("company")
+    company_phone_number = Faker("phone_number")
+    company_email = Faker("email")
+    company_website = Faker("url")
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
         model = Author
@@ -46,14 +47,12 @@ class AuthorFactory(BaseAuthorFactory):
 class LimitedAuthorFactory(BaseAuthorFactory):
     """Author factory, but limited to 20 authors."""
 
-    id = LazyAttribute(
-        lambda __x: random.randint(1, 20)
-    )
+    id = LazyAttribute(lambda __x: random.randint(1, 20))
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('id',)
+        django_get_or_create = ("id",)
 
 
 class SingleAuthorFactory(BaseAuthorFactory):
@@ -63,7 +62,7 @@ class SingleAuthorFactory(BaseAuthorFactory):
     name = "Artur Barseghyan"
     email = "barseghyan@gw20e.com"
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('id',)
+        django_get_or_create = ("id",)

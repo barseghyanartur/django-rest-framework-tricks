@@ -8,41 +8,63 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0013_auto_20170630_1919'),
+        ("books", "0013_auto_20170630_1919"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('salutation', models.CharField(max_length=10)),
-                ('first_name', models.CharField(max_length=200)),
-                ('last_name', models.CharField(max_length=200)),
-                ('email', models.EmailField(max_length=254)),
-                ('birth_date', models.DateField(blank=True, null=True)),
-                ('biography', models.TextField(blank=True, null=True)),
-                ('phone_number', models.CharField(blank=True, max_length=200, null=True)),
-                ('website', models.URLField(blank=True, null=True)),
-                ('company', models.CharField(blank=True, max_length=200, null=True)),
-                ('company_phone_number', models.CharField(blank=True, max_length=200, null=True)),
-                ('company_email', models.EmailField(blank=True, max_length=254, null=True)),
-                ('company_website', models.URLField(blank=True, null=True)),
-                ('bank_name', models.CharField(blank=True, max_length=200, null=True)),
-                ('bank_account_name', models.CharField(blank=True, max_length=200, null=True)),
-                ('bank_account_number', models.CharField(blank=True, max_length=200, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("salutation", models.CharField(max_length=10)),
+                ("first_name", models.CharField(max_length=200)),
+                ("last_name", models.CharField(max_length=200)),
+                ("email", models.EmailField(max_length=254)),
+                ("birth_date", models.DateField(blank=True, null=True)),
+                ("biography", models.TextField(blank=True, null=True)),
+                (
+                    "phone_number",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
+                ("website", models.URLField(blank=True, null=True)),
+                ("company", models.CharField(blank=True, max_length=200, null=True)),
+                (
+                    "company_phone_number",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
+                (
+                    "company_email",
+                    models.EmailField(blank=True, max_length=254, null=True),
+                ),
+                ("company_website", models.URLField(blank=True, null=True)),
+                ("bank_name", models.CharField(blank=True, max_length=200, null=True)),
+                (
+                    "bank_account_name",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
+                (
+                    "bank_account_number",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
             ],
             options={
-                'ordering': ['id'],
+                "ordering": ["id"],
             },
         ),
         migrations.CreateModel(
-            name='AuthorProxy',
-            fields=[
-            ],
+            name="AuthorProxy",
+            fields=[],
             options={
-                'proxy': True,
+                "proxy": True,
             },
-            bases=('books.author',),
+            bases=("books.author",),
         ),
     ]

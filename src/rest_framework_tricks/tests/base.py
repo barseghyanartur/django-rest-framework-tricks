@@ -12,13 +12,13 @@ import pytest
 
 import factories
 
-__title__ = 'rest_framework_tricks.tests.base'
-__author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2017-2019 Artur Barseghyan'
-__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
+__title__ = "rest_framework_tricks.tests.base"
+__author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__copyright__ = "2017-2019 Artur Barseghyan"
+__license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
 __all__ = (
-    'BaseRestFrameworkTestCase',
-    'BaseTestCase',
+    "BaseRestFrameworkTestCase",
+    "BaseTestCase",
 )
 
 LOGGER = logging.getLogger(__name__)
@@ -47,7 +47,7 @@ class BaseRestFrameworkTestCase(APITestCase):
         """
         self.client.login(
             username=factories.auth_user.TEST_USERNAME,
-            password=factories.auth_user.TEST_PASSWORD
+            password=factories.auth_user.TEST_PASSWORD,
         )
 
 

@@ -2,24 +2,25 @@
 Books Book model factory.
 """
 
-from factory import DjangoModelFactory, SubFactory  # , post_generation
+from factory import SubFactory  # , post_generation
+from factory.django import DjangoModelFactory
 
 from books.models import Order
 
 # from .factory_faker import Faker
 # from .books_orderline import OrderLineFactory
 
-__all__ = ('OrderFactory',)
+__all__ = ("OrderFactory",)
 
 
 class OrderFactory(DjangoModelFactory):
     """Order factory."""
 
-    owner = SubFactory('factories.auth_user.UserFactory')
+    owner = SubFactory("factories.auth_user.UserFactory")
     # created = Faker('date')
     # updated = Faker('date')
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
         model = Order

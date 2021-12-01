@@ -6,14 +6,9 @@ from django.db import models
 
 from rest_framework_tricks.models.fields import NestedProxyField
 
-from six import python_2_unicode_compatible
-
-__all__ = (
-    'Profile',
-)
+__all__ = ("Profile",)
 
 
-@python_2_unicode_compatible
 class Profile(models.Model):
     """Profile."""
 
@@ -26,65 +21,57 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=200, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     company = models.CharField(max_length=200, null=True, blank=True)
-    company_phone_number = models.CharField(max_length=200,
-                                            null=True,
-                                            blank=True)
+    company_phone_number = models.CharField(max_length=200, null=True, blank=True)
     company_email = models.EmailField(null=True, blank=True)
     company_website = models.URLField(null=True, blank=True)
 
     bank_name = models.CharField(max_length=200, null=True, blank=True)
     bank_account_name = models.CharField(max_length=200, null=True, blank=True)
-    bank_account_number = models.CharField(max_length=200,
-                                           null=True,
-                                           blank=True)
+    bank_account_number = models.CharField(max_length=200, null=True, blank=True)
 
     # This does not cause a model change
     personal_information = NestedProxyField(
-        'salutation',
-        'first_name',
-        'last_name',
-        'birth_date',
-        'biography'
+        "salutation", "first_name", "last_name", "birth_date", "biography"
     )
 
     # This does not cause a model change
     personal_contact_information = NestedProxyField(
-        'email',
-        'phone_number',
-        'website',
+        "email",
+        "phone_number",
+        "website",
     )
 
     # This does not cause a model change
     business_contact_information = NestedProxyField(
-        'company',
-        'company_email',
-        'company_phone_number',
-        'company_website',
+        "company",
+        "company_email",
+        "company_phone_number",
+        "company_website",
     )
 
     # This does not cause a model change
     contact_information = NestedProxyField(
-        'personal_contact_information',
-        'business_contact_information',
+        "personal_contact_information",
+        "business_contact_information",
     )
 
     # This does not cause a model change
     bank_information = NestedProxyField(
-        'bank_name',
-        'bank_account_name',
-        'bank_account_number',
+        "bank_name",
+        "bank_account_name",
+        "bank_account_number",
     )
 
     # This does not cause a model change
     data = NestedProxyField(
-        'personal_information',
-        'contact_information',
-        'bank_information',
+        "personal_information",
+        "contact_information",
+        "bank_information",
     )
 
     # This does not cause a model change
     information = NestedProxyField(
-        'data',
+        "data",
     )
 
     # This is the structure we want to achieve
@@ -120,7 +107,7 @@ class Profile(models.Model):
     #     }
     # }
 
-    class Meta(object):
+    class Meta:
         """Meta options."""
 
         ordering = ["id"]

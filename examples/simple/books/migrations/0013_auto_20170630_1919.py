@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0012_auto_20170630_1900'),
+        ("books", "0012_auto_20170630_1900"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='author',
-            name='company_website',
+            model_name="author",
+            name="company_website",
             field=models.URLField(blank=True, null=True),
         ),
     ]

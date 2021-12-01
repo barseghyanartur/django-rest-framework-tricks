@@ -4,10 +4,7 @@ Temporary copy of the ``rest_framework_extensions.routers`` of the
 ``drf_extensions`` package. To be removed once the latter one is updated
 to work with Django 2.0.
 """
-from distutils.version import LooseVersion
 from django.core.exceptions import ImproperlyConfigured
-
-from nine.versions import DJANGO_GTE_1_10
 
 from rest_framework.routers import (
     DefaultRouter,
@@ -25,58 +22,50 @@ from rest_framework_extensions.utils import (
 )
 from rest_framework_extensions.compat_drf import add_trailing_slash_if_needed
 
-if DJANGO_GTE_1_10:
-    from django.urls import NoReverseMatch
-else:
-    from django.core.urlresolvers import NoReverseMatch
+from django.urls import NoReverseMatch
 
 
-class ExtendedActionLinkRouterMixin(object):
+class ExtendedActionLinkRouterMixin:
     routes = [
         # List route.
         Route(
-            url=add_trailing_slash_if_needed(r'^{prefix}/$'),
-            mapping={
-                'get': 'list',
-                'post': 'create'
-            },
-            name='{basename}-list',
-            initkwargs={'suffix': 'List'}
+            url=add_trailing_slash_if_needed(r"^{prefix}/$"),
+            mapping={"get": "list", "post": "create"},
+            name="{basename}-list",
+            initkwargs={"suffix": "List"},
         ),
         # Detail route.
         Route(
-            url=add_trailing_slash_if_needed(r'^{prefix}/{lookup}/$'),
+            url=add_trailing_slash_if_needed(r"^{prefix}/{lookup}/$"),
             mapping={
-                'get': 'retrieve',
-                'put': 'update',
-                'patch': 'partial_update',
-                'delete': 'destroy'
+                "get": "retrieve",
+                "put": "update",
+                "patch": "partial_update",
+                "delete": "destroy",
             },
-            name='{basename}-detail',
-            initkwargs={'suffix': 'Instance'}
+            name="{basename}-detail",
+            initkwargs={"suffix": "Instance"},
         ),
         # Dynamically generated routes.
         # Generated using @list_route or @detail_route decorators on methods
         # of the viewset.
         # List
         Route(
-            url=add_trailing_slash_if_needed(r'^{prefix}/{methodname}/$'),
+            url=add_trailing_slash_if_needed(r"^{prefix}/{methodname}/$"),
             mapping={
-                '{httpmethod}': '{methodname}',
+                "{httpmethod}": "{methodname}",
             },
-            name='{basename}-{methodnamehyphen}-list',
-            initkwargs={}
+            name="{basename}-{methodnamehyphen}-list",
+            initkwargs={},
         ),
         # Detail
         Route(
-            url=add_trailing_slash_if_needed(
-                r'^{prefix}/{lookup}/{methodname}/$'
-            ),
+            url=add_trailing_slash_if_needed(r"^{prefix}/{lookup}/{methodname}/$"),
             mapping={
-                '{httpmethod}': '{methodname}',
+                "{httpmethod}": "{methodname}",
             },
-            name='{basename}-{methodnamehyphen}',
-            initkwargs={}
+            name="{basename}-{methodnamehyphen}",
+            initkwargs={},
         ),
     ]
     # first routes should be dynamic (because of urlpatterns position matters)
@@ -102,13 +91,13 @@ class ExtendedActionLinkRouterMixin(object):
                     ret += self.get_dynamic_routes_instances(
                         viewset,
                         route,
-                        self._filter_by_list_dynamic_routes(dynamic_routes)
+                        self._filter_by_list_dynamic_routes(dynamic_routes),
                     )
                 else:
                     ret += self.get_dynamic_routes_instances(
                         viewset,
                         route,
-                        self._filter_by_detail_dynamic_routes(dynamic_routes)
+                        self._filter_by_detail_dynamic_routes(dynamic_routes),
                     )
             else:
                 # Standard route
@@ -127,29 +116,23 @@ class ExtendedActionLinkRouterMixin(object):
         dynamic_routes = []
         for methodname in dir(viewset):
             attr = getattr(viewset, methodname)
-            httpmethods = getattr(attr, 'bind_to_methods', None)
+            httpmethods = getattr(attr, "bind_to_methods", None)
             if httpmethods:
-                endpoint = getattr(attr, 'endpoint', methodname)
+                endpoint = getattr(attr, "endpoint", methodname)
                 is_for_list = getattr(
-                    attr,
-                    'is_for_list',
-                    not getattr(attr, 'detail', True)
+                    attr, "is_for_list", not getattr(attr, "detail", True)
                 )
                 if endpoint in known_actions:
                     raise ImproperlyConfigured(
-                        'Cannot use @detail_route or @list_route decorator on '
+                        "Cannot use @detail_route or @list_route decorator on "
                         'method "%s" as %s is an existing route'
                         % (methodname, endpoint)
                     )
                 httpmethods = [method.lower() for method in httpmethods]
-                dynamic_routes.append(
-                    (httpmethods, methodname, endpoint, is_for_list)
-                )
+                dynamic_routes.append((httpmethods, methodname, endpoint, is_for_list))
         return dynamic_routes
 
-    def get_dynamic_route_viewset_method_name_by_endpoint(self,
-                                                          viewset,
-                                                          endpoint):
+    def get_dynamic_route_viewset_method_name_by_endpoint(self, viewset, endpoint):
         for dynamic_route in self.get_dynamic_routes(viewset=viewset):
             if dynamic_route[2] == endpoint:
                 return dynamic_route[1]
@@ -158,36 +141,32 @@ class ExtendedActionLinkRouterMixin(object):
         return flatten([route.mapping.values() for route in self.routes])
 
     def is_dynamic_route(self, route):
-        return route.mapping == {'{httpmethod}': '{methodname}'}
+        return route.mapping == {"{httpmethod}": "{methodname}"}
 
     def is_list_dynamic_route(self, route):
-        return route.name == '{basename}-{methodnamehyphen}-list'
+        return route.name == "{basename}-{methodnamehyphen}-list"
 
     def get_dynamic_routes_instances(self, viewset, route, dynamic_routes):
         dynamic_routes_instances = []
         for httpmethods, methodname, endpoint, is_for_list in dynamic_routes:
             initkwargs = route.initkwargs.copy()
             initkwargs.update(getattr(viewset, methodname).kwargs)
-            url_path = initkwargs.pop('url_path', endpoint)
-            dynamic_routes_instances.append(Route(
-                url=replace_methodname(route.url, url_path),
-                mapping=dict(
-                    (httpmethod, methodname)
-                    for httpmethod
-                    in httpmethods
-                ),
-                name=replace_methodname(route.name, url_path),
-                initkwargs=initkwargs,
-            ))
+            url_path = initkwargs.pop("url_path", endpoint)
+            dynamic_routes_instances.append(
+                Route(
+                    url=replace_methodname(route.url, url_path),
+                    mapping=dict(
+                        (httpmethod, methodname) for httpmethod in httpmethods
+                    ),
+                    name=replace_methodname(route.name, url_path),
+                    initkwargs=initkwargs,
+                )
+            )
         return dynamic_routes_instances
 
 
 class NestedRegistryItem(object):
-    def __init__(self,
-                 router,
-                 parent_prefix,
-                 parent_item=None,
-                 parent_viewset=None):
+    def __init__(self, router, parent_prefix, parent_item=None, parent_viewset=None):
         self.router = router
         self.parent_prefix = parent_prefix
         self.parent_item = parent_item
@@ -196,8 +175,7 @@ class NestedRegistryItem(object):
     def register(self, prefix, viewset, base_name, parents_query_lookups):
         self.router._register(
             prefix=self.get_prefix(
-                current_prefix=prefix,
-                parents_query_lookups=parents_query_lookups
+                current_prefix=prefix, parents_query_lookups=parents_query_lookups
             ),
             viewset=viewset,
             base_name=base_name,
@@ -206,38 +184,37 @@ class NestedRegistryItem(object):
             router=self.router,
             parent_prefix=prefix,
             parent_item=self,
-            parent_viewset=viewset
+            parent_viewset=viewset,
         )
 
     def get_prefix(self, current_prefix, parents_query_lookups):
-        return '{0}/{1}'.format(
-            self.get_parent_prefix(parents_query_lookups),
-            current_prefix
+        return "{0}/{1}".format(
+            self.get_parent_prefix(parents_query_lookups), current_prefix
         )
 
     def get_parent_prefix(self, parents_query_lookups):
-        prefix = '/'
+        prefix = "/"
         current_item = self
         i = len(parents_query_lookups) - 1
         while current_item:
             parent_lookup_value_regex = getattr(
-                current_item.parent_viewset,
-                'lookup_value_regex',
-                '[^/.]+'
+                current_item.parent_viewset, "lookup_value_regex", "[^/.]+"
             )
-            prefix = '{parent_prefix}/(?P<{parent_pk_kwarg_name}>' \
-                     '{parent_lookup_value_regex})/{prefix}' \
-                     ''.format(
-                         parent_prefix=current_item.parent_prefix,
-                         parent_pk_kwarg_name=compose_parent_pk_kwarg_name(
-                             parents_query_lookups[i]
-                         ),
-                         parent_lookup_value_regex=parent_lookup_value_regex,
-                         prefix=prefix
-                     )
+            prefix = (
+                "{parent_prefix}/(?P<{parent_pk_kwarg_name}>"
+                "{parent_lookup_value_regex})/{prefix}"
+                "".format(
+                    parent_prefix=current_item.parent_prefix,
+                    parent_pk_kwarg_name=compose_parent_pk_kwarg_name(
+                        parents_query_lookups[i]
+                    ),
+                    parent_lookup_value_regex=parent_lookup_value_regex,
+                    prefix=prefix,
+                )
+            )
             i -= 1
             current_item = current_item.parent_item
-        return prefix.strip('/')
+        return prefix.strip("/")
 
 
 class NestedRouterMixin(object):
@@ -249,7 +226,7 @@ class NestedRouterMixin(object):
         return NestedRegistryItem(
             router=self,
             parent_prefix=self.registry[-1][0],
-            parent_viewset=self.registry[-1][1]
+            parent_viewset=self.registry[-1][1],
         )
 
     def get_api_root_view(self, **kwargs):
@@ -273,11 +250,7 @@ class NestedRouterMixin(object):
                 ret = {}
                 for key, url_name in api_root_dict.items():
                     try:
-                        ret[key] = reverse(
-                            url_name,
-                            request=request,
-                            format=format
-                        )
+                        ret[key] = reverse(url_name, request=request, format=format)
                     except NoReverseMatch:
                         pass
                 return Response(ret)

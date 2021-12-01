@@ -4,11 +4,10 @@ Ordering filter.
 
 from rest_framework.filters import OrderingFilter as DjangoOrderingFilter
 
-__title__ = 'rest_framework_tricks.filters.ordering'
-__author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2017-2019 Artur Barseghyan'
-__license__ = 'GPL-2.0-only OR LGPL-2.1-or-later'
-__all__ = ('OrderingFilter',)
+__title__ = "rest_framework_tricks.filters.ordering"
+__author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
+__all__ = ("OrderingFilter",)
 
 
 class OrderingFilter(DjangoOrderingFilter):
@@ -46,16 +45,12 @@ class OrderingFilter(DjangoOrderingFilter):
         :param context:
         :return:
         """
-        valid_fields = getattr(view, 'ordering_fields', self.ordering_fields)
+        valid_fields = getattr(view, "ordering_fields", self.ordering_fields)
 
         if isinstance(valid_fields, dict):
             return valid_fields.items()
         else:
-            return super(OrderingFilter, self).get_valid_fields(
-                queryset,
-                view,
-                context
-            )
+            return super(OrderingFilter, self).get_valid_fields(queryset, view, context)
 
     def get_ordering(self, request, queryset, view):
         """Get ordering.
@@ -71,32 +66,25 @@ class OrderingFilter(DjangoOrderingFilter):
         the `ordering_param` value on the OrderingFilter or by
         specifying an `ORDERING_PARAM` value in the API settings.
         """
-        valid_fields = getattr(view, 'ordering_fields', self.ordering_fields)
+        valid_fields = getattr(view, "ordering_fields", self.ordering_fields)
 
         # If valid_fields is a dictionary, treat it differently
         if isinstance(valid_fields, dict):
             params = request.query_params.get(self.ordering_param)
 
             if params:
-                fields = [param.strip() for param in params.split(',')]
-                _ordering = self.remove_invalid_fields(
-                    queryset,
-                    fields,
-                    view,
-                    request
-                )
+                fields = [param.strip() for param in params.split(",")]
+                _ordering = self.remove_invalid_fields(queryset, fields, view, request)
 
                 ordering = []
                 for item in _ordering:
-                    if '-' in item:
+                    if "-" in item:
                         value = valid_fields.get(item[1:])
                         if isinstance(value, (tuple, list)):
-                            value = ['-{}'.format(__v) for __v in value]
+                            value = ["-{}".format(__v) for __v in value]
                             ordering += value
                         else:
-                            ordering.append(
-                                '-{}'.format(value)
-                            )
+                            ordering.append("-{}".format(value))
                     else:
                         value = valid_fields.get(item)
                         if isinstance(value, (tuple, list)):
@@ -111,8 +99,4 @@ class OrderingFilter(DjangoOrderingFilter):
 
         # In all other cases, use default behaviour
         else:
-            return super(OrderingFilter, self).get_ordering(
-                request,
-                queryset,
-                view
-            )
+            return super(OrderingFilter, self).get_ordering(request, queryset, view)

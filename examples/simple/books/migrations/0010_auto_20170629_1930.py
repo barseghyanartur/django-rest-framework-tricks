@@ -9,13 +9,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0009_auto_20170626_1331'),
+        ("books", "0009_auto_20170626_1331"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book',
-            name='publisher',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='books', to='books.Publisher'),
+            model_name="book",
+            name="publisher",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="books",
+                to="books.Publisher",
+            ),
         ),
     ]

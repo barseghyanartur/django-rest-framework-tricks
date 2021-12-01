@@ -8,13 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('books', '0007_book_description'),
+        ("books", "0007_book_description"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='state',
-            field=models.CharField(choices=[('pulished', 'Published'), ('not_published', 'Not published'), ('in_progress', 'In progress'), ('canelled', 'Cancelled'), ('rejected', 'Rejected')], default='pulished', max_length=100),
+            model_name="book",
+            name="state",
+            field=models.CharField(
+                choices=[
+                    ("pulished", "Published"),
+                    ("not_published", "Not published"),
+                    ("in_progress", "In progress"),
+                    ("canelled", "Cancelled"),
+                    ("rejected", "Rejected"),
+                ],
+                default="pulished",
+                max_length=100,
+            ),
         ),
     ]

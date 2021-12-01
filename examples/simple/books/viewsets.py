@@ -27,13 +27,13 @@ from .serializers import (
 )
 
 __all__ = (
-    'AuthorViewSet',
-    'AuthorProxyViewSet',
-    'BookViewSet',
-    'BookProxyViewSet',
-    'BookProxy2ViewSet',
-    'PublisherViewSet',
-    'ProfileViewSet',
+    "AuthorViewSet",
+    "AuthorProxyViewSet",
+    "BookViewSet",
+    "BookProxyViewSet",
+    "BookProxy2ViewSet",
+    "PublisherViewSet",
+    "ProfileViewSet",
 )
 
 
@@ -48,31 +48,30 @@ class BookViewSet(ModelViewSet):
 class BookProxyViewSet(ModelViewSet):
     """Book proxy ViewSet."""
 
-    queryset = BookProxy.objects.all().select_related('publisher')
+    queryset = BookProxy.objects.all().select_related("publisher")
     serializer_class = BookProxySerializer
     permission_classes = [AllowAny]
-    filter_backends = (
-        OrderingFilter,
-    )
+    filter_backends = (OrderingFilter,)
     ordering_fields = {
-        'id': 'id',
-        'city': 'publisher__city',
-        'status': ['state', 'publication_date'],
+        "id": "id",
+        "city": "publisher__city",
+        "status": ["state", "publication_date"],
     }
-    ordering = ('id',)
+    ordering = ("id",)
 
 
 class BookProxy2ViewSet(ModelViewSet):
     """Book proxy 2 ViewSet."""
 
-    queryset = BookProxy2.objects.all().select_related('publisher')
+    queryset = BookProxy2.objects.all().select_related("publisher")
     serializer_class = BookProxy2Serializer
     permission_classes = [AllowAny]
-    filter_backends = (
-        OrderingFilter,
+    filter_backends = (OrderingFilter,)
+    ordering_fields = (
+        "id",
+        "state",
     )
-    ordering_fields = ('id', 'state',)
-    ordering = ('id',)
+    ordering = ("id",)
 
 
 class PublisherViewSet(ModelViewSet):

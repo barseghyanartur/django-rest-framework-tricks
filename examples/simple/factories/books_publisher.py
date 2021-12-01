@@ -4,30 +4,31 @@ Books Publisher model factory.
 
 import random
 
-from factory import DjangoModelFactory, LazyAttribute
+from factory import LazyAttribute
+from factory.django import DjangoModelFactory
 
 from books.models import Publisher
 
 from .factory_faker import Faker
 
 __all__ = (
-    'PublisherFactory',
-    'LimitedPublisherFactory',
-    'SinglePublisherFactory',
+    "PublisherFactory",
+    "LimitedPublisherFactory",
+    "SinglePublisherFactory",
 )
 
 
 class BasePublisherFactory(DjangoModelFactory):
     """Base publisher factory."""
 
-    name = Faker('company')
-    address = Faker('address')
-    city = Faker('city')
-    state_province = Faker('province')
-    country = Faker('country')
-    website = Faker('url')
+    name = Faker("company")
+    address = Faker("address")
+    city = Faker("city")
+    state_province = Faker("province")
+    country = Faker("country")
+    website = Faker("url")
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
         model = Publisher
@@ -41,14 +42,12 @@ class PublisherFactory(BasePublisherFactory):
 class LimitedPublisherFactory(BasePublisherFactory):
     """Publisher factory, but limited to 20 publishers."""
 
-    id = LazyAttribute(
-        lambda __x: random.randint(1, 20)
-    )
+    id = LazyAttribute(lambda __x: random.randint(1, 20))
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('id',)
+        django_get_or_create = ("id",)
 
 
 class SinglePublisherFactory(BasePublisherFactory):
@@ -62,7 +61,7 @@ class SinglePublisherFactory(BasePublisherFactory):
     country = "NL"
     website = "https://gw20e.com"
 
-    class Meta(object):
+    class Meta:
         """Meta class."""
 
-        django_get_or_create = ('id',)
+        django_get_or_create = ("id",)

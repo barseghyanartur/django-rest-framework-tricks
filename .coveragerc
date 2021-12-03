@@ -1,4 +1,5 @@
 [run]
+relative_files = True
 omit =
     src/rest_framework_tricks/tests/*
     example/simple/settings/*

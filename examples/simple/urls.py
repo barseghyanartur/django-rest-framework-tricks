@@ -35,7 +35,9 @@ urlpatterns += urlpatterns_args[:]
 # Serving media and static in debug/developer mode.
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
 
     if settings.DEBUG_TOOLBAR is True:
         import debug_toolbar

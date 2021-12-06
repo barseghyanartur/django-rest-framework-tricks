@@ -91,7 +91,8 @@ class BookListWithCountsView(ListView):
             )
             .annotate(
                 price_per_page=Sum(
-                    F("price") / F("pages"), output_field=DecimalField(decimal_places=2)
+                    F("price") / F("pages"),
+                    output_field=DecimalField(decimal_places=2),
                 )
             )
         )
@@ -107,8 +108,17 @@ class BookListValuesView(ListView):
         """Get queryset."""
         return (
             self.model.objects.all()
-            .values("id", "title", "pages", "price", "publisher__id", "publisher__name")
-            .annotate(authors__name=GroupConcat("authors__name", separator=", "))
+            .values(
+                "id",
+                "title",
+                "pages",
+                "price",
+                "publisher__id",
+                "publisher__name",
+            )
+            .annotate(
+                authors__name=GroupConcat("authors__name", separator=", ")
+            )
             .distinct()
         )
 
@@ -152,7 +162,9 @@ class AuthorListValuesView(ListView):
 
     def get_queryset(self):
         """Get queryset."""
-        return self.model.objects.all().values("id", "salutation", "name", "email")
+        return self.model.objects.all().values(
+            "id", "salutation", "name", "email"
+        )
 
 
 class AuthorListValuesWithCountsView(ListView):
@@ -202,7 +214,9 @@ class AuthorListJSONView(JSONResponseMixin, TemplateView):
     def get_data(self, context):
         """Get queryset."""
         return list(
-            self.model.objects.all().values("id", "salutation", "name", "email")
+            self.model.objects.all().values(
+                "id", "salutation", "name", "email"
+            )
         )
 
     def render_to_response(self, context, **response_kwargs):

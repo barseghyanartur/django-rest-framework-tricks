@@ -59,7 +59,9 @@ router.register(r"profiles", ProfileViewSet, **{BASENAME: "profile"})
 
 router.register(r"authors", AuthorViewSet, **{BASENAME: "author"})
 
-router.register(r"proxy-authors", AuthorProxyViewSet, **{BASENAME: "authorproxy"})
+router.register(
+    r"proxy-authors", AuthorProxyViewSet, **{BASENAME: "authorproxy"}
+)
 
 urlpatterns = [
     url(r"^api/", include(router.urls)),
@@ -84,7 +86,11 @@ urlpatterns = [
         name="books.authors_values_with_counts",
     ),
     # Authors list in JSON format
-    url(r"^authors-json/$", AuthorListJSONView.as_view(), name="books.authors_json"),
+    url(
+        r"^authors-json/$",
+        AuthorListJSONView.as_view(),
+        name="books.authors_json",
+    ),
     # Books list
     url(r"^books/$", BookListView.as_view(), name="books.books"),
     # Books list (with counts)
@@ -95,14 +101,26 @@ urlpatterns = [
     ),
     # Books list (more efficient)
     url(
-        r"^books-values/$", view=BookListValuesView.as_view(), name="books.books_values"
+        r"^books-values/$",
+        view=BookListValuesView.as_view(),
+        name="books.books_values",
     ),
     # Publishers list
-    url(r"^publishers/$", PublisherListView.as_view(), name="books.publishers"),
+    url(
+        r"^publishers/$", PublisherListView.as_view(), name="books.publishers"
+    ),
     # Publisher IDs
-    url(r"^publisher-ids/$", PublisherIDsView.as_view(), name="books.publisher_ids"),
+    url(
+        r"^publisher-ids/$",
+        PublisherIDsView.as_view(),
+        name="books.publisher_ids",
+    ),
     # Create authors view
-    url(r"^create-authors/$", CreateAuthorsView.as_view(), name="books.create_authors"),
+    url(
+        r"^create-authors/$",
+        CreateAuthorsView.as_view(),
+        name="books.create_authors",
+    ),
     # Add authors to a book view
     url(
         r"^add-authors-to-book/$",
@@ -110,7 +128,11 @@ urlpatterns = [
         name="books.add_authors_to_book",
     ),
     # Update books view
-    url(r"^update-books/$", UpdateBooksView.as_view(), name="books.update_books"),
+    url(
+        r"^update-books/$",
+        UpdateBooksView.as_view(),
+        name="books.update_books",
+    ),
     # Index view
     url(r"^$", IndexView.as_view(), name="books.index"),
 ]

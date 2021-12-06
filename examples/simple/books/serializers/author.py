@@ -58,8 +58,12 @@ class BusinessContactInformationSerializer(serializers.ModelSerializer):
 class ContactInformationSerializer(serializers.ModelSerializer):
     """Contact information serializer."""
 
-    personal_contact_information = PersonalContactInformationSerializer(required=False)
-    business_contact_information = BusinessContactInformationSerializer(required=False)
+    personal_contact_information = PersonalContactInformationSerializer(
+        required=False
+    )
+    business_contact_information = BusinessContactInformationSerializer(
+        required=False
+    )
 
     class Meta:
         """Meta options."""

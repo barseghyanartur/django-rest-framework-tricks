@@ -109,7 +109,9 @@ class TestOrderingFilter(BaseRestFrameworkTestCase):
 
         :return:
         """
-        response = self.client.get(self.bookproxy_listing_url, {}, format="json")
+        response = self.client.get(
+            self.bookproxy_listing_url, {}, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = []
         for item in response.data["results"]:

@@ -136,7 +136,11 @@ def NestedProxyField(*fields, **options):
             # If dictionary
             if isinstance(__field, dict):
                 for __key, __values in __field.items():
-                    setattr(obj.__class__, __key, NestedProxyField(*__values, obj=obj))
+                    setattr(
+                        obj.__class__,
+                        __key,
+                        NestedProxyField(*__values, obj=obj),
+                    )
                     __dict.update({__key: getattr(obj, __key)})
             # If string
             else:

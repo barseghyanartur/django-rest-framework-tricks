@@ -50,7 +50,9 @@ class OrderingFilter(DjangoOrderingFilter):
         if isinstance(valid_fields, dict):
             return valid_fields.items()
         else:
-            return super(OrderingFilter, self).get_valid_fields(queryset, view, context)
+            return super(OrderingFilter, self).get_valid_fields(
+                queryset, view, context
+            )
 
     def get_ordering(self, request, queryset, view):
         """Get ordering.
@@ -74,7 +76,9 @@ class OrderingFilter(DjangoOrderingFilter):
 
             if params:
                 fields = [param.strip() for param in params.split(",")]
-                _ordering = self.remove_invalid_fields(queryset, fields, view, request)
+                _ordering = self.remove_invalid_fields(
+                    queryset, fields, view, request
+                )
 
                 ordering = []
                 for item in _ordering:
@@ -99,4 +103,6 @@ class OrderingFilter(DjangoOrderingFilter):
 
         # In all other cases, use default behaviour
         else:
-            return super(OrderingFilter, self).get_ordering(request, queryset, view)
+            return super(OrderingFilter, self).get_ordering(
+                request, queryset, view
+            )

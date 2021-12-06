@@ -222,7 +222,9 @@ LOGIN_REDIRECT_URL = "/en/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
+    },
     "root": {
         "level": "INFO",
         "handlers": ["all_log"],
@@ -342,6 +344,8 @@ if DEBUG and DEBUG_TOOLBAR:
 # Make the `django-rest-framework-tricks` package available without
 # installation or development.
 if DEV:
-    app_source_path = os.environ.get("DJANGO_REST_FRAMEWORK_TRICKS_SOURCE_PATH", "src")
+    app_source_path = os.environ.get(
+        "DJANGO_REST_FRAMEWORK_TRICKS_SOURCE_PATH", "src"
+    )
     # sys.path.insert(0, os.path.abspath('src'))
     sys.path.insert(0, os.path.abspath(app_source_path))

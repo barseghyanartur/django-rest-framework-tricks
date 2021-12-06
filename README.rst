@@ -34,7 +34,7 @@ Dependencies
 ============
 
 - djangorestframework: Initially written with 3.6.3, but nowadays tested
-  with >=3.9.2,<=3.11.0. May (still) work on earlier- or (even) support
+  with >=3.9,<3.13. May (still) work on earlier- or (even) support
   later- versions, although not guaranteed.
 
 Installation

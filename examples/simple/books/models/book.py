@@ -42,7 +42,9 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     pages = models.PositiveIntegerField(default=200)
     stock_count = models.PositiveIntegerField(default=30)
-    tags = models.ManyToManyField("books.Tag", related_name="books", blank=True)
+    tags = models.ManyToManyField(
+        "books.Tag", related_name="books", blank=True
+    )
 
     # This does not cause a model change
     publishing_information = NestedProxyField(

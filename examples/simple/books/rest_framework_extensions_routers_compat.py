@@ -60,7 +60,9 @@ class ExtendedActionLinkRouterMixin:
         ),
         # Detail
         Route(
-            url=add_trailing_slash_if_needed(r"^{prefix}/{lookup}/{methodname}/$"),
+            url=add_trailing_slash_if_needed(
+                r"^{prefix}/{lookup}/{methodname}/$"
+            ),
             mapping={
                 "{httpmethod}": "{methodname}",
             },
@@ -129,10 +131,14 @@ class ExtendedActionLinkRouterMixin:
                         % (methodname, endpoint)
                     )
                 httpmethods = [method.lower() for method in httpmethods]
-                dynamic_routes.append((httpmethods, methodname, endpoint, is_for_list))
+                dynamic_routes.append(
+                    (httpmethods, methodname, endpoint, is_for_list)
+                )
         return dynamic_routes
 
-    def get_dynamic_route_viewset_method_name_by_endpoint(self, viewset, endpoint):
+    def get_dynamic_route_viewset_method_name_by_endpoint(
+        self, viewset, endpoint
+    ):
         for dynamic_route in self.get_dynamic_routes(viewset=viewset):
             if dynamic_route[2] == endpoint:
                 return dynamic_route[1]
@@ -166,7 +172,9 @@ class ExtendedActionLinkRouterMixin:
 
 
 class NestedRegistryItem(object):
-    def __init__(self, router, parent_prefix, parent_item=None, parent_viewset=None):
+    def __init__(
+        self, router, parent_prefix, parent_item=None, parent_viewset=None
+    ):
         self.router = router
         self.parent_prefix = parent_prefix
         self.parent_item = parent_item
@@ -175,7 +183,8 @@ class NestedRegistryItem(object):
     def register(self, prefix, viewset, base_name, parents_query_lookups):
         self.router._register(
             prefix=self.get_prefix(
-                current_prefix=prefix, parents_query_lookups=parents_query_lookups
+                current_prefix=prefix,
+                parents_query_lookups=parents_query_lookups,
             ),
             viewset=viewset,
             base_name=base_name,
@@ -250,7 +259,9 @@ class NestedRouterMixin(object):
                 ret = {}
                 for key, url_name in api_root_dict.items():
                     try:
-                        ret[key] = reverse(url_name, request=request, format=format)
+                        ret[key] = reverse(
+                            url_name, request=request, format=format
+                        )
                     except NoReverseMatch:
                         pass
                 return Response(ret)

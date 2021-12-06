@@ -1,8 +1,6 @@
 """
 Test OrderingFilter.
 """
-import unittest
-
 from django.urls import reverse
 import pytest
 from rest_framework import status
@@ -11,8 +9,8 @@ import factories
 
 from .base import BaseRestFrameworkTestCase
 
-__title__ = "rest_framework_tricks.tests.test_nested_proxy_field"
 __author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__copyright__ = "2017-2022 Artur Barseghyan"
 __license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
 __all__ = ("TestOrderingFilter",)
 
@@ -109,7 +107,9 @@ class TestOrderingFilter(BaseRestFrameworkTestCase):
 
         :return:
         """
-        response = self.client.get(self.bookproxy_listing_url, {}, format="json")
+        response = self.client.get(
+            self.bookproxy_listing_url, {}, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = []
         for item in response.data["results"]:

@@ -1,12 +1,10 @@
 """
 Nested proxy field.
 """
-
 from ...utils import DictProxy
 
-__title__ = "rest_framework_tricks.models.fields.nested_proxy"
 __author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
-__copyright__ = "2017-2019 Artur Barseghyan"
+__copyright__ = "2017-2022 Artur Barseghyan"
 __license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
 __all__ = ("NestedProxyField",)
 
@@ -136,7 +134,11 @@ def NestedProxyField(*fields, **options):
             # If dictionary
             if isinstance(__field, dict):
                 for __key, __values in __field.items():
-                    setattr(obj.__class__, __key, NestedProxyField(*__values, obj=obj))
+                    setattr(
+                        obj.__class__,
+                        __key,
+                        NestedProxyField(*__values, obj=obj),
+                    )
                     __dict.update({__key: getattr(obj, __key)})
             # If string
             else:

@@ -38,12 +38,11 @@ and ``HyperlinkedModelSerializer`` classes.
     >>>         )
     >>>         nested_proxy_field = True
 """
-
 from rest_framework import serializers
 
 
-__title__ = "rest_framework_tricks.serializers.nested_proxy"
 __author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__copyright__ = "2017-2022 Artur Barseghyan"
 __license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
 __all__ = (
     "extract_nested_serializers",
@@ -70,7 +69,10 @@ def is_nested_proxy_field(field):
 
 
 def extract_nested_serializers(
-    serializer, validated_data, nested_serializers=None, nested_serializers_data=None
+    serializer,
+    validated_data,
+    nested_serializers=None,
+    nested_serializers_data=None,
 ):
     """Extract nested serializers.
 
@@ -119,7 +121,11 @@ def set_instance_values(nested_serializers, nested_serializers_data, instance):
                 nested_serializers[__serializer_name][__field_name]
             ):
                 set_instance_values(
-                    {__field_name: nested_serializers[__serializer_name][__field_name]},
+                    {
+                        __field_name: nested_serializers[__serializer_name][
+                            __field_name
+                        ]
+                    },
                     {__field_name: __field_value},
                     instance,
                 )
@@ -167,7 +173,10 @@ class ModelSerializer(serializers.ModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers, __nested_serializers_data = extract_nested_serializers(
+        (
+            __nested_serializers,
+            __nested_serializers_data,
+        ) = extract_nested_serializers(
             self,
             validated_data,
         )
@@ -176,7 +185,9 @@ class ModelSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)
 
         # Assign fields to the `instance` one by one
-        set_instance_values(__nested_serializers, __nested_serializers_data, instance)
+        set_instance_values(
+            __nested_serializers, __nested_serializers_data, instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -190,16 +201,23 @@ class ModelSerializer(serializers.ModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers, __nested_serializers_data = extract_nested_serializers(
+        (
+            __nested_serializers,
+            __nested_serializers_data,
+        ) = extract_nested_serializers(
             self,
             validated_data,
         )
 
         # Update the instance
-        instance = super(ModelSerializer, self).update(instance, validated_data)
+        instance = super(ModelSerializer, self).update(
+            instance, validated_data
+        )
 
         # Assign fields to the `instance` one by one
-        set_instance_values(__nested_serializers, __nested_serializers_data, instance)
+        set_instance_values(
+            __nested_serializers, __nested_serializers_data, instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -244,7 +262,10 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers, __nested_serializers_data = extract_nested_serializers(
+        (
+            __nested_serializers,
+            __nested_serializers_data,
+        ) = extract_nested_serializers(
             self,
             validated_data,
         )
@@ -253,7 +274,9 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         instance = self.Meta.model(**validated_data)
 
         # Assign fields to the `instance` one by one
-        set_instance_values(__nested_serializers, __nested_serializers_data, instance)
+        set_instance_values(
+            __nested_serializers, __nested_serializers_data, instance
+        )
 
         # Save the instance and return
         instance.save()
@@ -267,7 +290,10 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         :return:
         """
         # Collect information on nested serializers
-        __nested_serializers, __nested_serializers_data = extract_nested_serializers(
+        (
+            __nested_serializers,
+            __nested_serializers_data,
+        ) = extract_nested_serializers(
             self,
             validated_data,
         )
@@ -278,7 +304,9 @@ class HyperlinkedModelSerializer(serializers.HyperlinkedModelSerializer):
         )
 
         # Assign fields to the `instance` one by one
-        set_instance_values(__nested_serializers, __nested_serializers_data, instance)
+        set_instance_values(
+            __nested_serializers, __nested_serializers_data, instance
+        )
 
         # Save the instance and return
         instance.save()

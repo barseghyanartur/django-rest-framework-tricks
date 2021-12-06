@@ -83,7 +83,9 @@ class BaseBookFactory(DjangoModelFactory):
             for order in orders:
                 # Create 1 `OrderLine` object.
                 amount = random.randint(1, 5)
-                order_lines = OrderLineFactory.create_batch(amount, **order_line_kwargs)
+                order_lines = OrderLineFactory.create_batch(
+                    amount, **order_line_kwargs
+                )
                 order.lines.add(*order_lines)
 
 

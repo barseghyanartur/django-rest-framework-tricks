@@ -12,8 +12,8 @@ Collection of various tricks for
     :target: https://pypi.python.org/pypi/django-rest-framework-tricks/
     :alt: Supported Python versions
 
-.. image:: https://img.shields.io/travis/barseghyanartur/django-rest-framework-tricks/master.svg
-   :target: http://travis-ci.org/barseghyanartur/django-rest-framework-tricks
+.. image:: https://github.com/barseghyanartur/django-rest-framework-tricks/workflows/test/badge.svg
+   :target: https://github.com/barseghyanartur/django-rest-framework-tricks/actions
    :alt: Build Status
 
 .. image:: https://img.shields.io/badge/license-GPL--2.0--only%20OR%20LGPL--2.1--or--later-blue.svg

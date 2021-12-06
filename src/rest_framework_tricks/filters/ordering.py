@@ -1,11 +1,10 @@
 """
 Ordering filter.
 """
-
 from rest_framework.filters import OrderingFilter as DjangoOrderingFilter
 
-__title__ = "rest_framework_tricks.filters.ordering"
 __author__ = "Artur Barseghyan <artur.barseghyan@gmail.com>"
+__copyright__ = "2017-2022 Artur Barseghyan"
 __license__ = "GPL-2.0-only OR LGPL-2.1-or-later"
 __all__ = ("OrderingFilter",)
 
@@ -37,7 +36,7 @@ class OrderingFilter(DjangoOrderingFilter):
         GET /books/api/proxy-books/?ordering=email
     """
 
-    def get_valid_fields(self, queryset, view, context={}):
+    def get_valid_fields(self, queryset, view, context=None):
         """Done.
 
         :param queryset:
@@ -46,6 +45,8 @@ class OrderingFilter(DjangoOrderingFilter):
         :return:
         """
         valid_fields = getattr(view, "ordering_fields", self.ordering_fields)
+        if context is None:
+            context = {}
 
         if isinstance(valid_fields, dict):
             return valid_fields.items()

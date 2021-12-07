@@ -15,24 +15,25 @@
 import os
 import sys
 
+from nine import versions
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath(os.path.join("..", "src")))
-sys.path.insert(0, os.path.abspath(os.path.join("..", "examples")))
-sys.path.insert(0, os.path.abspath(os.path.join("..", "examples", "simple")))
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'src')))
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'examples')))
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'examples', 'simple')))
 try:
     import rest_framework_tricks
     from simple import settings as example_settings
-
     version = rest_framework_tricks.__version__
     project = rest_framework_tricks.__title__
     copyright = rest_framework_tricks.__copyright__
 except Exception as e:
-    version = "0.1"
-    project = u"django-rest-framework-tricks"
-    copyright = u"2017, Artur Barseghyan <artur.barseghyan@gmail.com>"
+    version = '0.1'
+    project = u'django-rest-framework-tricks'
+    copyright = u'2017-2021, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
 # -- Django configuration -----------------------------------------------------
 import django
@@ -42,21 +43,20 @@ if not settings.configured:
     INSTALLED_APPS = list(example_settings.INSTALLED_APPS)
 
     configure_kwargs = {
-        "DATABASES": example_settings.DATABASES,
-        "INSTALLED_APPS": INSTALLED_APPS,
-        "MEDIA_ROOT": example_settings.MEDIA_ROOT,
-        "MEDIA_URL": example_settings.MEDIA_URL,
-        "MIDDLEWARE_CLASSES": example_settings.MIDDLEWARE_CLASSES,
-        "ROOT_URLCONF": example_settings.ROOT_URLCONF,
-        "SECRET_KEY": example_settings.SECRET_KEY,
-        "SITE_ID": example_settings.SITE_ID,
-        "STATICFILES_DIRS": example_settings.STATICFILES_DIRS,
-        "STATICFILES_FINDERS": example_settings.STATICFILES_FINDERS,
-        "STATIC_URL": example_settings.STATIC_URL,
-        "STATIC_ROOT": example_settings.STATIC_ROOT,
+        'DATABASES': example_settings.DATABASES,
+        'INSTALLED_APPS': INSTALLED_APPS,
+        'MEDIA_ROOT': example_settings.MEDIA_ROOT,
+        'MEDIA_URL': example_settings.MEDIA_URL,
+        'MIDDLEWARE': example_settings.MIDDLEWARE,
+        'ROOT_URLCONF': example_settings.ROOT_URLCONF,
+        'SECRET_KEY': example_settings.SECRET_KEY,
+        'SITE_ID': example_settings.SITE_ID,
+        'STATICFILES_DIRS': example_settings.STATICFILES_DIRS,
+        'STATICFILES_FINDERS': example_settings.STATICFILES_FINDERS,
+        'STATIC_URL': example_settings.STATIC_URL,
+        'STATIC_ROOT': example_settings.STATIC_ROOT,
+        'TEMPLATES':example_settings.TEMPLATES,
     }
-
-    configure_kwargs.update({"TEMPLATES": example_settings.TEMPLATES})
 
     settings.configure(**configure_kwargs)
 
@@ -69,19 +69,19 @@ django.setup()
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode"]
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ["_templates"]
+templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = ".rst"
+source_suffix = '.rst'
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = "index"
+master_doc = 'index'
 
 # General information about the project.
 # project = u'django-rest-framework-tricks'
@@ -109,7 +109,7 @@ release = version
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ["_build"]
+exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -127,7 +127,7 @@ exclude_patterns = ["_build"]
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+pygments_style = 'sphinx'
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -137,7 +137,7 @@ pygments_style = "sphinx"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "default"
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -166,7 +166,7 @@ html_theme = "default"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -210,31 +210,31 @@ html_static_path = ["_static"]
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "django-rest-framework-tricksdoc"
+htmlhelp_basename = 'django-rest-framework-tricksdoc'
 
 
 # -- Options for LaTeX output -------------------------------------------------
 
 latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    # 'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    # 'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
-    # 'preamble': '',
+# The paper size ('letterpaper' or 'a4paper').
+# 'papersize': 'letterpaper',
+
+# The font size ('10pt', '11pt' or '12pt').
+# 'pointsize': '10pt',
+
+# Additional stuff for the LaTeX preamble.
+# 'preamble': '',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    (
-        "index",
-        "django-rest-framework-tricks.tex",
-        u"django-rest-framework-tricks Documentation",
-        u"Artur Barseghyan \\textless{}artur.barseghyan@gmail.com\\textgreater{}",
-        "manual",
-    ),
+  ('index',
+   'django-rest-framework-tricks.tex',
+   u'django-rest-framework-tricks Documentation',
+   u'Artur Barseghyan \\textless{}artur.barseghyan@gmail.com\\textgreater{}',
+   'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top
@@ -263,13 +263,11 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (
-        "index",
-        "django-rest-framework-tricks",
-        u"django-rest-framework-tricks Documentation",
-        [u"Artur Barseghyan <artur.barseghyan@gmail.com>"],
-        1,
-    )
+    ('index',
+     'django-rest-framework-tricks',
+     u'django-rest-framework-tricks Documentation',
+     [u'Artur Barseghyan <artur.barseghyan@gmail.com>'],
+     1)
 ]
 
 # If true, show URL addresses after external links.
@@ -282,15 +280,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (
-        "index",
-        "django-rest-framework-tricks",
-        u"django-rest-framework-tricks Documentation",
-        u"Artur Barseghyan <artur.barseghyan@gmail.com>",
-        "django-rest-framework-tricks",
-        "Integrate Elasticsearch DSL with Django REST framework.",
-        "Miscellaneous",
-    ),
+  ('index', 'django-rest-framework-tricks',
+   u'django-rest-framework-tricks Documentation',
+   u'Artur Barseghyan <artur.barseghyan@gmail.com>',
+   'django-rest-framework-tricks',
+   "Integrate Elasticsearch DSL with Django REST framework.",
+   'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -306,10 +301,10 @@ texinfo_documents = [
 # -- Options for Epub output --------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u"django-rest-framework-tricks"
-epub_author = u"Artur Barseghyan <artur.barseghyan@gmail.com>"
-epub_publisher = u"Artur Barseghyan <artur.barseghyan@gmail.com>"
-epub_copyright = u"2017, Artur Barseghyan <artur.barseghyan@gmail.com>"
+epub_title = u'django-rest-framework-tricks'
+epub_author = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_publisher = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_copyright = u'2017, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.

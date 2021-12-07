@@ -33,7 +33,7 @@ try:
 except Exception as e:
     version = '0.1'
     project = u'django-rest-framework-tricks'
-    copyright = u'2017, Artur Barseghyan <artur.barseghyan@gmail.com>'
+    copyright = u'2017-2021, Artur Barseghyan <artur.barseghyan@gmail.com>'
 
 # -- Django configuration -----------------------------------------------------
 import django
@@ -47,7 +47,7 @@ if not settings.configured:
         'INSTALLED_APPS': INSTALLED_APPS,
         'MEDIA_ROOT': example_settings.MEDIA_ROOT,
         'MEDIA_URL': example_settings.MEDIA_URL,
-        'MIDDLEWARE_CLASSES': example_settings.MIDDLEWARE_CLASSES,
+        'MIDDLEWARE': example_settings.MIDDLEWARE,
         'ROOT_URLCONF': example_settings.ROOT_URLCONF,
         'SECRET_KEY': example_settings.SECRET_KEY,
         'SITE_ID': example_settings.SITE_ID,
@@ -55,18 +55,8 @@ if not settings.configured:
         'STATICFILES_FINDERS': example_settings.STATICFILES_FINDERS,
         'STATIC_URL': example_settings.STATIC_URL,
         'STATIC_ROOT': example_settings.STATIC_ROOT,
+        'TEMPLATES':example_settings.TEMPLATES,
     }
-
-    if versions.DJANGO_GTE_1_8:
-        configure_kwargs.update({'TEMPLATES':example_settings.TEMPLATES})
-    else:
-        configure_kwargs.update({
-            'TEMPLATE_CONTEXT_PROCESSORS':
-                example_settings.TEMPLATE_CONTEXT_PROCESSORS,
-            'TEMPLATE_DIRS': example_settings.TEMPLATE_DIRS,
-            'TEMPLATE_LOADERS': example_settings.TEMPLATE_LOADERS,
-        })
-
 
     settings.configure(**configure_kwargs)
 

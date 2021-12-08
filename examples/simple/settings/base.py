@@ -192,12 +192,19 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     # Third party apps
     "rest_framework",  # REST framework
+    # REST schema
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
     # This app
     "rest_framework_tricks",
     # Other project specific apps
     "assets",  # Static files
     "books",  # Test app
 ]
+
+# *********************************************************************
+# *********************** django-rest-framework ***********************
+# *********************************************************************
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -207,6 +214,31 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
     "ORDERING_PARAM": "ordering",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+
+# *********************************************************************
+# *********************** django-spectacular **************************
+# *********************************************************************
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "django-rest-framework-tricks example API",
+    "DESCRIPTION": "django-rest-framework-tricks example API documentation.",
+    "VERSION": "",
+    "SWAGGER_UI_DIST": "SIDECAR",
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+    # "SCHEMA_PATH_PREFIX_TRIM": True,
+    # "SCHEMA_PATH_PREFIX": "",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "AUTHENTICATION_WHITELIST": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "CONTACT": {
+        "email": "admin@localhost",
+    },
 }
 
 LOGIN_URL = "/en/accounts/login/"

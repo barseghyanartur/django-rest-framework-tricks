@@ -2,6 +2,7 @@
 Test NestedProxyField.
 """
 from decimal import Decimal
+from typing import Callable
 
 from django.urls import reverse
 import pytest
@@ -26,7 +27,7 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
 
     pytestmark = pytest.mark.django_db
 
-    def get_status_code(self):
+    def get_status_code(self) -> int:
         """Get status code.
 
         :return: Status code expected as result of the action.
@@ -34,7 +35,7 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
         """
         raise NotImplementedError
 
-    def get_client_action(self):
+    def get_client_action(self) -> Callable:
         """Get client action.
 
         :return: Client action.
@@ -425,7 +426,7 @@ class TestNestedProxyFieldActionBase(BaseRestFrameworkTestCase):
 class TestNestedProxyFieldCreateAction(TestNestedProxyFieldActionBase):
     """Test NestedProxyField - create action."""
 
-    def get_status_code(self):
+    def get_status_code(self) -> int:
         """Get status code.
 
         :return: Status code expected as result of the action.
@@ -433,7 +434,7 @@ class TestNestedProxyFieldCreateAction(TestNestedProxyFieldActionBase):
         """
         return status.HTTP_201_CREATED
 
-    def get_client_action(self):
+    def get_client_action(self) -> Callable:
         """Get client action.
 
         :return: Client action.
@@ -521,7 +522,7 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
 
     pytestmark = pytest.mark.django_db
 
-    def get_status_code(self):
+    def get_status_code(self) -> int:
         """Get status code.
 
         :return: Status code expected as result of the action.
@@ -529,7 +530,7 @@ class TestNestedProxyFieldUpdateAction(TestNestedProxyFieldActionBase):
         """
         return status.HTTP_200_OK
 
-    def get_client_action(self):
+    def get_client_action(self) -> Callable:
         """Get client action.
 
         :return: Client action.

@@ -6,3 +6,5 @@ django-debug-toolbar>=2.1
 django-debug-toolbar-force>=0.1.7
 django-ormex>=0.2.1
 djangorestframework>=3.11.0,<3.12
+drf-spectacular
+drf-spectacular-sidecar

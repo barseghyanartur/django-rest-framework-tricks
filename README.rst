@@ -193,7 +193,7 @@ Model definition
             'state',
         )
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             ordering = ["isbn"]
@@ -246,7 +246,7 @@ Defining the serializers
         isbn = serializers.CharField(required=False)
         pages = serializers.IntegerField(required=False)
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book
@@ -266,7 +266,7 @@ Defining the serializers
     class StockInformationSerializer(serializers.ModelSerializer):
         """Stock information serializer."""
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book
@@ -293,7 +293,7 @@ Defining the serializers
         publishing_information = PublishingInformationSerializer(required=False)
         stock_information = StockInformationSerializer(required=False)
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book

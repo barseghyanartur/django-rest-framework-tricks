@@ -25,6 +25,9 @@ pip-compile django_3_1.in "$@"
 echo "pip-compile django_3_2.in"
 pip-compile django_3_2.in "$@"
 
+#echo "pip-compile django_4_0.in"
+#pip-compile django_4_0.in "$@"
+
 echo "pip-compile docs.in"
 pip-compile docs.in "$@"
 

@@ -7,7 +7,7 @@ from django.http import JsonResponse
 __all__ = ("JSONResponseMixin",)
 
 
-class JSONResponseMixin(object):
+class JSONResponseMixin:
     """A mixin that can be used to render a JSON response."""
 
     def render_to_json_response(self, context, **response_kwargs):

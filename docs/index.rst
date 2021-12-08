@@ -15,7 +15,7 @@ Collection of various tricks for
 .. image:: https://github.com/barseghyanartur/django-rest-framework-tricks/workflows/test/badge.svg
    :target: https://github.com/barseghyanartur/django-rest-framework-tricks/actions
    :alt: Build Status
-   
+
 .. image:: https://readthedocs.org/projects/django-rest-framework-tricks/badge/?version=latest
     :target: http://django-rest-framework-tricks.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status

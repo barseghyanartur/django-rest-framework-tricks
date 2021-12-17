@@ -25,6 +25,7 @@ django==3.0.14
     #   django-nine
     #   djangorestframework
     #   drf-spectacular
+    #   drf-spectacular-sidecar
 django-debug-toolbar==3.2.2
     # via -r django_3_0.in
 django-debug-toolbar-force==0.1.8
@@ -40,6 +41,8 @@ djangorestframework==3.11.2
     #   -r django_3_0.in
     #   drf-spectacular
 drf-spectacular==0.21.0
+    # via -r django_3_0.in
+drf-spectacular-sidecar==2021.12.13
     # via -r django_3_0.in
 factory-boy==3.2.1
     # via -r test.in

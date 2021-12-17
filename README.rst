@@ -12,6 +12,10 @@ Collection of various tricks for
     :target: https://pypi.python.org/pypi/django-rest-framework-tricks/
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/djversions/django-rest-framework-tricks.svg
+    :target: https://pypi.python.org/pypi/django-rest-framework-tricks/
+    :alt: Supported Django versions
+
 .. image:: https://github.com/barseghyanartur/django-rest-framework-tricks/workflows/test/badge.svg
    :target: https://github.com/barseghyanartur/django-rest-framework-tricks/actions
    :alt: Build Status

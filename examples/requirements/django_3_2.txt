@@ -43,7 +43,9 @@ djangorestframework==3.12.4
 drf-spectacular[sidecar]==0.21.0
     # via -r django_3_2.in
 drf-spectacular-sidecar==2021.12.6
-    # via drf-spectacular
+    # via
+    #   -r django_3_2.in
+    #   drf-spectacular
 factory-boy==3.2.1
     # via -r test.in
 faker==9.9.0

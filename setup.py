@@ -7,10 +7,11 @@ try:
 except:
     readme = ""
 
-version = "0.2.13"
+version = "0.2.14"
 
 install_requires = [
     "djangorestframework",
+    "humanize",
 ]
 
 extras_require = []

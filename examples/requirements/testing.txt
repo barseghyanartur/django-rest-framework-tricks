@@ -22,8 +22,6 @@ coverage[toml]==6.2
     # via
     #   -r test.in
     #   pytest-cov
-dataclasses==0.8
-    # via black
 distlib==0.3.3
     # via virtualenv
 django==3.2.9

@@ -671,6 +671,68 @@ serializer (JSON response). API becomes easier to use/understand that way.
     GET /api/profile/?ordering=full_name
     GET /api/profile/?ordering=-full_name
 
+File field with restrictions
+----------------------------
+
+Sample model
+~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from django.db import models
+
+
+Model definition
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class Profile(models.Model):
+        """Upload."""
+
+        username = models.CharField(max_length=255)
+        resume = models.FileField()
+
+
+Sample serializer
+~~~~~~~~~~~~~~~~~
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from rest_framework import serializers
+    from rest_framework_tricks.fields import ConstrainedFileField
+
+    from .models import Upload
+
+Defining the serializers
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class ProfileSerializer(serializers.ModelSerializer):
+        """Profile serializer."""
+
+        username = serializers.CharField()
+        # Restrict resume to 5Mb
+        resume = ConstrainedFileField(max_upload_size=5_242_880)
+
+        class Meta(object):
+
+        model = Profile
+        fields = (
+            'id',
+            'username',
+            'resume',
+        )
+
 Demo
 ====
 Run demo locally

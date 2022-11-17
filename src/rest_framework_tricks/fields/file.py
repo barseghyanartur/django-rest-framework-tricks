@@ -34,8 +34,10 @@ class ConstrainedFileField(FileField):
     default_error_messages = deepcopy(FileField.default_error_messages)
     default_error_messages.update(
         {
-            "max_upload_size": _("File size exceeds limit: {current_size}. "
-                                 "Limit is {max_size}.")
+            "max_upload_size": _(
+                "File size exceeds limit: {current_size}. "
+                "Limit is {max_size}."
+            )
         }
     )
 

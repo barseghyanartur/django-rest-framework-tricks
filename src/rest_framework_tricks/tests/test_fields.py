@@ -51,7 +51,9 @@ class FieldValues(TestCase):
         """Ensure that valid values return the expected validated data."""
         for input_value, expected_output in get_items(self.valid_inputs):
             self.assertEqual(
-                self.field.run_validation(input_value), expected_output, f"input value: {repr(input_value)}"
+                self.field.run_validation(input_value),
+                expected_output,
+                f"input value: {repr(input_value)}",
             )
 
     def test_invalid_inputs(self) -> None:
@@ -59,7 +61,11 @@ class FieldValues(TestCase):
         for input_value, expected_failure in get_items(self.invalid_inputs):
             with pytest.raises(serializers.ValidationError) as exc_info:
                 self.field.run_validation(input_value)
-            self.assertEqual(exc_info.value.detail, expected_failure, f"input value: {repr(input_value)}")
+            self.assertEqual(
+                exc_info.value.detail,
+                expected_failure,
+                f"input value: {repr(input_value)}",
+            )
 
     def test_outputs(self) -> None:
         """Ensure that outputs have expected values."""
@@ -78,12 +84,23 @@ class FieldValues(TestCase):
 class TestFileField(FieldValues):
     """Values for `ConstrainedFileField`."""
 
-    valid_inputs = [(MockFile(name="expl.doc", size=1_048_576), MockFile(name="expl.doc", size=1_048_576))]
+    valid_inputs = [
+        (
+            MockFile(name="expl.doc", size=1_048_576),
+            MockFile(name="expl.doc", size=1_048_576),
+        )
+    ]
     invalid_inputs = [
-        (MockFile(name="expl.doc", size=2_048_576), ["File size exceeds limit: 2.0M. Limit is 1.0M."]),
+        (
+            MockFile(name="expl.doc", size=2_048_576),
+            ["File size exceeds limit: 2.0M. Limit is 1.0M."],
+        ),
     ]
     outputs = [
-        (MockFile(name="example.doc", size=1_048_576, url="/example.doc"), "/example.doc"),
+        (
+            MockFile(name="example.doc", size=1_048_576, url="/example.doc"),
+            "/example.doc",
+        ),
         ("", None),
     ]
     field = ConstrainedFileField(max_length=10, max_upload_size=1_048_576)

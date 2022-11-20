@@ -20,6 +20,7 @@ are used for versioning (schema follows below):
 2022-11-20
 
 - Tested against Django 4.0.
+- Drop Python 3.6 support.
 - Drop Django REST Framework 3.9.x support.
 - Add `ConstrainedFileField` (for limiting size of file uploads).
 

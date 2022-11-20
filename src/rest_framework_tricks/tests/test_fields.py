@@ -1,5 +1,5 @@
 """Test `fields`."""
-from typing import Any
+from typing import Any, List
 from unittest import TestCase
 
 import pytest
@@ -42,9 +42,9 @@ def get_items(mapping_or_list_of_two_tuples):
 class FieldValues(TestCase):
     """Base class for testing valid and invalid input values."""
 
-    valid_inputs: list[list[str, Any]] = []
-    invalid_inputs: list[list[str, Any]] = []
-    outputs: list[list[str, Any]] = []
+    valid_inputs: List[List[str, Any]] = []
+    invalid_inputs: List[List[str, Any]] = []
+    outputs: List[List[str, Any]] = []
     field: serializers.Field
 
     def test_valid_inputs(self) -> None:

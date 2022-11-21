@@ -7,10 +7,11 @@ try:
 except:
     readme = ""
 
-version = "0.2.12"
+version = "0.2.13"
 
 install_requires = [
     "djangorestframework",
+    "humanize",
 ]
 
 extras_require = []
@@ -30,7 +31,6 @@ setup(
     description="Collection of various tricks for Django REST framework.",
     long_description=readme,
     classifiers=[
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -40,6 +40,11 @@ setup(
         "License :: OSI Approved :: GNU Lesser General Public License v2 or "
         "later (LGPLv2+)",
         "Framework :: Django",
+        "Framework:: Django:: 2.2",
+        "Framework:: Django:: 3.0",
+        "Framework:: Django:: 3.1",
+        "Framework:: Django:: 3.2",
+        "Framework:: Django:: 4.0",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Development Status :: 4 - Beta",

@@ -15,6 +15,15 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.13
+------
+2022-11-20
+
+- Tested against Django 4.0.
+- Drop Python 3.6 support.
+- Drop Django REST Framework 3.9.x support.
+- Add `ConstrainedFileField` (for limiting size of file uploads).
+
 0.2.12
 ------
 2021-12-06

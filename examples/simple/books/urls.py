@@ -3,7 +3,6 @@ Urls.
 """
 
 from django.urls import re_path as url, include
-
 import rest_framework
 from rest_framework.routers import DefaultRouter
 

@@ -12,6 +12,10 @@ Collection of various tricks for
     :target: https://pypi.python.org/pypi/django-rest-framework-tricks/
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/djversions/django-rest-framework-tricks.svg
+    :target: https://pypi.python.org/pypi/django-rest-framework-tricks/
+    :alt: Supported Django versions
+
 .. image:: https://github.com/barseghyanartur/django-rest-framework-tricks/workflows/test/badge.svg
    :target: https://github.com/barseghyanartur/django-rest-framework-tricks/actions
    :alt: Build Status
@@ -193,7 +197,7 @@ Model definition
             'state',
         )
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             ordering = ["isbn"]
@@ -246,7 +250,7 @@ Defining the serializers
         isbn = serializers.CharField(required=False)
         pages = serializers.IntegerField(required=False)
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book
@@ -266,7 +270,7 @@ Defining the serializers
     class StockInformationSerializer(serializers.ModelSerializer):
         """Stock information serializer."""
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book
@@ -293,7 +297,7 @@ Defining the serializers
         publishing_information = PublishingInformationSerializer(required=False)
         stock_information = StockInformationSerializer(required=False)
 
-        class Meta(object):
+        class Meta:
             """Meta options."""
 
             model = Book
@@ -666,6 +670,68 @@ serializer (JSON response). API becomes easier to use/understand that way.
     GET /api/profile/?ordering=-username
     GET /api/profile/?ordering=full_name
     GET /api/profile/?ordering=-full_name
+
+File field with restrictions
+----------------------------
+
+Sample model
+~~~~~~~~~~~~
+
+Absolutely no variations from standard implementation here.
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from django.db import models
+
+
+Model definition
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class Profile(models.Model):
+        """Upload."""
+
+        username = models.CharField(max_length=255)
+        resume = models.FileField()
+
+
+Sample serializer
+~~~~~~~~~~~~~~~~~
+
+Required imports
+^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from rest_framework import serializers
+    from rest_framework_tricks.fields import ConstrainedFileField
+
+    from .models import Upload
+
+Defining the serializers
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    class ProfileSerializer(serializers.ModelSerializer):
+        """Profile serializer."""
+
+        username = serializers.CharField()
+        # Restrict resume to 5Mb
+        resume = ConstrainedFileField(max_upload_size=5_242_880)
+
+        class Meta(object):
+
+        model = Profile
+        fields = (
+            'id',
+            'username',
+            'resume',
+        )
 
 Demo
 ====

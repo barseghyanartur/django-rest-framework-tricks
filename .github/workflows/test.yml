@@ -36,7 +36,7 @@ jobs:
 #    - name: Run test suite
 #      run: tox r --skip-pkg-install
     - name: Run test suite
-      run: tox
+      run: tox -r
       env:
         PYTEST_ADDOPTS: "-vv --durations=10"
     - name: Coveralls

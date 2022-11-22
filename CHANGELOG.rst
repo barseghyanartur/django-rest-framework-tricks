@@ -19,7 +19,7 @@ are used for versioning (schema follows below):
 ------
 2022-11-22
 
-- Tested against Django 4.0.
+- Tested against Django 4.1.
 - Tested against Django REST Framework 3.13.
 
 0.2.13

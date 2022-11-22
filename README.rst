@@ -35,14 +35,14 @@ Collection of various tricks for
 Prerequisites
 =============
 
-- Django 2.2, 3.0, 3.1, 3.2 and 4.0.
-- Python 3.7, 3.8, 3.9 and 3.10.
+- Django 2.2, 3.0, 3.1, 3.2, 4.0 and 4.1.
+- Python 3.7, 3.8, 3.9, 3.10 and 3.11.
 
 Dependencies
 ============
 
 - djangorestframework: Initially written with 3.6.3, but nowadays tested
-  with >=3.9,<3.13. May (still) work on earlier- or (even) support
+  with >=3.10,<3.14. May (still) work on earlier- or (even) support
   later- versions, although not guaranteed.
 
 Installation

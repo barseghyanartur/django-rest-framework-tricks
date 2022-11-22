@@ -6,27 +6,25 @@
 #
 alabaster==0.7.12
     # via sphinx
-asgiref==3.4.1
+asgiref==3.5.2
     # via django
-attrs==21.2.0
+attrs==22.1.0
     # via
     #   jsonschema
     #   pytest
-babel==2.9.1
+babel==2.11.0
     # via sphinx
-backports-entry-points-selectable==1.1.1
-    # via virtualenv
-certifi==2021.10.8
+certifi==2022.9.24
     # via requests
-charset-normalizer==2.0.8
+charset-normalizer==2.1.1
     # via requests
-coverage[toml]==6.2
+coverage[toml]==6.5.0
     # via
     #   -r test.in
     #   pytest-cov
-distlib==0.3.3
+distlib==0.3.6
     # via virtualenv
-django==3.2.9
+django==3.2.16
     # via
     #   -r django_3_2.in
     #   django-debug-toolbar
@@ -34,7 +32,7 @@ django==3.2.9
     #   djangorestframework
     #   drf-spectacular
     #   drf-spectacular-sidecar
-django-debug-toolbar==3.2.2
+django-debug-toolbar==3.7.0
     # via -r django_3_2.in
 django-debug-toolbar-force==0.1.8
     # via -r django_3_2.in
@@ -48,46 +46,46 @@ djangorestframework==3.12.4
     # via
     #   -r django_3_2.in
     #   drf-spectacular
-docutils==0.17.1
+docutils==0.19
     # via
     #   -r docs.in
     #   rst2pdf
     #   rstcheck
     #   sphinx
-drf-spectacular[sidecar]==0.21.0
+drf-spectacular[sidecar]==0.24.2
     # via -r django_3_2.in
-drf-spectacular-sidecar==2021.12.6
+drf-spectacular-sidecar==2022.11.1
     # via
     #   -r django_3_2.in
     #   drf-spectacular
 factory-boy==3.2.1
     # via -r test.in
-faker==9.9.0
+faker==15.3.3
     # via
     #   -r test.in
     #   factory-boy
-filelock==3.4.0
+filelock==3.8.0
     # via
     #   tox
     #   virtualenv
-idna==3.3
+idna==3.4
     # via requests
-imagesize==1.3.0
+imagesize==1.4.1
     # via sphinx
-importlib-metadata==4.8.2
+importlib-metadata==5.0.0
     # via rst2pdf
 inflection==0.5.1
     # via drf-spectacular
 iniconfig==1.1.1
     # via pytest
-jinja2==3.0.3
+jinja2==3.1.2
     # via
     #   -r docs.in
     #   rst2pdf
     #   sphinx
-jsonschema==3.2.0
+jsonschema==4.17.0
     # via drf-spectacular
-markupsafe==2.0.1
+markupsafe==2.1.1
     # via
     #   -r docs.in
     #   jinja2
@@ -97,11 +95,11 @@ packaging==21.3
     #   rst2pdf
     #   sphinx
     #   tox
-pillow==8.4.0
+pillow==9.3.0
     # via
     #   -r common.in
     #   reportlab
-platformdirs==2.4.0
+platformdirs==2.5.4
     # via virtualenv
 pluggy==0.13.1
     # via
@@ -112,13 +110,13 @@ py==1.11.0
     #   -r test.in
     #   pytest
     #   tox
-pygments==2.10.0
+pygments==2.13.0
     # via
     #   rst2pdf
     #   sphinx
-pyparsing==3.0.6
+pyparsing==3.0.9
     # via packaging
-pyrsistent==0.18.0
+pyrsistent==0.19.2
     # via jsonschema
 pytest==6.2.4
     # via
@@ -133,24 +131,26 @@ pytest-django==4.3.0
     # via -r test.in
 pytest-ordering==0.6
     # via -r test.in
-pytest-pythonpath==0.7.3
+pytest-pythonpath==0.7.4
     # via -r test.in
 python-dateutil==2.8.2
     # via faker
 python-memcached==1.58
     # via -r common.in
-pytz==2021.3
+pytz==2022.6
     # via
     #   -r common.in
     #   babel
     #   django
 pyyaml==6.0
-    # via drf-spectacular
-reportlab==3.6.3
+    # via
+    #   drf-spectacular
+    #   rst2pdf
+reportlab==3.6.12
     # via rst2pdf
-requests==2.26.0
+requests==2.28.1
     # via sphinx
-rst2pdf==0.98
+rst2pdf==0.99
     # via -r docs.in
 rstcheck==3.3.1
     # via -r docs.in
@@ -159,16 +159,14 @@ six==1.16.0
     #   -r common.in
     #   django-debug-toolbar-force
     #   django-ormex
-    #   jsonschema
     #   python-dateutil
     #   python-memcached
     #   tox
-    #   virtualenv
 smartypants==2.0.1
     # via rst2pdf
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==4.3.1
+sphinx==5.3.0
     # via -r docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -182,28 +180,23 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via
     #   django
     #   django-debug-toolbar
-text-unidecode==1.3
-    # via faker
 toml==0.10.2
+    # via pytest
+tomli==2.0.1
     # via
-    #   pytest
+    #   coverage
     #   tox
-tomli==1.2.2
-    # via coverage
-tox==3.23.1
+tox==3.27.1
     # via -r test.in
 uritemplate==4.1.1
     # via drf-spectacular
-urllib3==1.26.7
+urllib3==1.26.12
     # via requests
-virtualenv==20.10.0
+virtualenv==20.16.7
     # via tox
-zipp==3.6.0
+zipp==3.10.0
     # via importlib-metadata
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

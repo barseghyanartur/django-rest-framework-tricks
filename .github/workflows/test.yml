@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: test ${{ matrix.py }} - ${{ matrix.os }}
+    name: test ${{ matrix.python-version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: true
@@ -15,6 +15,7 @@ jobs:
 #          - Windows
 #          - MacOs
         python-version:
+          - "3.11"
           - "3.10"
           - "3.9"
           - "3.8"

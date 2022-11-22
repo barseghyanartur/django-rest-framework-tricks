@@ -35,8 +35,8 @@ Collection of various tricks for
 Prerequisites
 =============
 
-- Django 2.2, 3.0, 3.1 and 3.2.
-- Python 3.6, 3.7, 3.8, 3.9 and 3.10.
+- Django 2.2, 3.0, 3.1, 3.2 and 4.0.
+- Python 3.7, 3.8, 3.9 and 3.10.
 
 Dependencies
 ============
@@ -87,6 +87,7 @@ Main features and highlights
 - `Nested serializers`_: Nested (writable) serializers for non-relational fields.
 - `Ordering filter`_: Developer friendly names for ordering options (for
   instance, for related field names).
+- `File field with restrictions`_: Restrict the file field (in size).
 
 Usage examples
 ==============

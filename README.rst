@@ -87,6 +87,7 @@ Main features and highlights
 - `Nested serializers`_: Nested (writable) serializers for non-relational fields.
 - `Ordering filter`_: Developer friendly names for ordering options (for
   instance, for related field names).
+- `File field with restrictions`_: Restrict the file field (in size).
 
 Usage examples
 ==============

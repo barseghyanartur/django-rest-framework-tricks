@@ -4,11 +4,11 @@
 #
 #    pip-compile common.in
 #
-pillow==8.4.0
+pillow==9.3.0
     # via -r common.in
 python-memcached==1.58
     # via -r common.in
-pytz==2021.3
+pytz==2022.6
     # via -r common.in
 six==1.16.0
     # via

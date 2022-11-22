@@ -7,4 +7,4 @@ pytest-django==4.3.0
 pytest-ordering==0.6
 pytest-pythonpath
 pytest==6.2.4
-tox==3.23.1
+tox

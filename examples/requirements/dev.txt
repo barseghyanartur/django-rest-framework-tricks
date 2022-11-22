@@ -6,49 +6,53 @@
 #
 alabaster==0.7.12
     # via sphinx
-asgiref==3.4.1
+asgiref==3.5.2
     # via django
-astroid==2.9.0
+astroid==2.12.13
     # via pylint
-attrs==21.2.0
+asttokens==2.1.0
+    # via stack-data
+attrs==22.1.0
     # via
     #   jsonschema
     #   pytest
-babel==2.9.1
+babel==2.11.0
     # via sphinx
 backcall==0.2.0
     # via ipython
-backports-entry-points-selectable==1.1.1
-    # via virtualenv
-black==21.11b1
+black==22.10.0
     # via -r style_checkers.in
-bleach==4.1.0
+bleach==5.0.1
     # via readme-renderer
-certifi==2021.10.8
+build==0.9.0
+    # via pip-tools
+certifi==2022.9.24
     # via requests
-cffi==1.15.0
+cffi==1.15.1
     # via cryptography
-charset-normalizer==2.0.8
+charset-normalizer==2.1.1
     # via requests
-click==8.0.3
+click==8.1.3
     # via
     #   black
     #   pip-tools
-colorama==0.4.4
-    # via twine
-coverage[toml]==6.2
+commonmark==0.9.1
+    # via rich
+coverage[toml]==6.5.0
     # via
     #   -r test.in
     #   pytest-cov
-cryptography==36.0.0
+cryptography==38.0.3
     # via secretstorage
-decorator==5.1.0
+decorator==5.1.1
     # via
     #   ipdb
     #   ipython
-distlib==0.3.3
+dill==0.3.6
+    # via pylint
+distlib==0.3.6
     # via virtualenv
-django==3.2.9
+django==3.2.16
     # via
     #   -r django_3_2.in
     #   django-debug-toolbar
@@ -56,7 +60,7 @@ django==3.2.9
     #   djangorestframework
     #   drf-spectacular
     #   drf-spectacular-sidecar
-django-debug-toolbar==3.2.2
+django-debug-toolbar==3.7.0
     # via -r django_3_2.in
 django-debug-toolbar-force==0.1.8
     # via -r django_3_2.in
@@ -70,7 +74,7 @@ djangorestframework==3.12.4
     # via
     #   -r django_3_2.in
     #   drf-spectacular
-docutils==0.17.1
+docutils==0.19
     # via
     #   -r docs.in
     #   readme-renderer
@@ -83,21 +87,23 @@ drf-spectacular-sidecar==2022.11.1
     # via
     #   -r django_3_2.in
     #   drf-spectacular
+executing==1.2.0
+    # via stack-data
 factory-boy==3.2.1
     # via -r test.in
-faker==9.9.0
+faker==15.3.3
     # via
     #   -r test.in
     #   factory-boy
-filelock==3.4.0
+filelock==3.8.0
     # via
     #   tox
     #   virtualenv
-idna==3.3
+idna==3.4
     # via requests
-imagesize==1.3.0
+imagesize==1.4.1
     # via sphinx
-importlib-metadata==4.8.2
+importlib-metadata==5.0.0
     # via
     #   keyring
     #   rst2pdf
@@ -108,65 +114,69 @@ iniconfig==1.1.1
     # via pytest
 ipdb==0.13.9
     # via -r debug.in
-ipython==7.30.0
+ipython==8.6.0
     # via
     #   -r debug.in
     #   ipdb
 isort==5.10.1
     # via pylint
-jedi==0.18.1
+jaraco-classes==3.2.3
+    # via keyring
+jedi==0.18.2
     # via ipython
-jeepney==0.7.1
+jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-jinja2==3.0.3
+jinja2==3.1.2
     # via
     #   -r docs.in
     #   rst2pdf
     #   sphinx
 jsonschema==4.17.0
     # via drf-spectacular
-keyring==23.4.0
+keyring==23.11.0
     # via twine
-lazy-object-proxy==1.6.0
+lazy-object-proxy==1.8.0
     # via astroid
-markupsafe==2.0.1
+markupsafe==2.1.1
     # via
     #   -r docs.in
     #   jinja2
-matplotlib-inline==0.1.3
+matplotlib-inline==0.1.6
     # via ipython
-mccabe==0.6.1
+mccabe==0.7.0
     # via pylint
+more-itertools==9.0.0
+    # via jaraco-classes
 mypy-extensions==0.4.3
     # via black
 packaging==21.3
     # via
-    #   bleach
+    #   build
     #   pytest
     #   rst2pdf
     #   sphinx
     #   tox
 parso==0.8.3
     # via jedi
-pathspec==0.9.0
+pathspec==0.10.2
     # via black
-pep517==0.12.0
-    # via pip-tools
+pep517==0.13.0
+    # via build
 pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pillow==8.4.0
+pillow==9.3.0
     # via
     #   -r common.in
     #   reportlab
-pip-tools==6.4.0
+pip-tools==6.10.0
     # via -r deployment.in
-pkginfo==1.8.1
+pkginfo==1.8.3
     # via twine
-platformdirs==2.4.0
+platformdirs==2.5.4
     # via
     #   black
     #   pylint
@@ -175,28 +185,31 @@ pluggy==0.13.1
     # via
     #   pytest
     #   tox
-prompt-toolkit==3.0.23
+prompt-toolkit==3.0.33
     # via ipython
 ptyprocess==0.7.0
     # via pexpect
+pure-eval==0.2.2
+    # via stack-data
 py==1.11.0
     # via
     #   -r test.in
     #   pytest
     #   tox
-pycodestyle==2.8.0
+pycodestyle==2.9.1
     # via -r style_checkers.in
 pycparser==2.21
     # via cffi
-pygments==2.10.0
+pygments==2.13.0
     # via
     #   ipython
     #   readme-renderer
+    #   rich
     #   rst2pdf
     #   sphinx
-pylint==2.12.1
+pylint==2.15.6
     # via -r style_checkers.in
-pyparsing==3.0.6
+pyparsing==3.0.9
     # via packaging
 pyrsistent==0.19.2
     # via jsonschema
@@ -213,55 +226,57 @@ pytest-django==4.3.0
     # via -r test.in
 pytest-ordering==0.6
     # via -r test.in
-pytest-pythonpath==0.7.3
+pytest-pythonpath==0.7.4
     # via -r test.in
 python-dateutil==2.8.2
     # via faker
 python-memcached==1.58
     # via -r common.in
-pytz==2021.3
+pytz==2022.6
     # via
     #   -r common.in
     #   babel
     #   django
 pyyaml==6.0
-    # via drf-spectacular
-readme-renderer==30.0
+    # via
+    #   drf-spectacular
+    #   rst2pdf
+readme-renderer==37.3
     # via twine
-regex==2021.11.10
-    # via black
-reportlab==3.6.3
+reportlab==3.6.12
     # via rst2pdf
-requests==2.26.0
+requests==2.28.1
     # via
     #   requests-toolbelt
     #   sphinx
     #   twine
-requests-toolbelt==0.9.1
+requests-toolbelt==0.10.1
     # via twine
-rfc3986==1.5.0
+rfc3986==2.0.0
     # via twine
-rst2pdf==0.98
+rich==12.6.0
+    # via twine
+rst2pdf==0.99
     # via -r docs.in
 rstcheck==3.3.1
     # via -r docs.in
-secretstorage==3.3.1
+secretstorage==3.3.3
     # via keyring
 six==1.16.0
     # via
     #   -r common.in
+    #   asttokens
     #   bleach
     #   django-debug-toolbar-force
     #   django-ormex
     #   python-dateutil
     #   python-memcached
     #   tox
-    #   virtualenv
 smartypants==2.0.1
     # via rst2pdf
 snowballstemmer==2.2.0
     # via sphinx
-sphinx==4.3.1
+sphinx==5.3.0
     # via -r docs.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -275,50 +290,51 @@ sphinxcontrib-qthelp==1.0.3
     # via sphinx
 sphinxcontrib-serializinghtml==1.1.5
     # via sphinx
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via
     #   django
     #   django-debug-toolbar
-text-unidecode==1.3
-    # via faker
+stack-data==0.6.1
+    # via ipython
 toml==0.10.2
     # via
     #   ipdb
-    #   pylint
     #   pytest
-    #   tox
-tomli==1.2.2
+tomli==2.0.1
     # via
     #   black
+    #   build
     #   coverage
     #   pep517
-tox==3.23.1
+    #   pylint
+    #   tox
+tomlkit==0.11.6
+    # via pylint
+tox==3.27.1
     # via -r test.in
-tqdm==4.62.3
-    # via twine
-traitlets==5.1.1
+traitlets==5.5.0
     # via
     #   ipython
     #   matplotlib-inline
-twine==3.6.0
+twine==4.0.1
     # via -r deployment.in
-typing-extensions==4.0.1
-    # via black
 uritemplate==4.1.1
     # via drf-spectacular
-urllib3==1.26.7
-    # via requests
-virtualenv==20.10.0
+urllib3==1.26.12
+    # via
+    #   requests
+    #   twine
+virtualenv==20.16.7
     # via tox
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1
     # via bleach
-wheel==0.37.0
+wheel==0.38.4
     # via pip-tools
-wrapt==1.13.3
+wrapt==1.14.1
     # via astroid
-zipp==3.6.0
+zipp==3.10.0
     # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:

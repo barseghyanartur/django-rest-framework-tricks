@@ -28,7 +28,15 @@ def flatten_nested_data(
 
     Usage example:
 
+        class MySerializer(serializers.ModelSerializer):
 
+            def create(self, validated_data):
+                # Do something else
+                nested_field_names = get_nested_field_names(self)
+                validated_data = flatten_nested_data(
+                    validated_data, nested_field_names
+                )
+                return super().create(validated_data)
     """
     validated_data = deepcopy(validated_data)
     for field_name in nested_field_names:

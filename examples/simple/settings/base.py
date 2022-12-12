@@ -191,6 +191,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "django.contrib.humanize",
     # Third party apps
+    # "django_extensions",
     "rest_framework",  # REST framework
     # REST schema
     "drf_spectacular",

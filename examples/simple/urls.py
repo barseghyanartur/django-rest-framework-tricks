@@ -20,15 +20,10 @@ __all__ = ("urlpatterns",)
 
 admin.autodiscover()
 
-urlpatterns = []
-urlpatterns_args = []
-
-# Admin URLs
-urlpatterns_args += [
+urlpatterns = [
+    # Admin URLs
     url(r"^admin/", admin.site.urls),
-]
 
-urlpatterns_args = [
     # Books URLs
     url(r"^books/", include(books_urls)),
     # Home page
@@ -47,8 +42,6 @@ urlpatterns_args = [
         name="redoc",
     ),
 ]
-
-urlpatterns += urlpatterns_args[:]
 
 # Serving media and static in debug/developer mode.
 if settings.DEBUG:
